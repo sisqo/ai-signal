@@ -174,6 +174,7 @@ Replaces the card grid entirely. Each entry: Headline-weight title (Fraunces), a
 
 ### Navigation
 - **Style:** sticky header, Paper White/Near-Black background (matches body, not Hairline Gray), 1px Hairline Gray bottom border on scroll only. Logomark (Brand Navy / white in dark mode) plus wordmark set in Fraunces at Title size, as a single lockup. Nav links in Body face, Ink color, Honey Amber underline on hover (transform-based, no layout shift). Theme toggle sits at the far right as a simple sun/moon icon button, no background.
+- **Masthead tagline:** "— For people who build" set in Mono face, Body Small size, Muted Ink, immediately after the wordmark on the same line. Hidden below `md` (768px) — the sticky header's single row has to fit the logo lockup, nav links or the hamburger, and the theme toggle in whatever width is left, so the tagline is the first thing to go rather than wrapping or crowding those. Distinct from the longer descriptive line ("Notes on artificial intelligence, for practitioners and the curious alike") used in the footer and meta/OG description — the two are intentionally different lengths for different jobs, not an inconsistency to reconcile.
 - **Mobile:** nav links collapse into a full-height overlay panel (not a dropdown), Display-face link list, dismissible via the same toggle icon rotated to an ×.
 
 ## 6. Do's and Don'ts
