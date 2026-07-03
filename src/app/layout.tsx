@@ -1,0 +1,38 @@
+import type { Metadata } from 'next'
+import { fraunces, publicSans, jetbrainsMono } from '@/lib/fonts'
+import { SiteHeader } from '@/components/SiteHeader'
+import { SiteFooter } from '@/components/SiteFooter'
+import { Providers } from './providers'
+import './globals.css'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://ai.sisqo.dev'),
+  title: {
+    default: 'Signal — Notes on artificial intelligence',
+    template: '%s — Signal',
+  },
+  description: 'An editorial-quality blog about artificial intelligence, for practitioners and the curious alike.',
+  openGraph: {
+    title: 'Signal',
+    description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
+    type: 'website',
+  },
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${fraunces.variable} ${publicSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+      >
+        <Providers>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+        </Providers>
+      </body>
+    </html>
+  )
+}

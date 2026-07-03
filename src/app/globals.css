@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: oklch(1.000 0.000 0);
+  --color-surface: oklch(0.965 0.000 0);
+  --color-ink: oklch(0.18 0.01 55);
+  --color-muted: oklch(0.46 0.006 55);
+  --color-primary: oklch(0.56 0.17 55);
+  --color-accent: oklch(0.36 0.12 220);
+  --color-on-primary: oklch(1.000 0.000 0);
+  --color-on-accent: oklch(1.000 0.000 0);
+  color-scheme: light;
+}
+
+.dark {
+  --color-bg: oklch(0.09 0.000 0);
+  --color-surface: oklch(0.16 0.004 55);
+  --color-ink: oklch(0.95 0.004 55);
+  --color-muted: oklch(0.68 0.006 55);
+  --color-primary: oklch(0.72 0.16 57);
+  --color-accent: oklch(0.54 0.13 205);
+  --color-on-primary: oklch(0.18 0.01 55);
+  --color-on-accent: oklch(1.000 0.000 0);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-surface);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1), color 200ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
