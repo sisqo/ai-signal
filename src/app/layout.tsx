@@ -6,7 +6,7 @@ import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ai.sisqo.dev'),
+  metadataBase: new URL('https://ai-signal.sisqo.dev'),
   title: {
     default: 'AI Blog — Notes on artificial intelligence',
     template: '%s — AI Blog',
