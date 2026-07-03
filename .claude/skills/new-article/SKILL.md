@@ -51,6 +51,13 @@ MDX gotchas (see root `CLAUDE.md` for more):
 - Avoid stray `<`, `{`, `}` outside of fenced code blocks — MDX will try to parse them as JSX.
 - Tables (GFM pipe syntax) and fenced code blocks both already work and are styled — use them freely where they genuinely help.
 
+**Charts:** if a table's numbers are more legible as a visual comparison than as rows (a wide spread of values, a ranking, an "X times more" claim), generate a bar chart instead of — or alongside — the table:
+1. Write a small JSON file: `{ "unit": "×", "items": [{ "label": "...", "value": 32 }, ...] }`.
+2. `node scripts/generate-chart.mjs <data.json> public/articles/<slug>/<name>.svg`
+3. Reference it in the MDX body with plain markdown image syntax: `![Caption describing what the chart shows](/articles/<slug>/<name>.svg)`. The alt text becomes the visible caption — write it as a real sentence, not a filename-style label.
+
+This only works for bar charts of data already cited in the article (see `DESIGN.md`'s "Article Body Chart" component). Don't reach for it for decorative or stock photography — that's explicitly out of scope (see `PRODUCT.md`'s anti-references).
+
 ## Step 4: Frontmatter
 
 ```yaml
@@ -80,7 +87,7 @@ npm run lint
 npm run build
 ```
 
-If you used a table or anything visually novel, it's worth a quick local `npm run start` + screenshot check the way past articles were verified, but don't block publishing on it — this is a lower-stakes check than the build passing.
+If you used a table or anything visually novel, it's worth a quick local `npm run start` + screenshot check the way past articles were verified, but don't block publishing on it — this is a lower-stakes check than the build passing. If you added a chart, check it in both themes (toggle via the header button) — its colors come from CSS custom properties specifically so they adapt, and a broken toggle would only show up in the theme you didn't screenshot.
 
 ## Step 7: Publish
 

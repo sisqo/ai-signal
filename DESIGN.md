@@ -165,6 +165,11 @@ Flat by design — there is no shadow vocabulary. Depth and grouping come from t
 ### Article Index Row (signature component)
 Replaces the card grid entirely. Each entry: Headline-weight title (Fraunces), a single-line Muted Ink dek in Body face, and a Label-face metadata line (date · reading time · tag in Deep Teal). Rows are separated by a 1px Hairline Gray rule, full-bleed within the content column — no border-left stripe, no box, no shadow. The lead/featured story at the top of the homepage breaks the row pattern once: full Display-size title plus a two-line dek, to establish hierarchy the way a newspaper front page does with its lead story.
 
+### Article Body Chart
+- **Style:** an SVG bar chart wrapped in a bordered figure — 1px Hairline Gray border, `sm` (4px) corner radius, generous inner padding, matching the deliberate treatment already given to code blocks and tables rather than sitting bare in the body copy. Bar fill is Honey Amber; the zero-baseline rule and axis are Hairline Gray; row labels are Ink, value labels are Muted Ink, both in Label face (Mono). A Label-face, Muted Ink caption sits below the figure, sourced from the image's alt text — the same typographic treatment as the article byline metadata line, not a separate caption style.
+- **Theme behavior:** the SVG's fills and font-family reference the same `--color-*`/`--font-jetbrains-mono` custom properties as the rest of the page, and the markup is inlined into the document (not loaded via `<img src>`) specifically so it repaints on the light/dark toggle instead of freezing at generation time. See `scripts/generate-chart.mjs` and `src/components/MdxImage.tsx`.
+- **Scope:** bar charts only, generated from data already cited in the article body (benchmarks, comparisons, percentages) — not decorative photography or hero imagery, which stay out of scope per the anti-references in `PRODUCT.md`.
+
 ### Inputs
 - **Style:** bottom-border only (1px Muted Ink), transparent background, no corner radius, no box. Not currently used anywhere in the shipped site; the primitive is defined for whatever text input need comes next (search, comments).
 - **Focus:** border shifts to 2px Honey Amber, no glow/shadow.

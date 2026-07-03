@@ -27,6 +27,8 @@ The cost of that discovery layer is not theoretical, and it's larger than most t
 | Merged PRs by contributor | 5,010 tokens | 33,712 tokens | 7× |
 | Latest release & dependencies | 8,750 tokens | 37,402 tokens | 4× |
 
+![MCP token overhead vs. a plain CLI call, by task — from 4× on the largest task to 32× on the smallest one](/articles/api-vs-mcp-decision-framework/mcp-token-overhead.svg)
+
 The gap isn't just cost — it's reliability. The CLI runs succeeded 100% of the time; the MCP runs succeeded 72%, with the rest failing to TCP timeouts. Scalekit's back-of-envelope at 10,000 operations a month: roughly $3.20 on the CLI path versus $55.20 calling GitHub's MCP server directly. The root cause has a name — schema bloat. GitHub's server injects all 43 tool definitions into every single conversation turn, whether that turn needs them or not, before a single real task begins.
 
 That number is specific to how GitHub's server is built, not to MCP as a protocol — and [Stripe's server](https://docs.stripe.com/mcp) is the proof. Stripe's MCP server, hosted at `mcp.stripe.com`, exposes just 14 tools covering 40-plus REST endpoints (customers, subscriptions, invoices, refunds, disputes) by routing most calls through two generic tools, `stripe_api_read` and `stripe_api_write`, instead of defining a dedicated schema per endpoint. Stripe's own docs are explicit about why: this "makes much of the API available through MCP without increasing the context window unnecessarily." Same protocol, a design decision apart, and a very different token bill.

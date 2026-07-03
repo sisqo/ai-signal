@@ -1,0 +1,18 @@
+<svg viewBox="0 0 680 244" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="244" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Repo language &amp; license</text>
+    <rect x="260" y="24" width="370" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">32×</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">PR details &amp; review status</text>
+    <rect x="260" y="68" width="231.25" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="501.25" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">20×</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Repo metadata &amp; install info</text>
+    <rect x="260" y="112" width="104.0625" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="374.0625" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">9×</text>
+    <text x="0" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Merged PRs by contributor</text>
+    <rect x="260" y="156" width="80.9375" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="350.9375" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">7×</text>
+    <text x="0" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Latest release &amp; dependencies</text>
+    <rect x="260" y="200" width="46.25" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="316.25" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">4×</text>
+</svg>

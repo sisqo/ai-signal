@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import type { Metadata } from 'next'
 import { getAllSlugs, getArticleBySlug, formatDate } from '@/lib/content'
+import { MdxImage } from '@/components/MdxImage'
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }))
@@ -36,7 +37,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <p className="mt-6 max-w-2xl text-xl text-muted">{article.dek}</p>
 
       <div className="prose prose-lg mt-14 max-w-none dark:prose-invert">
-        <MDXRemote source={article.content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+        <MDXRemote
+          source={article.content}
+          options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          components={{ img: MdxImage }}
+        />
       </div>
     </article>
   )
