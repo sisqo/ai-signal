@@ -1,0 +1,43 @@
+---
+title: "What Developers Actually Hand Off to AI (And What They Still Won't)"
+slug: "what-developers-delegate-to-ai-2026"
+dek: "84% of developers now use AI tools. The 2025 Stack Overflow and JetBrains surveys show they're being far more selective about which tasks they'll actually trust it with than the adoption number suggests."
+date: "2026-07-03"
+tag: "Industry"
+featured: true
+---
+
+Eighty-four percent of developers now use AI tools in their work, up from 76% a year earlier, and 51% of professional developers use them every day. Read as a headline, that sounds like AI has become the default way software gets written. Read the task-level breakdown in the same survey, and a very different picture shows up: developers aren't handing AI their job. They're handing it a specific, narrow slice of it — and refusing, in large and growing numbers, to hand over the rest.
+
+## The tasks that are basically settled
+
+Some categories of work have quietly become AI-first. In Stack Overflow's 2025 Developer Survey, 54.1% of respondents said they now mostly use AI to search for answers — the single highest "mostly AI" figure in the survey, ahead of every coding task. Documentation is a close second: 30.8% mostly use AI to document code, and a further chunk lean on it for maintaining existing docs. Neither result is surprising. Searching and documenting are exactly the tasks with a clear right answer and low cost of being wrong — if the AI gets a doc comment slightly off, you notice and fix it in five seconds. That's a fundamentally different risk profile from the categories below.
+
+## The tasks AI assists but doesn't own
+
+Writing code, testing, and debugging tell a more interesting story, because "mostly AI" and "partially AI" diverge sharply. Only 16.9% of developers say they mostly use AI to write code — but 59% say they use it partially, meaning the majority treat it as a collaborator on a line-by-line or function-by-function basis, not an autonomous author. Debugging follows the same pattern: 20.7% mostly, 47.1% partially — nearly 70% combined, but skewed heavily toward "helps me, doesn't replace me." Testing lands lower on both counts (17.9% mostly, 27.5% partially), which tracks with JetBrains' Developer Ecosystem 2025 finding that developers are happy to let AI handle boilerplate and documentation but "prefer to stay in charge of creative and complex tasks, like debugging or designing application logic." The two surveys agree: AI is welcome in the room for this work, just not alone with the keys.
+
+## The tasks developers still won't touch
+
+Then there's a third tier where resistance isn't soft, it's structural. 75.8% of developers say deployment and monitoring isn't part of their AI workflow and they don't plan to change that. 69.2% say the same about project planning. And 58.7% reject AI involvement in committing or reviewing code — arguably the most telling number in the survey, since code review is precisely the checkpoint meant to catch what AI itself gets wrong. Vibe coding — generating a full application from a prompt with no manual editing — fares even worse: on the order of three-quarters of professional developers say it isn't part of their real, professional workflow.
+
+| Task | Mostly AI | Partially AI | Won't use AI |
+|---|---|---|---|
+| Searching for answers | 54.1% | — | — |
+| Documenting code | 30.8% | — | — |
+| Debugging / fixing code | 20.7% | 47.1% | — |
+| Testing code | 17.9% | 27.5% | — |
+| Writing code | 16.9% | 59% | — |
+| Committing / reviewing code | — | — | 58.7% |
+| Project planning | — | — | 69.2% |
+| Deployment & monitoring | — | — | 75.8% |
+
+*Source: 2025 Stack Overflow Developer Survey, AI section.*
+
+## Why: it comes down to a specific, recurring complaint
+
+The survey's trust numbers explain the shape of that table better than any tooling argument does. 46% of developers say they actively distrust the accuracy of AI output, versus 33% who trust it and just 3% who say they trust it highly — and that distrust figure is up from 31% the year before, moving in the opposite direction from adoption. The specific mechanism shows up again and again in the write-in responses: 66% of developers cite "AI solutions that are almost right, but not quite" as a top frustration, and 45% say debugging AI-generated code takes longer than writing the code themselves would have. That's the whole story in one sentence — an assistant that's wrong in an obvious way is easy to route around, but one that's wrong in a subtle way generates work instead of saving it, and developers have learned exactly which tasks tend to produce which kind of wrong.
+
+## The takeaway
+
+The adoption number and the trust number aren't actually in tension — they're describing two different, entirely rational decisions. Developers have sorted their own workflow into tasks where an AI mistake costs five seconds (search, docs, boilerplate — full delegation, no argument) and tasks where an AI mistake costs an incident (deploys, merges, architecture — AI stays an advisor at most, human keeps the final call). If you're evaluating where to point an agentic coding tool inside your own team, that's a more useful map than any benchmark chart, straight from the [2025 Stack Overflow Developer Survey](https://survey.stackoverflow.co/2025/ai) and [JetBrains' Developer Ecosystem 2025](https://blog.jetbrains.com/research/2025/10/state-of-developer-ecosystem-2025/) research: match the tool's autonomy to the task's blast radius, not to how capable the model claims to be in general.
