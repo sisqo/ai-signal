@@ -79,6 +79,17 @@ module.exports = {
           },
           'code::before': { content: 'none' },
           'code::after': { content: 'none' },
+          pre: {
+            backgroundColor: '#0f0d0c',
+            color: '#f1eeec',
+            borderRadius: '4px',
+          },
+          'pre code': {
+            backgroundColor: 'transparent',
+            color: 'inherit',
+            padding: '0',
+            fontWeight: '400',
+          },
         }
 
         return {
