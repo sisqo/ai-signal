@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'What AI Blog is and who writes it.',
+  description: 'What AI Signal is and who writes it.',
 }
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 pb-24 pt-4">
       <h1 className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-        About AI Blog
+        About AI Signal
       </h1>
       <div className="prose prose-lg mt-10 max-w-none dark:prose-invert">
         <p>

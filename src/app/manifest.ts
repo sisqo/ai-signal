@@ -2,12 +2,12 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AI Blog',
-    short_name: 'AI Blog',
+    name: 'AI Signal',
+    short_name: 'AI Signal',
     description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
+    background_color: '#020202',
     theme_color: '#12314f',
     icons: [
       { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

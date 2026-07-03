@@ -8,22 +8,19 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL('https://ai-signal.sisqo.dev'),
   title: {
-    default: 'AI Blog — Notes on artificial intelligence',
-    template: '%s — AI Blog',
+    default: 'AI Signal — Notes on artificial intelligence',
+    template: '%s — AI Signal',
   },
   description: 'An editorial-quality blog about artificial intelligence, for practitioners and the curious alike.',
   openGraph: {
-    title: 'AI Blog',
+    title: 'AI Signal',
     description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#020202' },
-  ],
+  themeColor: '#020202',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

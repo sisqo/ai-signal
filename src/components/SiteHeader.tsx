@@ -37,7 +37,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-center gap-2.5 text-[#12314f] dark:text-white">
           <LogoMark className="h-8 w-8" />
-          <span className="font-display text-xl font-semibold text-ink">AI Blog</span>
+          <span className="font-display text-xl font-semibold text-ink">AI Signal</span>
         </Link>
 
         <nav className="hidden items-center gap-8 sm:flex">

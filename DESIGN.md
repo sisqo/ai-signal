@@ -1,5 +1,5 @@
 ---
-name: AI Blog
+name: AI Signal
 description: An editorial-quality blog about artificial intelligence
 colors:
   bg-light: "#ffffff"
@@ -79,18 +79,18 @@ components:
     padding: "0px"
 ---
 
-# Design System: AI Blog
+# Design System: AI Signal
 
 ## 1. Overview
 
 **Creative North Star: "The Quiet Signal"**
 
-AI Blog is what's left when the noise of AI-startup marketing is stripped away: a well-set page, a confident headline, enough white space to think in. The system takes its cue from a well-edited magazine or a serious independent newsletter — the kind of publication where the typography does the persuading and the interface gets out of the way. Warmth comes from one honey-amber ink used with intent, not from a beige backdrop; precision comes from a strict type scale and a flat, hairline-divided layout, not from cards and shadows.
+AI Signal is what's left when the noise of AI-startup marketing is stripped away: a well-set page, a confident headline, enough white space to think in. The system takes its cue from a well-edited magazine or a serious independent newsletter — the kind of publication where the typography does the persuading and the interface gets out of the way. Warmth comes from one honey-amber ink used with intent, not from a beige backdrop; precision comes from a strict type scale and a flat, hairline-divided layout, not from cards and shadows.
 
 The system explicitly rejects wiki/documentation coldness — no tabular layouts, no neutral system-font hierarchy, no sterile density — and just as explicitly rejects the generic AI-SaaS template: no cream/sand backgrounds, no gradient text, no hero section with fake metrics, no identical icon-and-heading card grids, no tiny uppercase eyebrow sitting above every section.
 
 **Key Characteristics:**
-- Pure white (light) / near-black (dark) surfaces — the warmth lives in the amber primary and the serif display face, never in the background.
+- Pure white (light) / near-black (dark) surfaces — the warmth lives in the amber primary and the serif display face, never in the background. Dark is the default on first visit; light remains a fully designed, equally correct alternate, not an afterthought.
 - Editorial index, not a card grid: articles are a hairline-divided list with one featured lead story, the way a front page works.
 - One warm primary (honey-amber) and one cool accent (deep teal), each used for a distinct job, never blended into a gradient.
 - A quiet monospace label face for metadata (date, reading time, tag) — a technical wink for the practitioner reader, never the body face.
