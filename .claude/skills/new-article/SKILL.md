@@ -1,11 +1,24 @@
 ---
 name: new-article
-description: Writes and publishes a new AI Signal blog post end to end — research, write, verify, commit, push, deploy. With no argument, finds the most interesting recent AI/agentic-coding-tools news not already covered on the site. With a topic argument, does deeper targeted research on that topic instead. Use whenever the user wants a new article written for this blog (e.g. "/new-article", "/new-article the new Gemini release", "scrivi un nuovo articolo").
+description: Writes and publishes a new AI Signal blog post end to end — research, write, verify, commit, push, deploy. Two independent choices, both optional in the argument string — a mode ("auto" or "ask") and a topic. No mode given defaults to "auto". No topic given triggers discovery: find the most interesting recent AI/agentic-coding-tools news not already covered on the site. Use whenever the user wants a new article written for this blog (e.g. "/new-article", "/new-article ask", "/new-article the new Gemini release", "/new-article ask the new Gemini release", "scrivi un nuovo articolo").
 user-invocable: true
-argument-hint: "[optional topic — omit to auto-discover the day's most interesting uncovered story]"
+argument-hint: "[auto|ask] [optional topic — omit to auto-discover the day's most interesting uncovered story]"
 ---
 
-Publishes one new post to AI Signal (this repo). Two modes, chosen by whether the user gave a topic as an argument. Auto-publish is the house rule here: once the article is written and verified, commit, push, and deploy without waiting for approval — the user has already opted into that.
+Publishes one new post to AI Signal (this repo).
+
+## Parse the arguments first
+
+The argument string carries two independent, optional pieces: a **mode** and a **topic**.
+
+- If the first word is exactly `auto` or `ask` (case-insensitive), that's the mode; everything after it is the topic (which may be empty).
+- Otherwise there's no mode word — mode defaults to `auto`, and the *entire* argument string is the topic (which may be empty).
+
+So: `/new-article` → auto, no topic. `/new-article ask` → ask, no topic. `/new-article the new Gemini release` → auto, topic = "the new Gemini release". `/new-article ask the new Gemini release` → ask, topic = "the new Gemini release".
+
+**`auto` mode**: fully automatic, no confirmation gate anywhere. Once the article is written and verified, commit, push, and deploy without waiting for approval — this is the house default the user chose.
+
+**`ask` mode**: before writing anything, generate exactly 5 candidate subjects and present them as a plain numbered list in your response (title + one-line pitch each, nothing more — no full drafts, no research dump). Then stop and wait for the user's reply picking one (plain conversational text — don't use a widget capped at 4 options, the user asked for 5). Once they pick, proceed through research → write → verify → publish → report with no further gate, exactly like `auto`.
 
 ## Step 1: Survey what's already published
 
@@ -13,11 +26,21 @@ Before anything else, read every file in `content/articles/*.mdx`. For each, not
 
 Also note which file currently has `featured: true` — there should be exactly one. You'll need it in Step 5.
 
-## Step 2: Research
+## Step 2: Research (or propose, in `ask` mode)
 
-**No topic given (discovery mode):** run several varied web searches covering the last few days — new model releases, agentic coding tools and IDEs, notable developer-tooling launches, significant AI research or industry moves relevant to a practitioner/technical audience (see PRODUCT.md for who reads this). Skip generic AI business news (stock moves, executive reshuffles) that wouldn't interest that audience. From the candidates, cross off anything that overlaps with Step 1's map, then pick the single most interesting, well-sourced, genuinely new story.
+**No topic given:** run several varied web searches covering the last few days — new model releases, agentic coding tools and IDEs, notable developer-tooling launches, significant AI research or industry moves relevant to a practitioner/technical audience (see PRODUCT.md for who reads this). Skip generic AI business news (stock moves, executive reshuffles) that wouldn't interest that audience. Cross off anything that overlaps with Step 1's map.
+- In `auto` mode: pick the single most interesting, well-sourced, genuinely new story and go straight to deep research on it.
+- In `ask` mode: shortlist the best candidates from this initial pass, pick 5, and present them (Step 2b) before doing any deeper research on any of them.
 
-**Topic given (targeted mode):** research that specific topic in depth. Pull from multiple sources, not one. Cross-check specific facts — dates, version numbers, prices, names, quotes — across at least two sources before using them. If a detail can't be corroborated, either soften the language ("reportedly", "according to X") or leave it out. Do not invent specifics to fill a gap.
+**Topic given:** research that specific topic.
+- In `auto` mode: go straight to deep research on it (see below), then write.
+- In `ask` mode: do a light pass to find 5 different angles/framings for covering that same topic (different possible titles/takes, not 5 unrelated topics), present them (Step 2b), then deep-research only the one picked.
+
+**Deep research standard (applies once a topic is settled, either mode):** pull from multiple sources, not one. Cross-check specific facts — dates, version numbers, prices, names, quotes — across at least two sources before using them. If a detail can't be corroborated, either soften the language ("reportedly", "according to X") or leave it out. Do not invent specifics to fill a gap.
+
+### Step 2b: Presenting the 5 (ask mode only)
+
+Numbered list, five items, each one line: a working title and a half-sentence on why it's a good pick. No preamble beyond a single sentence, no per-item research dump. End by asking which one (or if none land, say so and you'll try another pass). Do not proceed past this point until the user replies.
 
 ## Step 3: Write
 
@@ -63,7 +86,7 @@ If you used a table or anything visually novel, it's worth a quick local `npm ru
 
 ```bash
 git add -A
-git commit -m "..."   # mention the topic and, briefly, the publish mode (discovered vs. targeted)
+git commit -m "..."   # mention the topic and, briefly, the mode (auto vs. ask) and whether it was discovered or targeted
 git push
 ```
 
@@ -71,4 +94,4 @@ Push triggers Vercel's auto-deploy. Give it 30–60 seconds, then confirm the ne
 
 ## Step 8: Report back
 
-Tell the user what got published: title, live URL, and a one-line note on where the story came from (which sources, or which topic they gave you). This is a completion summary, not a request for approval — the article is already live by the time you say this.
+Tell the user what got published: title, live URL, and a one-line note on where the story came from (which sources, or which topic/pick they gave you). This is a completion summary, not a request for approval — the article is already live by the time you say this.
