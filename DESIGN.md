@@ -1,5 +1,5 @@
 ---
-name: Signal
+name: AI Blog
 description: An editorial-quality blog about artificial intelligence
 colors:
   bg-light: "#ffffff"
@@ -79,13 +79,13 @@ components:
     padding: "0px"
 ---
 
-# Design System: Signal
+# Design System: AI Blog
 
 ## 1. Overview
 
 **Creative North Star: "The Quiet Signal"**
 
-Signal is what's left when the noise of AI-startup marketing is stripped away: a well-set page, a confident headline, enough white space to think in. The system takes its cue from a well-edited magazine or a serious independent newsletter — the kind of publication where the typography does the persuading and the interface gets out of the way. Warmth comes from one honey-amber ink used with intent, not from a beige backdrop; precision comes from a strict type scale and a flat, hairline-divided layout, not from cards and shadows.
+AI Blog is what's left when the noise of AI-startup marketing is stripped away: a well-set page, a confident headline, enough white space to think in. The system takes its cue from a well-edited magazine or a serious independent newsletter — the kind of publication where the typography does the persuading and the interface gets out of the way. Warmth comes from one honey-amber ink used with intent, not from a beige backdrop; precision comes from a strict type scale and a flat, hairline-divided layout, not from cards and shadows.
 
 The system explicitly rejects wiki/documentation coldness — no tabular layouts, no neutral system-font hierarchy, no sterile density — and just as explicitly rejects the generic AI-SaaS template: no cream/sand backgrounds, no gradient text, no hero section with fake metrics, no identical icon-and-heading card grids, no tiny uppercase eyebrow sitting above every section.
 
@@ -100,7 +100,10 @@ The system explicitly rejects wiki/documentation coldness — no tabular layouts
 The palette is deliberately narrow: near-neutral architecture (pure white/black, one hairline gray) plus exactly two brand colors, each with one job. OKLCH values are canonical; hex in the frontmatter is the sRGB projection for tooling compliance.
 
 ### Primary
-- **Honey Amber** (`#bc5000` light / `#ee8628` dark — `oklch(0.56 0.17 55)` / `oklch(0.72 0.16 57)`): the single warm signature color. Used for links, the primary CTA fill, hover underlines, the logotype mark, and the lead story's headline rule. Verified 4.91:1 (light) and 7.97:1 (dark) against body background; white text on the light-mode fill hits 4.91:1, near-black text on the dark-mode fill hits 7.25:1.
+- **Honey Amber** (`#bc5000` light / `#ee8628` dark — `oklch(0.56 0.17 55)` / `oklch(0.72 0.16 57)`): the single warm signature color. Used for links, the primary CTA fill, hover underlines, and the lead story's headline rule. Verified 4.91:1 (light) and 7.97:1 (dark) against body background; white text on the light-mode fill hits 4.91:1, near-black text on the dark-mode fill hits 7.25:1.
+
+### Logo (fixed, theme-independent)
+- **Brand Navy** (`#12314f`): the supplied logomark's only color — a chip/circuit icon with a signal-style spark at its center. It does not participate in the primary/accent system and never changes with the color strategy. It renders as-is (navy) on light backgrounds; in dark mode the mark switches to white via `currentColor` so it stays legible against Near-Black, the one place in the system where a color is swapped purely for contrast rather than for meaning.
 
 ### Secondary
 - **Deep Teal** (`#004868` light / `#008292` dark — `oklch(0.36 0.12 220)` / `oklch(0.54 0.13 205)`): the cool counterpoint to amber. Reserved for tags/category labels and secondary links — anything that needs to read as "metadata" rather than "primary action." Never appears in the same control as primary. Contrast against primary verified at 2.00:1 (light) / 1.75:1 (dark) — always visually distinguishable when adjacent.
@@ -151,7 +154,7 @@ Flat by design — there is no shadow vocabulary. Depth and grouping come from t
 
 ### Buttons
 - **Shape:** barely-rounded corners (4px, `rounded.sm`) — enough to soften, not enough to feel like an app.
-- **Primary:** Honey Amber fill, Paper White text (light) / Ink text (dark), Label typography, `14px 28px` padding. Used once per page at most (newsletter subscribe).
+- **Primary:** Honey Amber fill, Paper White text (light) / Ink text (dark), Label typography, `14px 28px` padding. Reserved for a single, deliberate per-page action — not currently used anywhere in the shipped site.
 - **Hover / Focus:** background shifts to Ink (light) / Paper Ink (dark) over 160ms ease-out-quart; focus-visible gets a 2px Honey Amber outline offset 2px.
 - **Ghost:** transparent background, Ink text, same padding/shape — used for secondary actions ("Read more," pagination).
 
@@ -163,11 +166,14 @@ Flat by design — there is no shadow vocabulary. Depth and grouping come from t
 Replaces the card grid entirely. Each entry: Headline-weight title (Fraunces), a single-line Muted Ink dek in Body face, and a Label-face metadata line (date · reading time · tag in Deep Teal). Rows are separated by a 1px Hairline Gray rule, full-bleed within the content column — no border-left stripe, no box, no shadow. The lead/featured story at the top of the homepage breaks the row pattern once: full Display-size title plus a two-line dek, to establish hierarchy the way a newspaper front page does with its lead story.
 
 ### Inputs
-- **Style:** bottom-border only (1px Muted Ink), transparent background, no corner radius, no box — used for the newsletter email field.
+- **Style:** bottom-border only (1px Muted Ink), transparent background, no corner radius, no box. Not currently used anywhere in the shipped site; the primitive is defined for whatever text input need comes next (search, comments).
 - **Focus:** border shifts to 2px Honey Amber, no glow/shadow.
 
+### Logo
+- **Mark:** the supplied chip-and-spark icon (Brand Navy `#12314f`, white in dark mode via `currentColor`), paired inline with the Fraunces wordmark in the header and footer. Fixed brand asset — not part of the primary/accent system, never recolored to Honey Amber or Deep Teal.
+
 ### Navigation
-- **Style:** sticky header, Paper White/Near-Black background (matches body, not Hairline Gray), 1px Hairline Gray bottom border on scroll only. Wordmark set in Fraunces at Title size. Nav links in Body face, Ink color, Honey Amber underline on hover (transform-based, no layout shift). Theme toggle sits at the far right as a simple sun/moon icon button, no background.
+- **Style:** sticky header, Paper White/Near-Black background (matches body, not Hairline Gray), 1px Hairline Gray bottom border on scroll only. Logomark (Brand Navy / white in dark mode) plus wordmark set in Fraunces at Title size, as a single lockup. Nav links in Body face, Ink color, Honey Amber underline on hover (transform-based, no layout shift). Theme toggle sits at the far right as a simple sun/moon icon button, no background.
 - **Mobile:** nav links collapse into a full-height overlay panel (not a dropdown), Display-face link list, dismissible via the same toggle icon rotated to an ×.
 
 ## 6. Do's and Don'ts

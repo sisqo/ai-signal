@@ -11,7 +11,7 @@ export default function NotFound() {
         href="/"
         className="mt-8 inline-block border-b border-primary text-primary transition-colors duration-150 ease-out-quart hover:text-ink hover:border-ink"
       >
-        Back to Signal
+        Back to AI Blog
       </Link>
     </div>
   )

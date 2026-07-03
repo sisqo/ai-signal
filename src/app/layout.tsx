@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { fraunces, publicSans, jetbrainsMono } from '@/lib/fonts'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
@@ -8,15 +8,22 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL('https://ai.sisqo.dev'),
   title: {
-    default: 'Signal — Notes on artificial intelligence',
-    template: '%s — Signal',
+    default: 'AI Blog — Notes on artificial intelligence',
+    template: '%s — AI Blog',
   },
   description: 'An editorial-quality blog about artificial intelligence, for practitioners and the curious alike.',
   openGraph: {
-    title: 'Signal',
+    title: 'AI Blog',
     description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
     type: 'website',
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#020202' },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
