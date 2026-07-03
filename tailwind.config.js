@@ -96,9 +96,49 @@ module.exports = {
           },
         }
 
+        const table = {
+          table: {
+            fontVariantNumeric: 'tabular-nums',
+          },
+          thead: {
+            borderBottomWidth: '1px',
+            borderBottomColor: 'var(--color-surface)',
+          },
+          'thead th': {
+            fontFamily: theme('fontFamily.mono').join(', '),
+            fontSize: '0.8125rem',
+            fontWeight: '500',
+            letterSpacing: '0.02em',
+            color: 'var(--color-muted)',
+            paddingTop: '0',
+            paddingBottom: '0.75em',
+            paddingInlineStart: '1.5em',
+            paddingInlineEnd: '1.5em',
+          },
+          'thead th:first-child': { paddingInlineStart: '0' },
+          'thead th:last-child': { paddingInlineEnd: '0' },
+          'tbody tr': {
+            borderBottomWidth: '1px',
+            borderBottomColor: 'var(--color-surface)',
+          },
+          'tbody tr:last-child': { borderBottomWidth: '0' },
+          'tbody td': {
+            paddingTop: '0.75em',
+            paddingBottom: '0.75em',
+            paddingInlineStart: '1.5em',
+            paddingInlineEnd: '1.5em',
+          },
+          'tbody td:first-child': { paddingInlineStart: '0' },
+          'tbody td:last-child': { paddingInlineEnd: '0' },
+          'thead th:not(:first-child), tbody td:not(:first-child)': {
+            textAlign: 'right',
+          },
+        }
+
         return {
-          DEFAULT: { css: shared },
-          invert: { css: shared },
+          DEFAULT: { css: { ...shared, ...table } },
+          invert: { css: { ...shared, ...table } },
+          lg: { css: table },
         }
       },
     },
