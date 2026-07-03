@@ -160,7 +160,7 @@ Flat by design — there is no shadow vocabulary. Depth and grouping come from t
 
 ### Tags
 - **Style:** no background fill, no border, no pill shape — just Deep Teal Label-face text. Sits inline with byline metadata, never as a standalone badge grid.
-- **State:** hover underlines the tag; no "selected" state exists yet (filtering is a future feature).
+- **State:** deliberately inert — no hover/underline state of its own, no "selected" state. Tag filtering doesn't exist yet; giving the tag a distinct hover treatment before that destination is real would make it look clickable-but-broken rather than restrained. Revisit this the day tag-filtered views ship, not before.
 
 ### Article Index Row (signature component)
 Replaces the card grid entirely. Each entry: Headline-weight title (Fraunces), a single-line Muted Ink dek in Body face, and a Label-face metadata line (date · reading time · tag in Deep Teal). Rows are separated by a 1px Hairline Gray rule, full-bleed within the content column — no border-left stripe, no box, no shadow. The lead/featured story at the top of the homepage breaks the row pattern once: full Display-size title plus a two-line dek, to establish hierarchy the way a newspaper front page does with its lead story.

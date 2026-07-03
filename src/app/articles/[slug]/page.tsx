@@ -27,7 +27,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <article className="mx-auto max-w-3xl px-6 pb-24 pt-4">
       <p className="font-mono text-sm tracking-wide text-muted">
-        {formatDate(article.date)} &middot; {article.readingTime} &middot;{' '}
+        <time dateTime={article.date}>{formatDate(article.date)}</time> &middot; {article.readingTime} &middot;{' '}
         <span className="text-accent">{article.tag}</span>
       </p>
       <h1 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">

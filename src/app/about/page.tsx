@@ -13,14 +13,25 @@ export default function AboutPage() {
       </h1>
       <div className="prose prose-lg mt-10 max-w-none dark:prose-invert">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-          ex ea commodo consequat.
+          AI Signal is a running account of what&rsquo;s actually happening in artificial intelligence — new
+          models, the tools built on top of them, and the industry moves that explain why any of it matters —
+          written for people who build with this technology and people who are simply trying to keep up with it.
         </p>
         <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
+          The starting assumption is that both audiences deserve the same thing: pieces that get to the point, use
+          real names and numbers instead of vague hand-waving, and stop once they&rsquo;ve made their case. No
+          manufactured urgency, no unearned hype, no restating a press release with different adjectives.
+        </p>
+        <p>
+          AI Signal is written and edited by SisQo. New pieces publish regularly — when there&rsquo;s
+          something worth writing about, not on a fixed schedule for its own sake.
+        </p>
+        <p>
+          Questions, corrections, or a story worth covering? Reach out at{' '}
+          <a href="https://sisqo.dev" target="_blank" rel="noopener noreferrer">
+            sisqo.dev
+          </a>
+          .
         </p>
       </div>
     </div>
