@@ -1,0 +1,45 @@
+---
+title: "API vs. MCP: The Decision Nobody Explains Well"
+slug: "api-vs-mcp-decision-framework"
+dek: "\"MCP is for agents, APIs are for developers\" is true and mostly useless. Here's the actual framework, with real token costs attached."
+date: "2026-07-03"
+tag: "Tools"
+featured: true
+---
+
+Ask five people when to use MCP instead of a direct API call and you'll get five versions of the same non-answer: "APIs are for developers, MCP is for AI." It's not wrong. It's also not a decision you can act on when you're staring at a real integration and a deadline. The honest framework has to start somewhere less comfortable: MCP is not a faster or better way to call an API. On every axis that matters for a deterministic system — latency, token cost, reliability — a direct API call wins, often by an order of magnitude. The question isn't which one is technically superior. It's which cost you're willing to pay for which capability.
+
+## What MCP actually is
+
+The [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) shipped from Anthropic on November 25, 2024, built by engineers David Soria Parra and Justin Spahr-Summers as an open standard for letting AI models discover and call tools at runtime instead of requiring a developer to hardcode every integration in advance. It caught on fast: OpenAI and Google DeepMind adopted it within months, and by the end of 2025 the ecosystem had grown to more than 97 million monthly SDK downloads and upwards of 10,000 active public servers, with support built into ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot, and VS Code. On December 9, 2025, Anthropic [donated the protocol](https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/) to a newly formed Agentic AI Foundation under the Linux Foundation — co-founded with Block and OpenAI, backed by Google, Microsoft, AWS, Cloudflare, and Bloomberg — putting MCP under the same vendor-neutral governance model as Kubernetes and Node.js.
+
+None of that makes MCP a replacement for your API. It's a discovery and invocation layer that sits in front of one. When an agent calls an MCP tool, something on the other end is almost always translating that call into the same REST, GraphQL, or gRPC request your API already serves. MCP answers a different question than your API does: not "how do I fetch this resource," but "what can I do here, described in a way a model can read and choose from without a human writing the integration code first."
+
+## What that layer actually costs
+
+The cost of that discovery layer is not theoretical, and it's larger than most teams expect. [Scalekit ran a controlled comparison](https://www.scalekit.com/blog/mcp-vs-cli-use) in 2026, pointing Claude Sonnet 4 at the same five read-only tasks — repo metadata, PR status, merged-PR history, release info — against GitHub's official MCP server (43 tool schemas) versus a plain CLI with no guidance:
+
+| Task | CLI | MCP | Overhead |
+|---|---|---|---|
+| Repo language & license | 1,365 tokens | 44,026 tokens | 32× |
+| PR details & review status | 1,648 tokens | 32,279 tokens | 20× |
+| Repo metadata & install info | 9,386 tokens | 82,835 tokens | 9× |
+| Merged PRs by contributor | 5,010 tokens | 33,712 tokens | 7× |
+| Latest release & dependencies | 8,750 tokens | 37,402 tokens | 4× |
+
+The gap isn't just cost — it's reliability. The CLI runs succeeded 100% of the time; the MCP runs succeeded 72%, with the rest failing to TCP timeouts. Scalekit's back-of-envelope at 10,000 operations a month: roughly $3.20 on the CLI path versus $55.20 calling GitHub's MCP server directly. The root cause has a name — schema bloat. GitHub's server injects all 43 tool definitions into every single conversation turn, whether that turn needs them or not, before a single real task begins.
+
+That number is specific to how GitHub's server is built, not to MCP as a protocol — and [Stripe's server](https://docs.stripe.com/mcp) is the proof. Stripe's MCP server, hosted at `mcp.stripe.com`, exposes just 14 tools covering 40-plus REST endpoints (customers, subscriptions, invoices, refunds, disputes) by routing most calls through two generic tools, `stripe_api_read` and `stripe_api_write`, instead of defining a dedicated schema per endpoint. Stripe's own docs are explicit about why: this "makes much of the API available through MCP without increasing the context window unnecessarily." Same protocol, a design decision apart, and a very different token bill.
+
+## The actual framework
+
+Once you separate the protocol from any one server's implementation, the decision criteria get concrete:
+
+- **Who's initiating the call?** Your own backend code, executing a known sequence against a resource it already has the ID for, wants a direct API call — deterministic, fast, and cheap. A user typing a request in natural language, where the exact sequence of calls isn't known until the model reasons about it, is what MCP's discovery model is for.
+- **How wide is the surface an agent actually needs?** If an agent only ever needs three or four operations, don't hand it a 40-tool schema dump — write a narrow MCP server, or just give it three tools. Stripe's read/write-proxy pattern is the template: expose capability, not a 1:1 mirror of your OpenAPI spec.
+- **What's your latency and reliability budget?** Scalekit's 72%-vs-100% success gap and 9.4× first-call slowdown (init overhead) are disqualifying for anything payment- or infra-adjacent. Keep those paths on direct API calls even if an agent is orchestrating the higher-level workflow.
+- **Do you need governance, not just access?** MCP's value shows up when the caller isn't code you control — a third-party agent, a non-technical user going through a chat interface, a compliance requirement to log and gate every tool invocation centrally. That's a real requirement APIs alone don't solve well, and it's the argument for MCP even at a token-cost premium.
+
+## The actual advice
+
+"Use both" is the answer nearly every source on this converges on, and it's correct — but it's incomplete without the corollary: building an MCP server is not the same task as having an API, and treating it as a thin, automatic wrapper is how you end up paying GitHub's 32× instead of Stripe's fraction of that. Keep your REST API as the deterministic source of truth. Build MCP access deliberately, scoped to what an agent genuinely needs to discover at runtime, not what's convenient to autogenerate from your existing spec. And before you ship an MCP server, run the same kind of benchmark Scalekit did on your own tasks — token cost and failure rate vary enormously based on how many tools you expose and how you expose them, and "we added MCP support" is not, by itself, a design decision.
