@@ -26,6 +26,8 @@ Before anything else, read every file in `content/articles/*.mdx`. For each, not
 
 Also note which file currently has `featured: true` — there should be exactly one. You'll need it in Step 5.
 
+While surveying, also look for a genuine internal-link opportunity: does the new topic naturally reference or build on an already-published piece? If so, plan to link it in the new article (see root `CLAUDE.md`'s Editorial Guidelines).
+
 ## Step 2: Research (or propose, in `ask` mode)
 
 **No topic given:** run several varied web searches covering the last few days — new model releases, agentic coding tools and IDEs, notable developer-tooling launches, significant AI research or industry moves relevant to a practitioner/technical audience (see PRODUCT.md for who reads this). Skip generic AI business news (stock moves, executive reshuffles) that wouldn't interest that audience. Cross off anything that overlaps with Step 1's map.
@@ -44,7 +46,7 @@ Numbered list, five items, each one line: a working title and a half-sentence on
 
 ## Step 3: Write
 
-Match the voice already established in `content/articles/`: direct, concrete, opinionated where earned, real names/dates/numbers instead of vague hand-waving, no AI-blog filler ("in today's fast-paced world of..."), no unearned hype. Structure loosely like the existing posts — a few `##` sections, a comparison table or code block if the topic actually calls for one, a closing take that tells the reader what to actually do with the information. Length follows the topic; the existing posts run roughly 600–1000 words, not a hard limit.
+Voice, structure, length, titling, citation, and tagging rules all live in root `CLAUDE.md`'s **Editorial Guidelines** section — read it before writing and follow it exactly. Don't restate or re-derive those rules here; this skill only adds the mechanical bits below.
 
 MDX gotchas (see root `CLAUDE.md` for more):
 - Do **not** start the body with a `#` H1 repeating the title — the page template renders the title from frontmatter separately. Start with the lead paragraph or a `##` subsection.
@@ -71,7 +73,7 @@ featured: true
 ---
 ```
 
-For `tag`: reuse an existing tag from Step 1 if the topic reasonably fits one — keep the tag vocabulary small and curated (DESIGN.md's restraint principle applies to taxonomy too, not just color). Only introduce a new tag if the topic genuinely doesn't fit any existing one.
+For `tag`: see root `CLAUDE.md`'s Editorial Guidelines for the reuse policy.
 
 ## Step 5: Un-feature the previous lead
 

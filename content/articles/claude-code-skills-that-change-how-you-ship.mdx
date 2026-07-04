@@ -14,7 +14,7 @@ Here are five that keep showing up across the highest-rated skill collections in
 
 A Claude Code skill is a folder containing a `SKILL.md` file: a short YAML header describing what the skill does and when to use it, followed by instructions in plain markdown. Drop it into `.claude/skills/` inside a project — or `~/.claude/skills/` to make it available everywhere — and Claude loads the description at the start of every session. When a request matches, Claude pulls in the full instructions automatically, or you trigger it directly with `/skill-name` if it's built to be user-invoked. Because skills follow the open Agent Skills standard, most of what's below also works in Codex, Gemini CLI, and Cursor with little or no change.
 
-## 1. Grill-Me — for plans that don't fall apart mid-build
+## 1. [Grill-Me](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me) — for plans that don't fall apart mid-build
 
 Built by Matt Pocock, who spent time on Vercel's developer tooling team. The idea is simple: before Claude writes a line of code, it interviews you about the plan — one question at a time, working down every branch of the decision tree, checking the codebase itself first whenever an answer is discoverable there instead of asking something it could just look up. For each question it also proposes its own recommended answer, so you end up correcting a draft rather than filling in a blank form.
 
@@ -28,7 +28,7 @@ Call it with `/grill-me` before you describe the next feature.
 
 **Caveat:** it's slow by design. If you already know exactly what you want, being interviewed for twenty minutes is friction, not value.
 
-## 2. Superpowers — for teams that need discipline more than speed
+## 2. [Superpowers](https://github.com/obra/superpowers-marketplace) — for teams that need discipline more than speed
 
 By Jesse Vincent (obra). Where grill-me handles the conversation before code, Superpowers governs everything after it: a plan-first, test-driven loop that won't let Claude jump from "here's an idea" straight to "here's a pull request." It stops at agreement, then a failing test, then the implementation — and it spins up subagents for parallel research and verification instead of doing everything serially in one context window.
 
@@ -41,7 +41,7 @@ It's also listed on Anthropic's official plugin marketplace as `superpowers@clau
 
 **Caveat:** it enforces a process, not judgment. Feed it a vague plan and it will execute that vague plan very thoroughly.
 
-## 3. Impeccable — for interfaces that don't scream "AI built this"
+## 3. [Impeccable](https://impeccable.style) — for interfaces that don't scream "AI built this"
 
 By Paul Bakaus, creator of jQuery UI and a former product lead on Chrome DevTools at Google. Impeccable builds on Anthropic's own frontend-design skill, starting from the observation that every model trained on the same SaaS templates and therefore defaults to the same tells: one overused sans-serif font, purple-to-blue gradients, cards nested in cards. Running `/impeccable init` forces a short interview about audience, brand voice, and visual references before it writes a `PRODUCT.md` file — then more than twenty follow-up commands (`audit`, `polish`, `critique`, `distill`, `animate`, and others) all read that file so every later pass stays consistent with it.
 
@@ -57,7 +57,7 @@ Then, inside Claude Code:
 
 **Caveat:** the design-context step isn't optional busywork — skip it and later commands fall back to generic defaults, which defeats the point of installing it in the first place.
 
-## 4. Caveman — for keeping the token bill sane
+## 4. [Caveman](https://github.com/JuliusBrussee/caveman) — for keeping the token bill sane
 
 By Julius Brussee. Caveman strips narration, filler, and pleasantries from Claude's responses while leaving every technical fact, file path, and code block untouched. Instead of a paragraph building up to a diagnosis and a recommendation, you get both in a fraction of the words — something closer to "Stale closure. Effect deps missing `userId`. Add it." than three sentences arriving at the same instruction.
 
@@ -69,7 +69,7 @@ Turn it on with `/caveman`, back off with "normal mode."
 
 **Caveat:** readable prose still has value when you're explaining something to a teammate later. Turn it off for anything you plan to paste into a PR description or a doc.
 
-## 5. Handoff — for sessions that don't lose the thread
+## 5. [Handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) — for sessions that don't lose the thread
 
 Also from Matt Pocock's collection. Long Claude Code sessions degrade quietly: context fills up with shell output, half-finished edits, and decisions made an hour ago that Claude has started to forget. `/compact` recovers some of that within a single conversation. Handoff does something different — it compresses everything relevant into a markdown brief so you can start a fresh session, switch to a different agent, or hand the work to a teammate without re-explaining the last two hours.
 

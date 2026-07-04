@@ -38,3 +38,17 @@ AI Signal is a **Next.js 15 App Router** editorial blog about AI, statically gen
 **Deployment:**
 - Vercel project `ai-signal` (team scope `sisqoz`), domain `ai-signal.sisqo.dev`, auto-deploys on push to `main`.
 - `vercel.json` pins `"framework": "nextjs"`. This is load-bearing, not decorative: the Vercel project was created before any code existed, so Vercel persisted a stale "Other" framework preset with a static `public/` output directory expectation. Without the override, builds succeed locally but fail on Vercel looking for a `public/` dir. Don't remove it.
+
+## Editorial Guidelines
+
+Voice, structure, and sourcing rules for every post in `content/articles/`. This is the single source of truth for editorial style — `new-article`'s writing step defers to this section rather than restating it; don't let the two drift apart.
+
+- **Cold open, no throat-clearing.** Every article opens on a concrete fact, date, or number — never a generic framing sentence ("In today's fast-moving AI landscape..."). This is the most consistent trait across published posts; keep it that way.
+- **Invisible narrator.** No first person ("I think") and no editorial "we" for the publication itself. Reserve direct second-person ("you") for closing/advice sections that tell the reader what to do — keep it out of body analysis.
+- **Voice:** direct, concrete, opinionated where earned, real names/dates/numbers instead of vague hand-waving, no AI-blog filler ("in today's fast-paced world of..."), no unearned hype.
+- **American English** spelling throughout (color, program, license, etc.).
+- **Structure:** a few `##` sections; a comparison table or code block only if the topic genuinely calls for one; a closing section that gives the reader something actionable, not a recap of what was just said. Length follows the topic — existing posts run roughly 600–1000 words, not a hard limit.
+- **Titles:** don't lean on "Actually" / "Really" / "Truly" to promise the piece cuts through hype — earn that through the title's specificity instead.
+- **Cite everything citable.** Any specific external claim with a findable URL — an announcement, survey, benchmark, repo, docs page — gets an inline markdown link on first mention. No exception for "well-known" sources.
+- **Link other AI Signal articles too**, the same way: when referencing another published piece by name, hyperlink it (`[our article on X](/articles/slug)`) rather than a bare prose mention.
+- **Tags:** reuse an existing tag (`Tools`, `Industry` so far) if the topic reasonably fits; keep the vocabulary small and curated. Add a new tag only when a topic genuinely doesn't fit any existing one — don't pre-invent categories for stories that haven't been written yet.

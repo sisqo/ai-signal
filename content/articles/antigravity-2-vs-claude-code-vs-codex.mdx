@@ -6,13 +6,13 @@ date: "2026-07-01"
 tag: "Tools"
 ---
 
-Six weeks ago, Google stopped describing Antigravity as an editor. At I/O 2026 on May 19, it relaunched as Antigravity 2.0 — a standalone desktop app, a Go-based CLI, an SDK, and a Gemini API tier, built around orchestrating teams of autonomous agents instead of helping you type faster. It's still shipping patches weekly: the changelog shows six release builds on July 1 alone.
+Six weeks ago, Google stopped describing Antigravity as an editor. At I/O 2026 on May 19, it [relaunched as Antigravity 2.0](https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/) — a standalone desktop app, a Go-based CLI, an SDK, and a Gemini API tier, built around orchestrating teams of autonomous agents instead of helping you type faster. It's still shipping patches weekly: the changelog shows six release builds on July 1 alone.
 
 That relaunch is worth a proper look next to the two tools most developers already have open: Claude Code and OpenAI's Codex. All three now call themselves agentic coding tools. They don't mean the same thing by it.
 
 ## Three different bets on what "agentic" means
 
-**Google Antigravity 2.0** is a fork of VS Code that has quietly demoted the editor to one surface among several. The desktop app is a hub for dispatching multiple agents at once — one on the frontend, one on the API layer, one running tests — each producing inspectable "Artifacts" (screenshots, walkthroughs) you review rather than diffs you read line by line. Its most distinctive piece is the **Browser Subagent**: it opens a real Chrome instance, navigates to your running dev server, clicks through the UI it just built, and loops back to fix what it sees break. The team behind it is, not coincidentally, largely the former Windsurf leadership — Google licensed Windsurf's technology and hired CEO Varun Mohan and much of the engineering team in mid-2025 after OpenAI's acquisition talks with Windsurf collapsed. (The name is a nod to Mr.doob's antigravity physics demo and Python's `import antigravity` easter egg, in case you were wondering.)
+**Google Antigravity 2.0** is a fork of VS Code that has quietly demoted the editor to one surface among several. The desktop app is a hub for dispatching multiple agents at once — one on the frontend, one on the API layer, one running tests — each producing inspectable "Artifacts" (screenshots, walkthroughs) you review rather than diffs you read line by line. Its most distinctive piece is the **Browser Subagent**: it opens a real Chrome instance, navigates to your running dev server, clicks through the UI it just built, and loops back to fix what it sees break. The team behind it is, not coincidentally, largely the former Windsurf leadership — [Google licensed Windsurf's technology and hired CEO Varun Mohan and much of the engineering team](https://www.computerworld.com/article/4021763/google-snatches-windsurf-execs-in-a-2-4b-deal-derailing-openais-biggest-acquisition-yet.html) in mid-2025 after OpenAI's acquisition talks with Windsurf collapsed. (The name is a nod to Mr.doob's antigravity physics demo and Python's `import antigravity` easter egg, in case you were wondering.)
 
 **Claude Code** takes the opposite architectural bet: it doesn't want your editor at all. It's a CLI tool that lives in your terminal and works alongside whatever you already use — VS Code, JetBrains, vim, nothing — reading and editing files, running commands, and calling out to subagents when a task benefits from a separate context window. Its edge isn't a UI, it's depth: a skills system with a genuinely large third-party ecosystem, a 1M-token context window on the API, and Sonnet 5 — now the default model as of July 1 — built specifically for staying on plan across long multi-step tasks rather than one clever completion at a time.
 
@@ -33,11 +33,15 @@ Worth pausing on one line in that table: all three converged on $200 a month for
 
 ## Try each one in under a minute
 
-Antigravity doesn't have a one-line CLI install yet — grab the desktop app from antigravity.google, or follow Google's migration guide if you're moving off Gemini CLI (which stops serving free and Pro/Ultra users on June 18, 2026).
+Antigravity doesn't have a one-line CLI install yet — grab the desktop app from [antigravity.google](https://antigravity.google/), or follow [Google's migration guide](https://antigravity.google/docs/gcli-migration) if you're moving off Gemini CLI (which stops serving free and Pro/Ultra users on June 18, 2026).
+
+**[Claude Code](https://code.claude.com/docs/en/setup)**
 
 ```
 npm install -g @anthropic-ai/claude-code
 ```
+
+**[Codex](https://developers.openai.com/codex/quickstart)**
 
 ```
 npm install -g @openai/codex
@@ -47,7 +51,7 @@ npm install -g @openai/codex
 
 **Pick Antigravity 2.0** if you're building something with a visible UI — a web or Android app — and want an agent that actually clicks through what it built instead of assuming the code is correct because it compiles. It's also the obvious choice if you're already deep in Firebase, Android Studio, or Google Cloud; the first-party integrations are tighter than anything Cursor or Claude Code offer there. Budget for quota uncertainty: this is still the newest of the three platforms, and it has already changed its own rules on paying users more than once.
 
-**Pick Claude Code** if you care more about a long autonomous task landing correctly than about watching it happen. Multi-step refactors, unfamiliar codebases, architectural analysis — the kind of work where you'd rather review one clean result than babysit a browser tab — is where the terminal-first, model-first approach earns its keep. It's also the natural pick if our article on Claude Code skills convinced you the third-party ecosystem is worth building on.
+**Pick Claude Code** if you care more about a long autonomous task landing correctly than about watching it happen. Multi-step refactors, unfamiliar codebases, architectural analysis — the kind of work where you'd rather review one clean result than babysit a browser tab — is where the terminal-first, model-first approach earns its keep. It's also the natural pick if [our article on Claude Code skills](/articles/claude-code-skills-that-change-how-you-ship) convinced you the third-party ecosystem is worth building on.
 
 **Pick Codex** if your team already lives inside ChatGPT and GitHub. The `@codex` PR delegation and background Automations mean the agent can pick up real engineering chores — triage, review, monitoring — without anyone opening a new tool. It's also the least disruptive option if you're not ready to change editors or workflows at all.
 
