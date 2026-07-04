@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { LogoMark } from './LogoMark'
 
 export function SiteFooter() {
@@ -15,7 +16,19 @@ export function SiteFooter() {
 
       <div className="mx-auto flex max-w-5xl flex-col gap-2 px-6 pb-10 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>© {new Date().getFullYear()} AI Signal</span>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <Link
+            href="/articles"
+            className="text-muted transition-colors duration-150 ease-out-quart hover:text-primary"
+          >
+            All Articles
+          </Link>
+          <Link
+            href="/about"
+            className="text-muted transition-colors duration-150 ease-out-quart hover:text-primary"
+          >
+            About
+          </Link>
           <a
             href="/rss.xml"
             aria-label="Subscribe to AI Signal via RSS"
