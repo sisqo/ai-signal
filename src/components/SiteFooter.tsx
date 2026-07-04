@@ -15,14 +15,23 @@ export function SiteFooter() {
 
       <div className="mx-auto flex max-w-5xl flex-col gap-2 px-6 pb-10 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>© {new Date().getFullYear()} AI Signal</span>
-        <a
-          href="https://sisqo.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted transition-colors duration-150 ease-out-quart hover:text-primary"
-        >
-          by SisQo
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/rss.xml"
+            aria-label="Subscribe to AI Signal via RSS"
+            className="text-muted transition-colors duration-150 ease-out-quart hover:text-primary"
+          >
+            RSS
+          </a>
+          <a
+            href="https://sisqo.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted transition-colors duration-150 ease-out-quart hover:text-primary"
+          >
+            by SisQo
+          </a>
+        </div>
       </div>
     </footer>
   )

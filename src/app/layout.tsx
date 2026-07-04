@@ -3,11 +3,12 @@ import { Analytics } from '@vercel/analytics/next'
 import { fraunces, publicSans, jetbrainsMono } from '@/lib/fonts'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
+import { SITE_URL } from '@/lib/site'
 import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ai-signal.sisqo.dev'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'AI Signal — Notes on artificial intelligence',
     template: '%s — AI Signal',
@@ -17,6 +18,13 @@ export const metadata: Metadata = {
     title: 'AI Signal',
     description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
     type: 'website',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': [{ url: '/rss.xml', title: 'AI Signal (RSS)' }],
+      'application/atom+xml': [{ url: '/atom.xml', title: 'AI Signal (Atom)' }],
+      'application/feed+json': [{ url: '/feed.json', title: 'AI Signal (JSON Feed)' }],
+    },
   },
 }
 

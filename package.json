@@ -2,6 +2,9 @@
   "name": "ai-signal",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -11,6 +14,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",
     "@vercel/analytics": "^2.0.1",
+    "feed": "^5.2.1",
     "gray-matter": "^4.0.3",
     "next": "15.5.19",
     "next-mdx-remote": "^6.0.0",
