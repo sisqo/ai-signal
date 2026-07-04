@@ -1,0 +1,45 @@
+---
+title: "The 10 Built-In Claude Code Commands, Ranked"
+slug: "claude-code-built-in-commands-ranked"
+dek: "Anthropic quietly gutted /agents's interactive wizard on July 1 — the third native command stripped down this way in two months. Here are the ten built-ins still worth keeping in your fingers, ranked by how much they actually change a session."
+date: "2026-07-04"
+tag: "Tools"
+featured: true
+---
+
+On July 1, Anthropic shipped Claude Code v2.1.198 and quietly removed the interactive wizard behind `/agents`. The command still runs — it just prints a one-line reminder now, telling you to ask Claude to create and manage subagents in plain language instead, or edit `.claude/agents/` by hand. Read on its own, that's a minor changelog line. Read next to two other recent removals, it's a pattern: `/pr-comments` lost its dedicated interface in v2.1.91 ("ask Claude directly... instead"), `/vim` went the same way in v2.1.92 (toggle it through `/config` now), and three days before this article's dateline, `/agents` became the third command folded into "just ask Claude" or a settings menu.
+
+## Why Anthropic keeps doing this
+
+[Claude Code's own documentation](https://code.claude.com/docs/en/commands) states the direction plainly: "Custom commands have been merged into skills. A file at `.claude/commands/deploy.md` and a skill at `.claude/skills/deploy/SKILL.md` both create `/deploy` and work the same way." Anthropic isn't just pruning underused commands — it's consolidating three different extension mechanisms (custom commands, skills, and one-off interactive wizards) into a single system, and routing anything that used to need a dedicated picker UI into a natural-language request instead.
+
+That's worth knowing before treating any "complete" command list as gospel: Anthropic's own reference tags every entry as a true built-in, a **[Skill]**, or a **[Workflow]** — thirteen rows, including first-party bundled ones like `/code-review`, `/verify`, and `/dataviz`, are Skill- or Workflow-tagged rather than genuine built-ins. Third-party, community-built skills — the kind covered in [our article on Claude Code skills](/articles/claude-code-skills-that-change-how-you-ship) — live in that same layer, installed rather than shipped. This piece sticks to the roughly 86 commands whose behavior is actually coded into the CLI binary, which leaves out a few genuinely useful first-party skills purely on that technicality.
+
+## The ten, ranked by how much they change a session
+
+Ranking criterion: not name recognition, but how much a command changes the outcome of a real working session — cost, correctness, or whether a long session stays usable at all. That's why `/agents` isn't on this list despite the headline above: as of July 1 it does nothing but print a reminder.
+
+| Rank | Command | What it does |
+|---|---|---|
+| 1 | `/rewind` (`/checkpoint`, `/undo`) | Restores conversation and/or code to an earlier checkpoint. Since June 24 (v2.1.191) it can recover a conversation from *before* `/clear` was run — context that used to be gone for good. |
+| 2 | `/compact` | Summarizes the conversation to free context; takes focus instructions (`/compact Focus on code samples`) that can be set once per repo in `CLAUDE.md` instead of typed each time. |
+| 3 | `/clear` (`/reset`, `/new`) | Starts a fresh conversation; code changes persist, and the old session stays reachable via `/resume`. Running `/rename` first keeps the archived session findable later. |
+| 4 | `/resume` (`/continue`) | Reopens a past session by name, ID, or picker. Background sessions show as `bg`; pasting a PR URL finds the session that created it. |
+| 5 | `/model` | Switches the active model, saved as default unless `s` is pressed for this-session-only. Pairs with the separate `/effort` command — Anthropic's own docs now recommend `xhigh` for most coding work. |
+| 6 | `/permissions` (`/allowed-tools`) | Sets allow/ask/deny rules for tools, including a review of recent auto-mode denials — the command behind most fixes for "stop asking me every five seconds." |
+| 7 | `/mcp` | Manages MCP server connections. As of v2.1.185, `claude mcp login <name>` authenticates from the shell directly, useful over SSH with `--no-browser`. |
+| 8 | `/usage` (`/cost`, `/stats`) | Session cost and plan limits, broken down by skill, subagent, and MCP server on paid plans. Anthropic's own costs guide is explicit that the dollar figure "isn't relevant for billing purposes" on Max/Pro — an API-user metric wearing a subscription-user's UI. |
+| 9 | `/context` | A colored grid of what's filling the context window, with suggestions for what's bloating it — the diagnostic read that `/compact` acts on. |
+| 10 | `/init` | Generates a starting `CLAUDE.md` from the repo. The first command worth running in any new project — every later session builds on what it writes. |
+
+*Source: [Claude Code commands reference](https://code.claude.com/docs/en/commands) and [costs guide](https://code.claude.com/docs/en/costs), current as of this writing.*
+
+A few of these are worth a second look past the table. The `/usage` billing caveat is easy to miss and easy to misread: on a subscription plan rather than the API, the number it shows is diagnostic, not a bill. `/mcp`'s shell-based login is new enough — [Week 26 of Anthropic's release digest](https://code.claude.com/docs/en/whats-new) — that most existing Claude Code writeups don't mention it, and it matters specifically for anyone running Claude Code on a remote box with no browser handy. And `/rewind`'s June 24 upgrade quietly removes one of the more common reasons people avoided `/clear` in the first place: the fear that clearing context meant losing the ability to go back.
+
+## What didn't make the cut, and why it's still worth knowing
+
+`/doctor`, `/diff`, `/plan`, `/goal`, `/background`, `/config` (which now accepts `key=value` pairs directly, even in non-interactive mode as of v2.1.181), `/review`, and `/export` are all genuine, current built-ins that just didn't move the ranking-by-impact needle as high as the ten above. None of them are gone or renamed, which is the actual point of checking a primary source instead of an older cheat sheet: of everything in this piece, only `/vim` and `/pr-comments` no longer work as written elsewhere on the internet — a distinction a [still-open GitHub issue](https://github.com/anthropics/claude-code/issues/43370) about stale `/vim` documentation illustrates by accident. There will likely be a fourth removal by the time this article is a few months old.
+
+## The actual advice
+
+Don't memorize this list as a fixed cheat sheet. Memorize the two things that keep it honest instead: `/help`, which prints whatever Claude Code currently supports, and the [commands reference](https://code.claude.com/docs/en/commands) itself, which Anthropic keeps current in a way a static blog post can't. Given three removals in two months, the safer habit isn't knowing all 86 built-ins by heart — it's knowing the interactive-wizard layer is actively shrinking, and checking the reference before you build a workflow around one that might not be there next quarter.
