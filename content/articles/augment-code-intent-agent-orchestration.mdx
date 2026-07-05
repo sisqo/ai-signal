@@ -1,0 +1,30 @@
+---
+title: "Augment Code Bets the Next Coding Tool Isn't an IDE, It's a Workspace"
+slug: "augment-code-intent-agent-orchestration"
+dek: "Intent doesn't write code faster than a single coding agent. It exists because tracking which of five agents is doing what became the actual bottleneck."
+date: "2026-07-08"
+tag: "Tools"
+featured: true
+---
+
+Augment Code's pitch for [Intent](https://www.augmentcode.com/blog/intent-a-workspace-for-agent-orchestration), its coding workspace in public beta since February 2026, starts from a complaint rather than a feature: "The problem isn't typing code. It's tracking which agent is doing what." That's a different diagnosis than most agentic coding tools make. Claude Code, Codex, and Antigravity 2.0 — the tools [we compared earlier this month](/articles/antigravity-2-vs-claude-code-vs-codex) — each optimize how well a single agent executes a task. Intent starts from the assumption that a developer is already running several agents at once, and that coordinating them, not writing the code, is where time actually goes.
+
+## Three agents, one spec
+
+Intent's architecture splits the work into three roles instead of one agent doing everything. A coordinator agent uses Augment's Context Engine — semantic search across the codebase — to understand the task and propose a plan as a written specification. Once that spec is approved, implementor agents fan out and execute the work in parallel waves. A verifier agent then checks the completed work against the original spec before a human reviews anything, flagging inconsistencies or missing pieces rather than leaving that check entirely to the developer.
+
+Each workspace is backed by its own git worktree, keeping agents, terminals, diffs, browser previews, and review state isolated together — a developer can pause one workspace, switch to another, or hand a task off without one agent's in-progress changes colliding with another's.
+
+## Bring your own agent
+
+Intent isn't limited to Augment's own models doing the implementing. Claude Code, Codex, and OpenCode are all supported as "bring your own agent" options inside the same coordinator/verifier structure. Existing Augment users pay the same credit rate they already pay through the Auggie CLI; agents brought in from other providers run on their own separate cost.
+
+That's a notable design choice on its own: Augment isn't trying to be the one agent that replaces the others already in a developer's toolchain. It's positioning Intent as the layer above them — the place where whichever agents a team already uses get coordinated against a shared spec instead of running as, in one independent reviewer's phrase, "a swarm of independent prompts."
+
+## What's still unproven
+
+Intent is honest about one gap: there's no benchmarked productivity comparison yet against single-agent tools or against other multi-agent setups. The pitch is entirely architectural — fewer collisions, clearer accountability for which agent did what — not a claim that code ships faster. It's also macOS-only for now, with Windows support still on a waitlist, which matters if part of a team is on Windows and would need to wait to adopt it alongside macOS colleagues.
+
+## Whether it's worth trying now
+
+If you're already an Augment Code subscriber, Intent costs nothing extra to try — it runs on the same credits as the Auggie CLI, so the honest move is just opening it on your next multi-step task and seeing whether the coordinator/verifier split actually catches something a single agent would have missed. If you're not an Augment customer, the more useful test is conceptual before it's financial: does your current bottleneck look like "the agent isn't good enough" or "I've lost track of what three agents are each doing right now"? Intent is built for the second problem specifically, and it won't fix the first one at all.
