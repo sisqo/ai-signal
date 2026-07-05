@@ -1,5 +1,5 @@
 import { Feed, type Item } from 'feed'
-import { getAllArticles } from './content'
+import { getPublishedArticles } from './content'
 import { SITE_URL } from './site'
 
 const SITE_TITLE = 'AI Signal'
@@ -8,7 +8,7 @@ const AUTHOR = { name: 'SisQo', link: 'https://sisqo.dev' }
 const MAX_ITEMS = 20
 
 export function buildFeed(): Feed {
-  const articles = getAllArticles().slice(0, MAX_ITEMS)
+  const articles = getPublishedArticles().slice(0, MAX_ITEMS)
 
   const feed = new Feed({
     title: SITE_TITLE,

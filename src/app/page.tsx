@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/content'
+import { getPublishedArticles } from '@/lib/content'
 import { FeaturedArticle, ArticleRow } from '@/components/ArticleIndexRow'
+
+export const revalidate = 3600
 
 const HOMEPAGE_ROW_LIMIT = 8
 
 export default function HomePage() {
-  const articles = getAllArticles()
+  const articles = getPublishedArticles()
   const featured = articles.find((a) => a.featured) ?? articles[0]
   const rest = articles.filter((a) => a.slug !== featured?.slug)
   const visible = rest.slice(0, HOMEPAGE_ROW_LIMIT)

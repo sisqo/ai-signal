@@ -1,20 +1,20 @@
 ---
 name: new-article
-description: Writes and publishes a new AI Signal blog post end to end — research, write, verify, commit, push, deploy. Two independent choices, both optional in the argument string — a mode ("auto" or "ask") and a topic. No mode given defaults to "auto". No topic given triggers discovery: find the most interesting recent AI/agentic-coding-tools news not already covered on the site. Use whenever the user wants a new article written for this blog (e.g. "/new-article", "/new-article ask", "/new-article the new Gemini release", "/new-article ask the new Gemini release", "scrivi un nuovo articolo").
+description: Writes and publishes a new AI Signal blog post end to end — research, write, verify, commit, push, deploy. Two independent choices, both optional in the argument string — a mode ("auto" or "ask") and a topic. No mode given defaults to "auto". No topic given triggers discovery: find the most interesting recent AI/agentic-coding-tools news not already covered on the site. An optional `--publish YYYY-MM-DD` flag anywhere in the string schedules the article for a future date instead of publishing it today — the piece is still written, committed, and pushed immediately, but stays hidden (404) on the live site until that date. Use whenever the user wants a new article written for this blog (e.g. "/new-article", "/new-article ask", "/new-article the new Gemini release", "/new-article ask the new Gemini release", "/new-article --publish 2026-07-15 the new Gemini release", "scrivi un nuovo articolo", "scrivi un articolo da pubblicare il 15 luglio").
 user-invocable: true
-argument-hint: "[auto|ask] [optional topic — omit to auto-discover the day's most interesting uncovered story]"
+argument-hint: "[auto|ask] [--publish YYYY-MM-DD] [optional topic — omit to auto-discover the day's most interesting uncovered story]"
 ---
 
 Publishes one new post to AI Signal (this repo).
 
 ## Parse the arguments first
 
-The argument string carries two independent, optional pieces: a **mode** and a **topic**.
+The argument string carries three independent, optional pieces: a **mode**, an optional **`--publish` date**, and a **topic**.
 
-- If the first word is exactly `auto` or `ask` (case-insensitive), that's the mode; everything after it is the topic (which may be empty).
-- Otherwise there's no mode word — mode defaults to `auto`, and the *entire* argument string is the topic (which may be empty).
+- First, look for `--publish YYYY-MM-DD` anywhere in the string. If present, remove it from the string (mode/topic parsing below runs on what's left) and remember the date — this is the article's scheduled publish date instead of today.
+- Then, on what remains: if the first word is exactly `auto` or `ask` (case-insensitive), that's the mode; everything after it is the topic (which may be empty). Otherwise there's no mode word — mode defaults to `auto`, and the *entire* remaining string is the topic (which may be empty).
 
-So: `/new-article` → auto, no topic. `/new-article ask` → ask, no topic. `/new-article the new Gemini release` → auto, topic = "the new Gemini release". `/new-article ask the new Gemini release` → ask, topic = "the new Gemini release".
+So: `/new-article` → auto, no topic, publish today. `/new-article ask` → ask, no topic, publish today. `/new-article the new Gemini release` → auto, topic = "the new Gemini release", publish today. `/new-article --publish 2026-07-15 ask the new Gemini release` → ask, topic = "the new Gemini release", scheduled for 2026-07-15.
 
 **`auto` mode**: fully automatic, no confirmation gate anywhere. Once the article is written and verified, commit, push, and deploy without waiting for approval — this is the house default the user chose.
 
@@ -67,7 +67,7 @@ This only works for bar charts of data already cited in the article (see `DESIGN
 title: "..."
 slug: "kebab-case-slug"
 dek: "One sentence teaser, no filler."
-date: "YYYY-MM-DD"   # today, per current system context
+date: "YYYY-MM-DD"   # today, per current system context — or the --publish date if one was given
 tag: "..."
 featured: true
 ---
@@ -77,7 +77,7 @@ For `tag`: see root `CLAUDE.md`'s Editorial Guidelines for the reuse policy.
 
 ## Step 5: Un-feature the previous lead
 
-Edit whichever file had `featured: true` (found in Step 1) and remove that line — only the newest article should be featured. The homepage falls back to the most recent article automatically if none are featured, but be explicit rather than relying on the fallback.
+Edit whichever file had `featured: true` (found in Step 1) and remove that line — only the newest article should be featured, and always set `featured: true` on the new one regardless of whether it publishes today or on a future `--publish` date. This is safe even when scheduling weeks out: the homepage only looks for `featured: true` among already-*published* articles (see `src/lib/content.ts`'s `getPublishedArticles`), falling back to the most recent published article if none match. So during the gap between writing a scheduled article and its publish date, the old article keeps showing as the de facto lead via that fallback — nothing needs a second edit later, and there's no gap where the homepage has no lead at all.
 
 ## Step 6: Verify before publishing
 
@@ -99,8 +99,12 @@ git commit -m "..."   # mention the topic and, briefly, the mode (auto vs. ask) 
 git push
 ```
 
-Push triggers Vercel's auto-deploy. Give it 30–60 seconds, then confirm the new article's URL returns 200 on `https://ai-signal.sisqo.dev/articles/<slug>` before declaring done.
+Push triggers Vercel's auto-deploy regardless of the article's `date` — scheduling doesn't delay this step, it only delays what the deployed site actually shows. Give the deploy 30–60 seconds, then check `https://ai-signal.sisqo.dev/articles/<slug>`:
+- **Publishing today:** confirm it returns 200 before declaring done.
+- **Scheduled (`--publish` in the future):** confirm it currently returns 404 (expected — that's the gating working) rather than 200. A 200 here means the date didn't make it into the frontmatter correctly.
 
 ## Step 8: Report back
 
-Tell the user what got published: title, live URL, and a one-line note on where the story came from (which sources, or which topic/pick they gave you). This is a completion summary, not a request for approval — the article is already live by the time you say this.
+Tell the user what happened: title, and a one-line note on where the story came from (which sources, or which topic/pick they gave you).
+- **Published today:** give the live URL — the article is already live by the time you say this.
+- **Scheduled:** state the publish date clearly and that the article is committed and deployed but stays hidden until then. It appears automatically once the site gets a request more than an hour after its last render of that page, past midnight Europe/Rome on that date — no rebuild needed, but also no exact-second guarantee (see CLAUDE.md's "Scheduled publishing" section) — this is a completion summary for "written and queued," not "live."

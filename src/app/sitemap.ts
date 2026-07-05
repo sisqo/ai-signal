@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
-import { getAllArticles } from '@/lib/content'
+import { getPublishedArticles } from '@/lib/content'
 import { SITE_URL } from '@/lib/site'
 
+export const revalidate = 3600
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const articles = getAllArticles()
+  const articles = getPublishedArticles()
 
   return [
     { url: SITE_URL, lastModified: articles[0]?.date, changeFrequency: 'daily', priority: 1 },

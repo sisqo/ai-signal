@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
-import { getAllArticles } from '@/lib/content'
+import { getPublishedArticles } from '@/lib/content'
 import { ArticleRow } from '@/components/ArticleIndexRow'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'All Articles',
@@ -8,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function ArticlesArchivePage() {
-  const articles = getAllArticles()
+  const articles = getPublishedArticles()
 
   return (
     <div className="mx-auto max-w-3xl px-6 pb-24 pt-4">

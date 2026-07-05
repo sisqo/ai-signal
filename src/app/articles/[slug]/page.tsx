@@ -2,8 +2,10 @@ import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import type { Metadata } from 'next'
-import { getAllSlugs, getArticleBySlug, formatDate } from '@/lib/content'
+import { getAllSlugs, getArticleBySlug, formatDate, isPublished } from '@/lib/content'
 import { MdxImage } from '@/components/MdxImage'
+
+export const revalidate = 3600
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }))
@@ -12,7 +14,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const article = getArticleBySlug(slug)
-  if (!article) return {}
+  if (!article || !isPublished(article.date)) return {}
   return {
     title: article.title,
     description: article.dek,
@@ -23,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const article = getArticleBySlug(slug)
-  if (!article) notFound()
+  if (!article || !isPublished(article.date)) notFound()
 
   return (
     <article className="mx-auto max-w-3xl px-6 pb-24 pt-4">

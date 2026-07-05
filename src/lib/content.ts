@@ -37,6 +37,18 @@ export function getAllArticles(): Article[] {
   return articles.sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
+// Articles can carry a future `date` to be scheduled ahead of time (see /new-article's
+// --publish flag). A date is "published" once its day has started in Europe/Rome — comparing
+// ISO date strings against "today" in that zone sidesteps manual UTC offset/DST math entirely.
+export function isPublished(date: string): boolean {
+  const todayInRome = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(new Date())
+  return date <= todayInRome
+}
+
+export function getPublishedArticles(): Article[] {
+  return getAllArticles().filter((a) => isPublished(a.date))
+}
+
 export function getArticleBySlug(slug: string): Article | null {
   const filePath = path.join(contentDir, `${slug}.mdx`)
   if (!fs.existsSync(filePath)) return null
