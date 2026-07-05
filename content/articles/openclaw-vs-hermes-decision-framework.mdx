@@ -1,0 +1,45 @@
+---
+title: "382,000 Stars vs. Three CVEs: How to Choose Between OpenClaw and Hermes"
+slug: "openclaw-vs-hermes-decision-framework"
+dek: "Both are legitimate, both are growing fast, and neither number in that title tells you which one belongs on your machine. Here's the framework that actually does."
+date: "2026-07-05"
+tag: "Tools"
+featured: true
+---
+
+[OpenClaw](https://github.com/openclaw/openclaw) has 382,000 GitHub stars, is MIT-licensed, and has shipped two critical CVEs this year — a one-click Control UI takeover in January and a 9.9-CVSS privilege escalation bug patched in March. [Hermes Agent](https://github.com/NousResearch/hermes-agent), Nous Research's rival self-hosted assistant, launched five weeks after that first OpenClaw CVE, has grown to 209,000 stars, and carries three disclosed CVEs, the worst rated 5.3. Read as a scoreboard, that looks like an easy call: younger, smaller, safer. It isn't, because star count and CVE count aren't measuring safety versus danger — they're measuring reach versus newness, on two projects that made almost opposite bets about what a personal AI agent should be.
+
+## Two different bets
+
+OpenClaw's lineage matters here. It started in 2025 as Clawdbot, built by the Austrian developer [Peter Steinberger](https://steipete.me/posts/2026/openclaw), got renamed Moltbot over a trademark dispute, and relaunched as OpenClaw in January 2026 right before it went viral. By mid-February, Sam Altman was announcing that Steinberger himself was [joining OpenAI](https://techcrunch.com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai/) to "drive the next generation of personal agents," while OpenClaw moved to an independent foundation and stayed open source. The product that resulted from that trajectory is built around a persistent Node.js gateway daemon: agents that keep state and talk to each other across sessions, approval-gated command execution, and integrations into more than a dozen messaging platforms — WhatsApp, Telegram, Slack, Signal, iMessage — plus ClawHub, an open marketplace for community-built skills. The bet is that the hard problem is routing and control: who can reach your agent, from where, with what permissions.
+
+Hermes Agent, built by [Nous Research](https://github.com/NousResearch/hermes-agent) — the team behind the original Hermes model fine-tunes — launched in February 2026 as a Python-first alternative with a different premise entirely: that the hard problem is memory. Instead of accumulating unbounded context, Hermes forces its own memory into hard limits and runs a closed learning loop — experience, extraction, skill creation, refinement — so the agent's procedures actually change as it's used. It runs from a $5 VPS up through serverless backends like Modal and Daytona that hibernate when idle, and it treats each deployment as an isolated "profile" rather than a member of a coordinating team. Where OpenClaw wants to be the switchboard for a dozen channels and a small army of agents, Hermes wants to be one agent that gets measurably better at knowing you.
+
+Neither framing is wrong. They're optimized for different jobs, and that's the actual first question to ask before comparing anything else: do you need an orchestration layer, or do you need an agent that learns?
+
+## What the security record actually says — and doesn't
+
+It's tempting to treat CVE counts as a proxy for "which one is safer to run." They aren't, for two reasons: OpenClaw has simply existed under adversarial scrutiny for longer, and the two projects' disclosed bugs sit in completely different parts of the stack.
+
+OpenClaw's worst disclosed issue, later nicknamed "ClawBleed," was a Control UI flaw that blindly trusted a `gatewayUrl` URL parameter — visiting a malicious webpage while logged in was enough to leak your auth token in a single click, a vulnerability the [University of Toronto's security office](https://security.utoronto.ca/advisories/openclaw-vulnerability-notification/) rated critical and confirmed was patched in version 2026.1.29. Two months later came a more serious one: researchers at [ARMO](https://www.armosec.io/blog/cve-2026-32922-openclaw-privilege-escalation-cloud-security/) found that OpenClaw's `device.token.rotate` function failed to check that a caller's requested token scope stayed within its existing permissions — meaning a token limited to device pairing could mint itself a fully privileged admin token. ARMO also scanned the internet in February 2026 and found more than 135,000 exposed OpenClaw instances, 63% of them running with no authentication at all. Separately, a supply-chain campaign nicknamed ClawHavoc flooded the open ClawHub marketplace with malicious skills disguised as legitimate ones.
+
+Hermes's three disclosed CVEs are smaller in both severity and blast radius: a path-traversal bug in a messaging-platform adapter (CVSS 4.0), a symlink-following flaw in its file tools (4.8), and a path-traversal issue in its web UI (5.3), [according to a Cloud Security Alliance research note](https://labs.cloudsecurityalliance.org/research/csa-research-note-hermes-agent-cves-20260504-csa-styled/). But that same note is careful not to hand Hermes a clean bill of health — an independent audit of its default configuration turned up unassigned Critical and High findings, including unrestricted shell execution reachable through a regex-only validation bypass. The report's actual conclusion cuts against a simple "Hermes is safer" reading: "the more consequential risks in both frameworks are architectural, not implementation bugs" — long-lived memory stores, broad tool permissions, and prompt-driven execution that conventional security tooling doesn't watch for.
+
+That architectural framing is exactly what a June 2026 [systematic study of memory-poisoning attacks](https://arxiv.org/abs/2606.04329) tested directly, evaluating both OpenClaw and Hermes Agent among its target systems. The finding: standard prompt-injection defenses watch what a user types in a given turn; an agent that writes what it learns into memory and reads it back later has an attack surface those defenses never look at. Hermes's entire design leans into exactly that mechanism as a feature. OpenClaw's exposure comes from the opposite direction — a wide, internet-facing surface with a track record of trust-boundary bugs in the gateway itself. Different failure mode, not a difference in how careful either team has been.
+
+## The framework
+
+| If you need... | Lean OpenClaw | Lean Hermes |
+|---|---|---|
+| Channel reach | Yes — a dozen-plus platforms from one gateway | Fewer channels, added more slowly |
+| Agents that coordinate | Persistent teams, shared state across sessions | Isolated profiles, no cross-agent chat |
+| Deployment style | An always-on daemon you keep patched | Container/serverless backends that can hibernate |
+| Getting better over time | A large marketplace of static, pre-built skills | An agent that rewrites its own skills from use |
+| Attack surface you're trading | Larger, more targeted, more patched history to lean on | Smaller, newer, less battle-tested — good and bad |
+| Project maturity | Established since 2025, 382K stars, foundation-backed | Five months old, 209K stars, weekly releases |
+
+Read the table by what you're actually deploying, not by brand recognition. A single developer who wants an assistant that gets sharper about their preferences over months, running in a sandboxed container that shuts off when idle, is Hermes's exact use case. A team that needs one system routing across WhatsApp, Slack, and Teams with an audit trail and a marketplace of ready-made skills is what OpenClaw was built for — and also what its CVE history has been busiest attacking. This is the same tradeoff shape behind [our API vs. MCP framework](/articles/api-vs-mcp-decision-framework): the question is never "which one is better," it's which cost, and which failure mode, you're actually willing to own.
+
+## Before you deploy either one
+
+Whichever you pick, do these three things first. Pin to the latest patched release before you install anything — for OpenClaw that means at minimum v2026.3.21, the hardened baseline past both disclosed critical CVEs. Never expose the Control UI or gateway port to the open internet; ARMO's 135,000-instance scan is a direct measurement of what happens when people skip this. And before installing any third-party skill from ClawHub or Hermes's equivalent registry, read what permissions it's actually requesting — ClawHavoc proved that "popular marketplace" and "vetted marketplace" are not the same claim.
