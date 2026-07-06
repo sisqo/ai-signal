@@ -1,0 +1,30 @@
+<svg viewBox="0 0 680 420" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="420" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">GPT-5.4</text>
+    <rect x="260" y="24" width="370" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">57.3</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Gemini 3.1 Pro Preview</text>
+    <rect x="260" y="68" width="358.3769633507854" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="628.3769633507854" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">55.5</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">GPT-5.3-Codex</text>
+    <rect x="260" y="112" width="342.8795811518325" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="612.8795811518326" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">53.1</text>
+    <text x="0" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">GPT-5.4 Mini</text>
+    <rect x="260" y="156" width="332.54799301919724" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="602.5479930191973" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">51.5</text>
+    <text x="0" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Claude Sonnet 4.6</text>
+    <rect x="260" y="200" width="328.673647469459" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="598.673647469459" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">50.9</text>
+    <text x="0" y="254" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">GPT-5.4 Nano</text>
+    <rect x="260" y="244" width="283.47294938917975" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="553.4729493891798" y="254" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">43.9</text>
+    <text x="0" y="298" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">DeepSeek V3.2</text>
+    <rect x="260" y="288" width="236.98080279232116" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="506.98080279232113" y="298" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">36.7</text>
+    <text x="0" y="342" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Qwen3.5-27B</text>
+    <rect x="260" y="332" width="225.35776614310646" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="495.35776614310646" y="342" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">34.9</text>
+    <text x="0" y="386" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Mistral Small 4</text>
+    <rect x="260" y="376" width="156.9109947643979" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="426.9109947643979" y="386" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">24.3</text>
+</svg>

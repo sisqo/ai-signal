@@ -1,0 +1,57 @@
+---
+title: "$0.14 vs. $3 a Million Tokens: The Real Cost of the Cheap Coding Model"
+slug: "cheap-coding-models-decision-framework"
+dek: "DeepSeek's newest cheap coding model claims to match Claude Sonnet 4.6 on the industry's most-cited benchmark at roughly 1/20th the price. Only one of those two scores has been independently checked."
+date: "2026-07-06"
+tag: "Tools"
+---
+
+DeepSeek's V4 Flash costs [$0.14 per million input tokens](https://api-docs.deepseek.com/quick_start/pricing) — the small chunks of text, roughly a word or word-fragment, that a model reads and writes, and the unit every provider bills by. Claude Sonnet 4.6, the coding model most professional developers default to, costs [$3](https://platform.claude.com/docs/en/about-claude/pricing) for the same million tokens: about 21 times more. On SWE-bench Verified — a benchmark that hands a model a real, already-closed GitHub issue from a popular open-source project and checks its fix against the one a human maintainer actually shipped — DeepSeek's [own model card](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash) claims V4 Flash resolves 79% of the test set. Sonnet 4.6's widely tracked score on the same benchmark is 79.6%.
+
+If that 79% holds up, a twentieth of the price buys coding help statistically indistinguishable from the model most teams already pay for. Nobody outside DeepSeek has confirmed it does.
+
+That gap — between what a price tag promises and what an outside party has actually measured — is the real decision facing anyone shopping for a coding model in mid-2026. Token prices for capable models have collapsed hard enough this year that "cheap" no longer means "worse." It means something specific needs checking before real work gets routed to it.
+
+## The sticker prices
+
+| Model | Input $/M | Output $/M | Notes |
+|---|---|---|---|
+| Claude Sonnet 4.6 | $3.00 | $15.00 | Anthropic's mainstream coding model |
+| Claude Haiku 4.5 | $1.00 | $5.00 | Anthropic's own budget tier |
+| GPT-5.4 | $2.50 | $15.00 | OpenAI's current flagship |
+| GPT-5.4 Mini | $0.75 | $4.50 | |
+| GPT-5.4 Nano | $0.20 | $1.25 | |
+| DeepSeek V4 Flash | $0.14 | $0.28 | Open weights (downloadable, self-hostable), MIT license |
+| Qwen3.5-Flash | ~$0.07 | $0.26 | Alibaba, open weights |
+| Mistral Small 4 | $0.15 | $0.60 | Open weights |
+
+Prices are current list rates from [OpenAI](https://developers.openai.com/api/docs/pricing), [Anthropic](https://platform.claude.com/docs/en/about-claude/pricing), [DeepSeek](https://api-docs.deepseek.com/quick_start/pricing), and [OpenRouter](https://openrouter.ai/qwen/qwen3.5-flash-02-23)'s live listings for Qwen and [Mistral](https://openrouter.ai/mistralai/mistral-small-2603). The spread is real: the cheapest usable option here costs about 4% of the priciest.
+
+## What an independent scoreboard says
+
+Coding capability doesn't track price as cleanly as that table suggests. [Artificial Analysis](https://artificialanalysis.ai/), an independent benchmarking firm that runs its own evaluations rather than republishing vendor claims, tracks a "Coding Index" — a composite coding score, out of roughly 60 points — across dozens of models:
+
+![On Artificial Analysis's independently run Coding Index, GPT-5.4 Mini already outscores Claude Sonnet 4.6 at a quarter of the price, while DeepSeek's cheapest current model, V4 Flash, doesn't appear at all — only its previous-generation sibling, V3.2, has been through the firm's evaluation pipeline.](/articles/cheap-coding-models-decision-framework/coding-index.svg)
+
+Two things stand out. First, GPT-5.4 Mini beats Claude Sonnet 4.6 on this index (51.5 versus 50.9) at a quarter of the cost — a genuine case of the cheap option not being a compromise, confirmed by a source with no stake in either vendor. Second, DeepSeek V4 Flash isn't on the board at all. The only DeepSeek entry Artificial Analysis has independently run is V3.2, the generation V4 replaced.
+
+## The benchmark you can't check yet
+
+That gap isn't an oversight. DeepSeek [released V4](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash) on April 24, 2026, and its SWE-bench Verified, GPQA, and MMLU-Pro scores come from the company's own announcement and model card — [a Hugging Face thread requesting community-run evaluations](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/discussions/11) for those same benchmarks is still open, with no independently reproduced numbers posted. Claude Sonnet 4.6's 79.6%, by contrast, is a figure multiple outside trackers have converged on.
+
+Neither fact means V4 Flash's number is wrong. It means one of these scores is a claim and the other is closer to a fact, and the sticker price alone won't tell you which is which.
+
+## Where cheap quietly costs more
+
+Two costs don't show up on a pricing page. Artificial Analysis's own testing flagged V4 Flash as notably verbose, [generating far more output tokens](https://artificialanalysis.ai/models/deepseek-v4-flash) than comparable models to reach the same answer — and output tokens cost double the input rate, so a chattier model quietly eats into its own price advantage. And in an agentic coding loop, where a model iterates against test failures on its own, a cheaper model that needs two extra retries to pass can end up burning more total tokens than a pricier model that gets it right the first time. Cost per resolved task, not cost per token, is the number that actually matters — and it's rarely the one published anywhere.
+
+## A framework for picking one
+
+- Route high-volume, low-stakes work — boilerplate, tests, docs, routine refactors — to the cheapest model that clears your own eval suite. The price gap is real money at that scale, and the quality bar is forgiving.
+- For anything you won't carefully review yourself — security-sensitive code, novel architecture, an agent running unsupervised — spend the extra dollars on a model whose benchmark number came from somewhere other than the company selling it.
+- If you already pay a flagship vendor, try that vendor's own budget tier first. Claude Haiku 4.5 or GPT-5.4 Mini keep the same SDK and tool-calling format as the model you're already using — one less integration to maintain than a wholesale switch.
+- If your volume is big enough that even $0.14 per million tokens adds up, price out self-hosting the open-weight options — DeepSeek, Qwen, and Mistral Small are all downloadable — against the API bill. Fixed infrastructure cost can beat per-token pricing once usage climbs high enough.
+
+Developers are already [selective about which tasks they'll hand to AI at all](/articles/what-developers-delegate-to-ai-2026); the same selectivity should extend to which model gets which task. The instinct that makes [judging OpenClaw against Hermes on GitHub stars alone](/articles/openclaw-vs-hermes-decision-framework) a bad shortcut applies here too — the number on the landing page answers the wrong question first.
+
+The next time a pricing page promises coding help twenty times cheaper, check one thing before routing real work to it: whether the benchmark backing that promise came from the company charging you for it, or from someone with nothing to gain either way.
