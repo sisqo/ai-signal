@@ -8,8 +8,8 @@ const HOMEPAGE_ROW_LIMIT = 8
 
 export default function HomePage() {
   const articles = getPublishedArticles()
-  const featured = articles.find((a) => a.featured) ?? articles[0]
-  const rest = articles.filter((a) => a.slug !== featured?.slug)
+  const featured = articles[0]
+  const rest = articles.slice(1)
   const visible = rest.slice(0, HOMEPAGE_ROW_LIMIT)
   const hasMore = rest.length > HOMEPAGE_ROW_LIMIT
 

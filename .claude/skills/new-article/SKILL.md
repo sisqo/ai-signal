@@ -22,9 +22,7 @@ So: `/new-article` → auto, no topic, publish today. `/new-article ask` → ask
 
 ## Step 1: Survey what's already published
 
-Before anything else, read every file in `content/articles/*.mdx`. For each, note the frontmatter (`title`, `slug`, `dek`, `date`, `tag`, `featured`) and skim the body. Build a mental map of what's already been covered — specific tools, releases, and angles — so you don't re-tread the same story. A genuine follow-up (a major new version, a reversal, a significant update to something covered before) is fair game; restating the same announcement from a slightly different angle is not.
-
-Also note which file currently has `featured: true` — there should be exactly one. You'll need it in Step 5.
+Before anything else, read every file in `content/articles/*.mdx`. For each, note the frontmatter (`title`, `slug`, `dek`, `date`, `tag`) and skim the body. Build a mental map of what's already been covered — specific tools, releases, and angles — so you don't re-tread the same story. A genuine follow-up (a major new version, a reversal, a significant update to something covered before) is fair game; restating the same announcement from a slightly different angle is not.
 
 While surveying, also look for a genuine internal-link opportunity: does the new topic naturally reference or build on an already-published piece? If so, plan to link it in the new article (see root `CLAUDE.md`'s Editorial Guidelines).
 
@@ -69,17 +67,14 @@ slug: "kebab-case-slug"
 dek: "One sentence teaser, no filler."
 date: "YYYY-MM-DD"   # today, per current system context — or the --publish date if one was given
 tag: "..."
-featured: true
 ---
 ```
 
 For `tag`: see root `CLAUDE.md`'s Editorial Guidelines for the reuse policy.
 
-## Step 5: Un-feature the previous lead
+Nothing to do about the homepage lead spot — it's computed automatically from `date` (most recent *published* article wins, see root `CLAUDE.md`), so a scheduled article takes over the lead by itself the moment its date arrives, with no follow-up edit.
 
-Edit whichever file had `featured: true` (found in Step 1) and remove that line — only the newest article should be featured, and always set `featured: true` on the new one regardless of whether it publishes today or on a future `--publish` date. This is safe even when scheduling weeks out: the homepage only looks for `featured: true` among already-*published* articles (see `src/lib/content.ts`'s `getPublishedArticles`), falling back to the most recent published article if none match. So during the gap between writing a scheduled article and its publish date, the old article keeps showing as the de facto lead via that fallback — nothing needs a second edit later, and there's no gap where the homepage has no lead at all.
-
-## Step 6: Verify before publishing
+## Step 5: Verify before publishing
 
 Run, in order, and fix anything that fails before moving on:
 
@@ -91,7 +86,7 @@ npm run build
 
 If you used a table or anything visually novel, it's worth a quick local `npm run start` + screenshot check the way past articles were verified, but don't block publishing on it — this is a lower-stakes check than the build passing. If you added a chart, check it in both themes (toggle via the header button) — its colors come from CSS custom properties specifically so they adapt, and a broken toggle would only show up in the theme you didn't screenshot.
 
-## Step 7: Publish
+## Step 6: Publish
 
 ```bash
 git add -A
@@ -103,7 +98,7 @@ Push triggers Vercel's auto-deploy regardless of the article's `date` — schedu
 - **Publishing today:** confirm it returns 200 before declaring done.
 - **Scheduled (`--publish` in the future):** confirm it currently returns 404 (expected — that's the gating working) rather than 200. A 200 here means the date didn't make it into the frontmatter correctly.
 
-## Step 8: Report back
+## Step 7: Report back
 
 Tell the user what happened: title, and a one-line note on where the story came from (which sources, or which topic/pick they gave you).
 - **Published today:** give the live URL — the article is already live by the time you say this.

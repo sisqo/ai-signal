@@ -11,7 +11,6 @@ export type ArticleMeta = {
   dek: string
   date: string
   tag: string
-  featured?: boolean
 }
 
 export type Article = ArticleMeta & {

@@ -5,7 +5,7 @@ user-invocable: true
 argument-hint: "<number of articles to schedule>"
 ---
 
-Finds N free dates and N good stories to fill them, then writes and schedules each one by actually invoking `/new-article` — once per pick — rather than reimplementing what that skill already does. This skill's own job stops at picking the dates and the topics; `/new-article` still owns research, writing, frontmatter, the `featured` handoff, verification, and publishing, exactly as it does for a single normal run. See root `CLAUDE.md`'s "Scheduled publishing" section for how the underlying hide-until-date mechanism works (ISR, `isPublished()`, 404-until-date).
+Finds N free dates and N good stories to fill them, then writes and schedules each one by actually invoking `/new-article` — once per pick — rather than reimplementing what that skill already does. This skill's own job stops at picking the dates and the topics; `/new-article` still owns research, writing, frontmatter, verification, and publishing, exactly as it does for a single normal run. See root `CLAUDE.md`'s "Scheduled publishing" section for how the underlying hide-until-date mechanism works (ISR, `isPublished()`, 404-until-date).
 
 ## Parse the argument
 
@@ -19,7 +19,7 @@ The argument is a single positive integer N — how many articles to actually wr
 
 ## Step 2: Survey what's already published or scheduled
 
-Same as `/new-article`'s Step 1: read every article's frontmatter and skim the body, so the 2N candidates proposed next don't re-tread a story already published *or already sitting in the schedule* for a later date. (You don't need to track `featured: true` yourself — Step 5 hands that off to `/new-article`.)
+Same as `/new-article`'s Step 1: read every article's frontmatter and skim the body, so the 2N candidates proposed next don't re-tread a story already published *or already sitting in the schedule* for a later date.
 
 ## Step 3: Discovery research
 
@@ -41,7 +41,7 @@ Don't research or write these yourself — invoke the `/new-article` skill itsel
 
 For example, for the first pick: invoke `/new-article` with args `auto --publish 2026-07-15 <that candidate's title and pitch>`.
 
-Let each invocation run all the way through — its own survey, research, writing, frontmatter, verification, commit, and push — before starting the next one. **Do this strictly in order, one at a time, never in parallel.** This isn't just tidiness: `/new-article`'s own Step 5 un-features whichever article currently has `featured: true` and features the one it just wrote instead. Running the picks in date order lets that logic cascade correctly across the whole batch on its own — by the time the last pick (`dN`) is written, it's the one and only `featured: true` article, exactly as if you'd run `/new-article` that many separate times on the actual calendar days instead of all at once today. Running two picks concurrently (or out of order) would race on that flag and on the git history — don't.
+Let each invocation run all the way through — its own survey, research, writing, frontmatter, verification, commit, and push — before starting the next one. **Do this strictly in order, one at a time, never in parallel.** This isn't just tidiness: each run commits and pushes on its own, and running two picks concurrently would race on the git history (or two agents editing/committing at once) — don't. (The homepage lead spot itself needs no such care: it's computed automatically from `date` at request time, so whichever pick ends up with the latest published date simply becomes the lead on its own, with no flag to cascade.)
 
 ## Step 6: Report back
 

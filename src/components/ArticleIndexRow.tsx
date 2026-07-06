@@ -7,7 +7,6 @@ function MetaLine({ article, readingTime }: { article: ArticleMeta; readingTime:
     <p className="font-mono text-sm tracking-wide text-muted">
       <time dateTime={article.date}>{formatDate(article.date)}</time> &middot; {readingTime} &middot;{' '}
       <span className="text-accent">{article.tag}</span>
-      {article.featured && <> &middot; Featured</>}
     </p>
   )
 }
