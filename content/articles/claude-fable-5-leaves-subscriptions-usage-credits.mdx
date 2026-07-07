@@ -1,0 +1,40 @@
+---
+title: "Fable 5's Six Free Days Are Over. Here's What It Costs Now."
+slug: "claude-fable-5-leaves-subscriptions-usage-credits"
+dek: "Anthropic gave every Pro, Max, and Team subscriber six days of included access to its best model. Today the free ride ends, and what happens next depends entirely on which plan you're on."
+date: "2026-07-07"
+tag: "Tools"
+---
+
+Today, July 7, 2026, is the day Claude Fable 5 stops being a free-to-use part of most Claude subscriptions. Since July 1, Anthropic had [folded the model into Pro, Max, Team, and some Enterprise plans](https://www.anthropic.com/news/redeploying-fable-5) at no extra charge, up to half of each plan's weekly usage limit. As of today, going past that point — or using Fable 5 at all, on the plans that never got the allowance — means paying per token: [$10 per million input tokens and $50 per million output tokens](https://platform.claude.com/docs/en/about-claude/pricing), on top of whatever the subscription already costs.
+
+That's not a small distinction for either kind of reader. If a developer has been running Fable 5 through Claude Code all week without thinking about it, today is when a meter starts running underneath a flat monthly fee. If someone's never touched a token counter in their life, the plain version is simpler: the best model Anthropic sells just stopped being included with the subscription, the way a phone plan might stop including data roaming after a promotional week.
+
+## A six-day preview, not a comeback
+
+[Fable 5 launched June 9](/articles/claude-fable-5-mythos-5-glasswing) alongside its more heavily restricted twin, Mythos 5, and topped Anthropic's own coding benchmark by 11 points over Claude Opus 4.8. Three days later, [the U.S. government imposed export controls on both models](/articles/trump-ai-executive-order-frontier-models) after reviewers flagged a jailbreak — a way of tricking a model into ignoring its own safety rules — and Anthropic pulled Fable 5 for every user worldwide because it had no way to check a customer's location in real time. The controls lifted June 30. Anthropic brought Fable 5 back globally on July 1, this time behind a new classifier the company says blocks the jailbreak technique in more than 99% of attempts, according to [MacRumors](https://www.macrumors.com/2026/07/01/anthropic-fable-5-relaunch/). The catch was built into the relaunch from day one, not added later: the free allowance was only ever good "through July 7."
+
+## Who keeps free access, and who doesn't
+
+The cutoff doesn't land the same way on every plan:
+
+| Plan | Through July 7 | Starting today |
+|---|---|---|
+| Free | Never included | Never included |
+| Pro / Max | Included, up to 50% of weekly limit | Usage credits required beyond any remaining allowance |
+| Team (standard seats) | Included, up to 50% of weekly limit | Usage credits required |
+| Enterprise (standard seats) | No included allowance | Usage credits required, or no access if credits aren't enabled |
+| Enterprise (premium seats) | Included, drawn from each seat's usage | Usage credits required |
+| API / consumption-based Enterprise | Always billed per token | Unchanged |
+
+"Usage credits" is Anthropic's name for prepaid, metered spending layered on top of a subscription — the same per-token billing the API has always used, now reachable from inside a plan that otherwise charges a flat monthly fee. A Claude Console admin has to turn credits on before anyone on a Team or Enterprise seat can use them; do nothing, and a standard Enterprise seat simply loses Fable 5 access outright once the free window closes.
+
+## Why Anthropic is calling this temporary
+
+Anthropic has framed the change as a capacity problem, not a pricing decision. The company told [Bleeping Computer](https://www.bleepingcomputer.com/news/artificial-intelligence/claude-fable-5-isnt-permanently-leaving-subscriptions-anthropic-says/) it expects demand for Fable 5 to be "very high, and difficult to predict," and that "for subscription plans, we'd rather give access sooner than later, so we're rolling out more conservatively, in stages." A Claude Code engineer put it more bluntly on X: the model "will come off subscriptions after July 7th," but Anthropic aims "to restore Fable as a standard part of our subscriptions as soon as capacity allows" — with no date attached to that promise.
+
+That distinction matters for how to read today's change. This isn't the export-control story repeating itself; the government restriction was lifted a week ago and isn't the reason for this cutoff. It's closer to a rideshare app surging prices at rush hour: the model works exactly the same, the company just isn't ready to give unlimited access away at a flat rate yet.
+
+## What to do about it today
+
+If your Fable 5 usage this week hasn't been tracked, check the Claude Console — it shows exactly how much of the 50% allowance already got used before today's cutoff, which matters before assuming a plan is now billing per token. For routine work, Opus 4.8 remains fully included on every paid plan and costs half of Fable 5's metered rate if usage credits do get turned on; save Fable 5's premium for tasks where [the 11-point jump on SWE-Bench Pro](/articles/claude-fable-5-mythos-5-glasswing) — a benchmark that scores a model's fixes against real, already-resolved GitHub issues — is worth paying for by the token. Team and Enterprise admins should check now, not after someone hits a wall mid-task, whether usage credits are enabled for their organization: a standard Enterprise seat with credits off doesn't get an error message explaining why Fable 5 disappeared, it just doesn't have access anymore.
