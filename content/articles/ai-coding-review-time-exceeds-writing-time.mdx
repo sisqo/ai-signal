@@ -1,0 +1,31 @@
+---
+title: "The Bottleneck in AI-Assisted Coding Just Flipped From Writing to Reviewing"
+slug: "ai-coding-review-time-exceeds-writing-time"
+dek: "A survey of 2,847 developers found reviewing AI-generated code now eats more hours per week than writing it — and independent telemetry data backs up the shift."
+date: "2026-07-08"
+tag: "Tools"
+---
+
+Developers spent a median of 11.4 hours a week reviewing AI-generated code in the first quarter of 2026, versus 9.8 hours writing it — the first time reviewing has outpaced writing since [Digital Applied](https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey) began tracking the split, in a survey of 2,847 developers across 320 organizations fielded between January and March 2026.
+
+The plain-language version matters more than the decimal points: the job of "using AI to code" has quietly turned into "checking AI's work," and that's a fundamentally different skill than the one most teams built their AI adoption plans around. A tool that writes fast but needs heavy checking isn't the productivity story it looked like eighteen months ago — it's a story about where the actual bottleneck moved to.
+
+## The reversal, and who's winning the tool race
+
+Digital Applied's survey — 34% full-stack developers, 22% backend, 19% frontend, spread across 320 agencies and in-house teams — found review time up 31% year over year while writing time grew a comparatively modest 8%. The two lines crossed sometime in Q1, flipping a gap that ran the other direction as recently as late 2024, when writing still led. Debugging (6.1 hours), refactoring (4.7), and documentation (3.3) trail both, rounding out where a developer's AI-assisted week actually goes:
+
+![A bar chart showing weekly hours developers spend on AI-assisted work: 11.4 hours reviewing AI-generated code, 9.8 hours writing new code, 6.1 hours debugging, 4.7 hours refactoring, and 3.3 hours on documentation and tests.](/articles/ai-coding-review-time-exceeds-writing-time/weekly-hours.svg)
+
+The same survey has [Claude Code](/articles/antigravity-2-vs-claude-code-vs-codex) overtaking Cursor as the most-used primary tool for the first time, 28% to 24%, adding 7 percentage points quarter over quarter and posting the highest net promoter score in the survey at +58. GitHub Copilot holds the widest any-use footprint at 58% but the weakest loyalty, with 42% of everyone who's switched tools in the past six months having started there.
+
+## Is one marketing survey enough to believe this?
+
+A single vendor-run survey citing its own numbers is exactly the kind of claim this site treats skeptically. It holds up better once checked against research with no product to sell: a longitudinal study on [arXiv](https://arxiv.org/html/2601.10258) — a preprint server where researchers post papers before formal peer review — tracked 800 developers over two years using actual IDE telemetry from JetBrains, not self-reported survey answers. It found AI users typed 587 more characters a month than non-users, a real acceleration, but also deleted 102 more characters a month versus just 7.6 for non-users. Of code developers initially accepted from an AI, 18.16% was later deleted and another 6.62% heavily rewritten. The paper's framing lands on the same underlying shift as Digital Applied's survey, independently: AI "redistributes and reshapes development work" rather than simply reducing it, with prior research it cites finding developers already spending "over 50% of their time evaluating and editing AI-generated output." Two very different methodologies, self-report survey and passive telemetry, landing on the same direction of travel is a stronger signal than either alone.
+
+## Where the payoff is real, and where it isn't
+
+The same survey explains why review time specifically is the thing that grew, rather than everything growing evenly. Gains are concentrated exactly where checking an AI's output is cheap: 78% of developers report significant gains on boilerplate and scaffolding, 64% on test writing, 59% on unfamiliar-language work. They collapse exactly where checking is expensive and the cost of a miss is high: only 18% report significant gains on architectural decisions (24% said AI was actively unhelpful there), 21% on production-incident debugging, and 16% on security-sensitive code. Productivity gains overall follow the same shape over time — a median 34% lift in a tool's first 60 days, plateauing at 37% by 180 days, with almost all of the improvement front-loaded into the first two months. Reviewing isn't growing because AI got worse; it's growing because adoption pushed into the categories of work where a human still has to read every line before trusting it.
+
+## What to budget for if you're running a team
+
+Treat review capacity as a line item when adopting an agentic coding tool, not an afterthought to writing speed — 37% of Digital Applied's respondents flagged review fatigue by name as an underreported drag, and the arXiv data suggests roughly a fifth of what gets accepted gets deleted or rewritten anyway. Lean hardest on AI for the tasks where the numbers back it up: boilerplate, tests, and unfamiliar-language work, where most developers see genuine gains. Keep human review tightest exactly where it already is: architecture, security-sensitive code, and live incidents are where both the marketing survey and the independent telemetry agree the payoff is smallest and the risk of skipping a careful read is highest.

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 680 244" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="244" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Reviewing AI-generated code</text>
+    <rect x="260" y="24" width="370" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">11.4 hrs/wk</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Writing new code with AI</text>
+    <rect x="260" y="68" width="318.0701754385965" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="588.0701754385965" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">9.8 hrs/wk</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Debugging with AI assistance</text>
+    <rect x="260" y="112" width="197.98245614035085" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="467.98245614035085" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">6.1 hrs/wk</text>
+    <text x="0" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Refactoring existing code</text>
+    <rect x="260" y="156" width="152.5438596491228" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="422.5438596491228" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">4.7 hrs/wk</text>
+    <text x="0" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Writing docs/tests</text>
+    <rect x="260" y="200" width="107.10526315789473" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="377.10526315789474" y="210" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">3.3 hrs/wk</text>
+</svg>
