@@ -23,7 +23,7 @@ Same as `/new-article`'s Step 1: read every article's frontmatter and skim the b
 
 ## Step 3: Discovery research
 
-Run the same broad discovery pass as `/new-article`'s Step 2 with no topic given — same categories, not restated here to avoid the two drifting apart (model releases, coding tools, developer tooling, and industry moves, but also AI policy/regulation, work/society impact, and consumer AI products — see `PRODUCT.md`'s two audiences). Skip anything Step 2 already covers. Unlike `/new-article ask` (which can present multiple angles on one story when a topic is given), every candidate here must be a genuinely **different underlying story** — this is filling a real calendar, not exploring framings of a single announcement.
+Run the same discovery pass as `/new-article`'s Step 2 with no topic given — same categories and same exclusions, not restated here to avoid the two drifting apart. Skip anything Step 2 already covers. Unlike `/new-article ask` (which can present multiple angles on one story when a topic is given), every candidate here must be a genuinely **different underlying story** — this is filling a real calendar, not exploring framings of a single announcement.
 
 Keep searching until there are at least **2N** distinct, well-sourced, uncovered stories. If fewer than 2N solid candidates turn up even after a thorough pass, say so plainly and present what's actually there rather than padding the list with weak filler.
 
