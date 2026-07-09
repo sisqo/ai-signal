@@ -1,0 +1,41 @@
+---
+title: "Two Ways to Loop an AI Coding Agent, and Why Anthropic Built Both"
+slug: "claude-code-loop-vs-ralph-wiggum"
+dek: "Claude Code's own documentation splits 'keep working without me' into three distinct mechanisms — and the one nicknamed after a Simpsons character isn't the one built for checking on a deploy overnight."
+date: "2026-07-09"
+tag: "Tools"
+---
+
+An engineer finished a $50,000 client contract for $297 in API costs by writing one line of bash: a `while true` loop that fed a coding agent the same prompt file, over and over, letting it read its own previous work from the filesystem instead of a chat window. [Geoffrey Huntley](https://ghuntley.com/ralph/) named the technique after Ralph Wiggum, the perpetually confident *Simpsons* kid, because it works despite being — in Huntley's words — "deterministically bad in an undeterministic world": dumb repetition compensating for whatever the model got wrong last time. In August 2025, a team at a Y Combinator hackathon (a startup accelerator's project sprint) ran the same trick against Claude Code headlessly — no terminal window, no one watching — and [woke up to more than 1,000 commits and six fully ported repositories](https://news.ycombinator.com/item?id=45005434).
+
+By December 2025, Anthropic had turned Huntley's hack into an [official plugin](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md). Claude Code also ships a completely different, unrelated command that happens to share half the name: `/loop`. The two get conflated constantly in writeups and forum threads, and the confusion is understandable — both promise to keep an agent working without a human typing the next prompt. What each one actually does, and when the other is the wrong tool, comes down to a single question: is the goal to keep *polling* something, or to keep *grinding* until something becomes true?
+
+## Ralph: the loop that lives outside the conversation
+
+The original Ralph technique is almost insultingly simple: `while :; do cat PROMPT.md | claude ; done`. Every iteration starts a brand-new process with zero conversation memory — the only thing that persists between loops is whatever got written to disk and committed to git. Anthropic's official plugin keeps that spirit but moves the mechanism inside a single session: it installs a [Stop hook](https://code.claude.com/docs/en/hooks-guide) — a script Claude Code runs automatically whenever a turn tries to end — that intercepts the exit, silently re-feeds the identical prompt, and only lets the session actually stop once Claude outputs an exact, pre-agreed "completion promise" string.
+
+That design has two sharp edges. Running it unattended generally requires the `--dangerously-skip-permissions` flag, since nobody is around to approve tool calls between iterations. And as the AI infrastructure company [HumanLayer points out](https://www.humanlayer.dev/blog/brief-history-of-ralph), Anthropic's plugin captures the surface mechanics of Ralph but not Huntley's actual discipline: carving work into small, independently verifiable chunks with hard stop conditions. Feed it a vague prompt and it will loop just as confidently toward nothing.
+
+## /loop: built for checking back, not grinding forward
+
+Claude Code's `/loop` is [a bundled skill](/articles/claude-code-built-in-commands-ranked) — the same first-party category as `/code-review` and `/verify` — not a hard-coded built-in, and not a Stop hook at all. It's a scheduler. Give it an interval and a prompt (`/loop 5m check if the deployment finished`) and Claude Code converts that into a cron job (the standard format for "run this on a repeating calendar interval") and fires it on a fixed cadence. Give it only a prompt (`/loop check whether CI passed and address any review comments`) and Claude picks its own delay each round instead — anywhere from one minute to one hour — based on what it just observed: short waits while a build is running or a PR is active, long waits once things go quiet. [Anthropic's documentation](https://code.claude.com/docs/en/scheduled-tasks) says Claude prints the chosen delay and the reason for it at the end of every iteration.
+
+Under the hood, `/loop` behaves like a proper scheduler rather than a bash trick: fire times get a randomized offset so every session doesn't hit the API at the same wall-clock second, every scheduled loop hard-expires after seven days regardless of what it's doing, and pressing Esc cancels a pending wakeup instantly. None of that is about reaching a finish line — a fixed-interval `/loop` will happily poll a dead deployment forever until someone stops it. It's built to check on things, not to complete them.
+
+## The command that actually replaced Ralph's job: /goal
+
+Here's the detail that clears up why both exist: Anthropic's own docs put `/loop`, a Stop hook (Ralph's mechanism), and a third command called [`/goal`](https://code.claude.com/docs/en/goal) side by side in one comparison table, sorted by what starts the next turn and what stops it. `/goal` is the native version of "keep working until a condition holds." Set one — `/goal all tests in test/auth pass and lint is clean` — and Claude keeps taking turns until a separate, smaller model (Haiku, by default) reads the transcript after each turn and judges whether the condition is actually met. No exact-string matching, no `--dangerously-skip-permissions`, no hand-rolled hook script.
+
+That's a strictly more rigorous version of what a completion-promise string is trying to approximate, which is why `/goal`, not `/loop`, is the alternative Claude Code's own documentation points to for a Stop hook. `/loop` was never competing with Ralph in the first place — it occupies the "check back periodically" slot that neither Ralph nor `/goal` covers.
+
+## Which one to reach for
+
+| Job | Use |
+|---|---|
+| Poll a deploy, babysit a PR, run a periodic maintenance pass | `/loop`, self-paced |
+| Something on a strict cadence (every 15 minutes, no more, no less) | `/loop` with a fixed interval |
+| Grind a well-defined task to a verifiable finish line inside one session | `/goal` |
+| Want the classic overnight brute-force loop, with a hard iteration cap | Anthropic's official Ralph plugin (or the original raw bash version, for CLIs other than Claude Code) |
+| Needs to run with your machine off | Cloud routines (one-hour minimum interval) or a GitHub Actions schedule |
+
+The failure mode worth remembering is the same across all five: none of these mechanisms know when a task is a bad fit for looping. `/goal`'s evaluator can only judge what Claude has already surfaced in the conversation, so write conditions its own output can prove — a test-suite exit code, not something taken on faith. And whichever one runs unattended overnight, set an explicit ceiling before walking away: a turn limit on `/goal`, `--max-iterations` on a Ralph loop, the seven-day expiry `/loop` already enforces without being asked. The $297 outcome only makes a good story because it knew when to stop.
