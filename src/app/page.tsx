@@ -14,7 +14,7 @@ export default function HomePage() {
   const hasMore = rest.length > HOMEPAGE_ROW_LIMIT
 
   return (
-    <div className="max-w-feed px-[clamp(24px,5vw,72px)] pb-10 pt-[clamp(48px,7vw,104px)]">
+    <div className="mx-auto max-w-feed px-[clamp(24px,5vw,72px)] pb-10 pt-[clamp(48px,7vw,104px)]">
       {featured && <FeaturedArticle article={featured} readingTime={featured.readingTime} />}
 
       {visible.length > 0 && (

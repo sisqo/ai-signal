@@ -13,7 +13,7 @@ export default function ArticlesArchivePage() {
   const articles = getPublishedArticles()
 
   return (
-    <div className="max-w-feed px-[clamp(24px,5vw,72px)] pb-24 pt-[clamp(48px,7vw,104px)]">
+    <div className="mx-auto max-w-feed px-[clamp(24px,5vw,72px)] pb-24 pt-[clamp(48px,7vw,104px)]">
       <h1
         className="font-display text-fg"
         style={{ fontSize: 'clamp(30px,3.6vw,52px)', fontWeight: 560, lineHeight: 1.02, letterSpacing: '-0.02em' }}

@@ -94,7 +94,7 @@ Dark is the default reading mode and the more considered of the two — near-bla
 - Quiet, purposeful motion: a four/five-bar equalizer pulse (masthead + footer), a slow marquee ticker of short signal phrases, and a reading-progress bar that glows in the accent color. All motion respects `prefers-reduced-motion`.
 - A monospace label face for metadata (date, reading time, tag, nav, ticker) — unchanged in spirit from before, still never a body face.
 
-**Layout posture:** Header, ticker, and footer are full-bleed — no `max-width` container, just `clamp(24px,5vw,72px)` side padding — so they read as page-wide furniture, not a centered column. The home page's featured story and article list share a `max-width: 1120px` cap but no `margin: 0 auto`: on wide viewports the content hugs the left padding edge, like a newspaper front page starting at its left margin, rather than floating centered. The single-article reading view breaks that pattern deliberately — `max-width: 780px`, `margin: 0 auto` — a focused, book-like column in contrast to the front page's left-to-right sprawl.
+**Layout posture:** Header, ticker, and footer are full-bleed — no `max-width` container, just `clamp(24px,5vw,72px)` side padding — so they read as page-wide furniture, not a centered column. The home page's featured story and article list (and the `/articles` archive) share a `max-width: 1120px` cap with `margin: 0 auto`, centering that wider column on the viewport. The single-article reading view uses a narrower `max-width: 780px`, also `margin: 0 auto` — a focused, book-like column nested inside the same centered posture, not a contrasting one.
 
 ## 2. Colors
 
