@@ -55,7 +55,7 @@ export function SiteFooter() {
 
       <div className="mt-14 flex items-end gap-5">
         <EqualizerBars variant="footer" />
-        <span className="font-display text-[clamp(52px,11vw,150px)] font-semibold leading-[0.82] tracking-[-0.03em] text-fg">
+        <span className="font-display text-[clamp(32px,5vw,64px)] font-semibold leading-[0.9] tracking-[-0.02em] text-fg">
           AI Signal
         </span>
       </div>

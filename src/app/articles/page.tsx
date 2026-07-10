@@ -16,7 +16,7 @@ export default function ArticlesArchivePage() {
     <div className="max-w-feed px-[clamp(24px,5vw,72px)] pb-24 pt-[clamp(48px,7vw,104px)]">
       <h1
         className="font-display text-fg"
-        style={{ fontSize: 'clamp(40px,5.4vw,78px)', fontWeight: 560, lineHeight: 0.98, letterSpacing: '-0.024em' }}
+        style={{ fontSize: 'clamp(30px,3.6vw,52px)', fontWeight: 560, lineHeight: 1.02, letterSpacing: '-0.02em' }}
       >
         All Articles
       </h1>

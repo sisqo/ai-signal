@@ -32,7 +32,7 @@ export function FeaturedArticle({ article, readingTime }: { article: ArticleMeta
           <MetaLine article={article} readingTime={readingTime} tagClassName="text-accent" />
         </div>
         <h1
-          className="font-display text-[clamp(48px,7vw,112px)] text-fg transition-colors duration-200 group-hover:text-accent"
+          className="font-display text-[clamp(32px,4.6vw,72px)] text-fg transition-colors duration-200 group-hover:text-accent"
           style={{ fontWeight: 560, lineHeight: 0.94, letterSpacing: '-0.028em' }}
         >
           {article.title}

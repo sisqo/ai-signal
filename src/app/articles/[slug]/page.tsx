@@ -45,7 +45,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
         <h1
           className="font-display text-fg"
-          style={{ fontSize: 'clamp(40px,5.4vw,78px)', fontWeight: 560, lineHeight: 0.98, letterSpacing: '-0.024em' }}
+          style={{ fontSize: 'clamp(30px,3.6vw,52px)', fontWeight: 560, lineHeight: 1.02, letterSpacing: '-0.02em' }}
         >
           {article.title}
         </h1>

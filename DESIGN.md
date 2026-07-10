@@ -21,7 +21,7 @@ colors:
 typography:
   display:
     fontFamily: "Newsreader, Georgia, serif"
-    fontSize: "clamp(3rem, 1.5rem + 7vw, 7rem)"
+    fontSize: "clamp(2rem, 1.2rem + 4.6vw, 4.5rem)"
     fontWeight: 560
     lineHeight: 0.94
     letterSpacing: "-0.028em"
@@ -130,8 +130,8 @@ The palette is one near-neutral architecture (paper/near-black, one hairline gra
 **Character:** Newsreader is a warm, high-contrast transitional serif built for long optical-size range — it carries both the huge masthead/featured-headline treatment and the article body copy itself (a deliberate shift from the old system, where body copy ran in the sans face and serif was reserved for headlines only). IBM Plex Sans is the humanist grotesk for UI chrome: nav, the home-page dek, footer descriptions. JetBrains Mono is the label face — metadata, the ticker, nav links, eyebrow labels — never a body face.
 
 ### Hierarchy (selected roles — full fluid scale lives in `tokens.css` / Tailwind arbitrary values in components)
-- **Featured H1** (560, `clamp(48px, 7vw, 112px)`, 0.94 leading, `-0.028em` tracking): the homepage lead story.
-- **Article H1** (560, `clamp(40px, 5.4vw, 78px)`, 0.98 leading, `-0.024em` tracking): single-article view, and reused for the "All Articles" / About headings.
+- **Featured H1** (560, `clamp(32px, 4.6vw, 72px)`, 0.94 leading, `-0.028em` tracking): the homepage lead story.
+- **Article H1** (560, `clamp(30px, 3.6vw, 52px)`, 1.02 leading, `-0.02em` tracking): single-article view, and reused for the "All Articles" / About headings.
 - **List H2** (540, `clamp(28px, 3.4vw, 48px)`, 1.03 leading, `-0.017em` tracking): secondary article-list titles.
 - **Article body** (400, 21px, 1.72 leading): article prose — set in Newsreader, not the sans face.
 - **Article H2** (600, 31px, 1.15 leading, `-0.01em` tracking): in-body section headers.
@@ -140,7 +140,7 @@ The palette is one near-neutral architecture (paper/near-black, one hairline gra
 - **Dek (article)**: Newsreader italic, `clamp(19px, 1.6vw, 24px)`, 1.5 leading, muted.
 - **Label**: JetBrains Mono, 13–14px, 0.02–0.16em tracking — byline, date, reading time, tag, nav, ticker, eyebrows.
 - **List index numeral**: Newsreader 500, `clamp(52px, 7vw, 104px)`, 0.8 leading, outlined (`-webkit-text-stroke: 1.4px currentColor` + transparent fill) so it recolors with the row on hover.
-- **Footer wordmark**: Newsreader 600, `clamp(52px, 11vw, 150px)`, 0.82 leading, `-0.03em` tracking.
+- **Footer wordmark**: Newsreader 600, `clamp(32px, 5vw, 64px)`, 0.9 leading, `-0.02em` tracking.
 
 ### Named Rules
 **The Serif-Reads Rule.** Newsreader now carries both headlines and continuous article body reading — a deliberate merge of the old system's headline/body split. IBM Plex Sans is reserved for UI chrome and the home page's dek, not article prose. JetBrains Mono remains label-only; it never sets a full sentence.
