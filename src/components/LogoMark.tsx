@@ -1,84 +1,22 @@
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="212 236.5 600 600" className={className} fill="none" aria-hidden="true">
-      <defs>
-        <g id="pin">
-          <rect x="-9" y="0" width="18" height="46" rx="6" />
-        </g>
-      </defs>
-
-      <g fill="currentColor">
-        <use href="#pin" x="410" y="316" />
-        <use href="#pin" x="461" y="316" />
-        <use href="#pin" x="547" y="316" />
-        <use href="#pin" x="598" y="316" />
-
-        <use href="#pin" x="410" y="662" transform="rotate(180 410 685)" />
-        <use href="#pin" x="461" y="662" transform="rotate(180 461 685)" />
-        <use href="#pin" x="512" y="662" transform="rotate(180 512 685)" />
-        <use href="#pin" x="563" y="662" transform="rotate(180 563 685)" />
-        <use href="#pin" x="614" y="662" transform="rotate(180 614 685)" />
-
-        <use href="#pin" x="284" y="424" transform="rotate(-90 284 447)" />
-        <use href="#pin" x="284" y="475" transform="rotate(-90 284 498)" />
-        <use href="#pin" x="284" y="526" transform="rotate(-90 284 549)" />
-        <use href="#pin" x="284" y="577" transform="rotate(-90 284 600)" />
-        <use href="#pin" x="284" y="628" transform="rotate(-90 284 651)" />
-
-        <use href="#pin" x="740" y="424" transform="rotate(90 740 447)" />
-        <use href="#pin" x="740" y="475" transform="rotate(90 740 498)" />
-        <use href="#pin" x="740" y="526" transform="rotate(90 740 549)" />
-        <use href="#pin" x="740" y="577" transform="rotate(90 740 600)" />
-        <use href="#pin" x="740" y="628" transform="rotate(90 740 651)" />
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
+      <rect x="5" y="5" width="14" height="14" rx="3" stroke="var(--color-fg)" strokeWidth="1.6" />
+      <g stroke="var(--color-fg)" strokeWidth="1.6" strokeLinecap="round">
+        <line x1="9" y1="5" x2="9" y2="2.2" />
+        <line x1="15" y1="5" x2="15" y2="2.2" />
+        <line x1="9" y1="19" x2="9" y2="21.8" />
+        <line x1="15" y1="19" x2="15" y2="21.8" />
+        <line x1="5" y1="9" x2="2.2" y2="9" />
+        <line x1="5" y1="15" x2="2.2" y2="15" />
+        <line x1="19" y1="9" x2="21.8" y2="9" />
+        <line x1="19" y1="15" x2="21.8" y2="15" />
       </g>
-
-      <rect x="328" y="362" width="352" height="352" rx="54" fill="currentColor" />
-      <rect x="345" y="379" width="318" height="318" rx="40" className="fill-bg" />
-      <rect x="359" y="393" width="290" height="290" rx="30" fill="currentColor" />
-
-      <path
-        d="M 612 296 C 596 280, 626 266, 656 271 C 692 277, 720 302, 722 338 C 724 368, 703 390, 674 392 C 655 393, 636 388, 620 378"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="17"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="612" cy="296" r="11" fill="currentColor" />
-
-      <path
-        d="M 620 378 C 605 392, 588 415, 578 440 C 570 460, 566 470, 563 479"
-        fill="none"
-        className="stroke-bg"
-        strokeWidth="15"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      <g className="stroke-bg" strokeWidth="6" strokeLinecap="round">
-        <line x1="563" y1="479" x2="527" y2="511" />
-        <line x1="445" y1="479" x2="481" y2="511" />
-        <line x1="563" y1="597" x2="527" y2="565" />
-        <line x1="445" y1="597" x2="481" y2="565" />
-      </g>
-
-      <g className="fill-bg">
-        <circle cx="563" cy="479" r="15" />
-        <circle cx="445" cy="479" r="15" />
-        <circle cx="563" cy="597" r="15" />
-        <circle cx="445" cy="597" r="15" />
-      </g>
-
-      <path
-        d="M 504 452 Q 517 528 592 538 Q 517 548 504 624 Q 491 548 416 538 Q 491 528 504 452 Z"
-        className="fill-bg"
-      />
-
-      <g fill="currentColor">
-        <rect x="452" y="742" width="24" height="70" rx="4" />
-        <rect x="493" y="762" width="24" height="50" rx="4" />
-        <rect x="534" y="782" width="24" height="30" rx="4" />
-        <rect x="575" y="796" width="20" height="16" rx="4" />
+      <g stroke="var(--color-accent)" strokeWidth="1.7" strokeLinecap="round">
+        <line x1="12" y1="9.2" x2="12" y2="14.8" />
+        <line x1="9.2" y1="12" x2="14.8" y2="12" />
+        <line x1="10" y1="10" x2="14" y2="14" />
+        <line x1="14" y1="10" x2="10" y2="14" />
       </g>
     </svg>
   )

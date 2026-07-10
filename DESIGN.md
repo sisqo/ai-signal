@@ -2,49 +2,53 @@
 name: AI Signal
 description: An editorial-quality blog about artificial intelligence
 colors:
-  bg-light: "#ffffff"
-  surface-light: "#f3f3f3"
-  ink-light: "#15100d"
-  muted-light: "#5b5755"
-  primary-light: "#bc5000"
-  accent-light: "#004868"
-  bg-dark: "#020202"
-  surface-dark: "#0f0d0c"
-  ink-dark: "#f1eeec"
-  muted-dark: "#9b9795"
-  primary-dark: "#ee8628"
-  accent-dark: "#008292"
+  bg-light: "#f6f4ef"
+  surface-light: "#fdfcfa"
+  fg-light: "#1b1d21"
+  muted-light: "#585d64"
+  faint-light: "#8b9096"
+  line-light: "#d5d6d8"
+  accent-light: "#2f9e57"
+  accent-2-light: "#26824a"
+  bg-dark: "#111214"
+  surface-dark: "#1c1e21"
+  fg-dark: "#f2f3f4"
+  muted-dark: "#8b9096"
+  faint-dark: "#4e5358"
+  line-dark: "#33363a"
+  accent-dark: "#bef264"
+  accent-2-dark: "#a3d95f"
 typography:
   display:
-    fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "clamp(2.75rem, 1.75rem + 5vw, 5rem)"
-    fontWeight: 460
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "clamp(3rem, 1.5rem + 7vw, 7rem)"
+    fontWeight: 560
+    lineHeight: 0.94
+    letterSpacing: "-0.028em"
   headline:
-    fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "clamp(1.75rem, 1.35rem + 2vw, 2.75rem)"
-    fontWeight: 500
-    lineHeight: 1.15
-    letterSpacing: "-0.01em"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "clamp(1.75rem, 1.2rem + 3.4vw, 3rem)"
+    fontWeight: 540
+    lineHeight: 1.03
+    letterSpacing: "-0.017em"
   title:
-    fontFamily: "Public Sans, -apple-system, sans-serif"
+    fontFamily: "IBM Plex Sans, -apple-system, sans-serif"
     fontSize: "1.25rem"
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: "normal"
   body:
-    fontFamily: "Public Sans, -apple-system, sans-serif"
-    fontSize: "1.125rem"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "21px"
     fontWeight: 400
-    lineHeight: 1.7
+    lineHeight: 1.72
     letterSpacing: "normal"
   label:
     fontFamily: "JetBrains Mono, ui-monospace, monospace"
-    fontSize: "0.8125rem"
+    fontSize: "13px"
     fontWeight: 500
     lineHeight: 1.4
-    letterSpacing: "0.02em"
+    letterSpacing: "0.08em"
 rounded:
   none: "0px"
   sm: "4px"
@@ -57,23 +61,17 @@ spacing:
   xl: "96px"
 components:
   button-primary:
-    backgroundColor: "{colors.primary-light}"
+    backgroundColor: "{colors.accent-light}"
     textColor: "{colors.bg-light}"
     typography: "{typography.label}"
-    rounded: "{rounded.sm}"
-    padding: "14px 28px"
+    rounded: "{rounded.md}"
+    padding: "10px 22px"
   button-primary-hover:
-    backgroundColor: "{colors.ink-light}"
+    backgroundColor: "{colors.accent-2-light}"
     textColor: "{colors.bg-light}"
-  button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink-light}"
-    typography: "{typography.label}"
-    rounded: "{rounded.sm}"
-    padding: "14px 28px"
   tag:
     backgroundColor: "transparent"
-    textColor: "{colors.accent-light}"
+    textColor: "{colors.accent-2-light}"
     typography: "{typography.label}"
     rounded: "{rounded.none}"
     padding: "0px"
@@ -83,118 +81,129 @@ components:
 
 ## 1. Overview
 
-**Creative North Star: "The Quiet Signal"**
+**Creative North Star: "The Wire Dispatch"**
 
-AI Signal is what's left when the noise of AI-startup marketing is stripped away: a well-set page, a confident headline, enough white space to think in. The system takes its cue from a well-edited magazine or a serious independent newsletter — the kind of publication where the typography does the persuading and the interface gets out of the way. Warmth comes from one honey-amber ink used with intent, not from a beige backdrop; precision comes from a strict type scale and a flat, hairline-divided layout, not from cards and shadows.
+AI Signal reads like a wire-service feed for the AI beat: a scrolling ticker of signal, a masthead that announces itself, and a front page built like a newspaper's — one large lead dispatch, then a hairline-divided list of everything else, each entry stamped with a big outlined index numeral like a wire item number. The system keeps the original editorial soul (serif headlines, hairline dividers, a monospace label face for metadata) but adds brand personality that the "Quiet Signal" era deliberately avoided: a single signature accent color running through everything, small live motion (an equalizer pulse, a marquee ticker, reading-progress), and eyebrow labels that announce a section the way a wire desk announces a feed.
 
-The system explicitly rejects wiki/documentation coldness — no tabular layouts, no neutral system-font hierarchy, no sterile density — and just as explicitly rejects the generic AI-SaaS template: no cream/sand backgrounds, no gradient text, no hero section with fake metrics, no identical icon-and-heading card grids, no tiny uppercase eyebrow sitting above every section.
+Dark is the default reading mode and the more considered of the two — near-black with a bright signal-lime accent. Light is a fully designed alternate with a warm, paper-toned background, not an inverted afterthought.
 
 **Key Characteristics:**
-- Pure white (light) / near-black (dark) surfaces — the warmth lives in the amber primary and the serif display face, never in the background. Dark is the default on first visit; light remains a fully designed, equally correct alternate, not an afterthought.
-- Editorial index, not a card grid: articles are a hairline-divided list with one featured lead story, the way a front page works.
-- One warm primary (honey-amber) and one cool accent (deep teal), each used for a distinct job, never blended into a gradient.
-- A quiet monospace label face for metadata (date, reading time, tag) — a technical wink for the practitioner reader, never the body face.
+- One accent color, one job family: signal lime (dark) / signal green (light) carries links, hover states, the CTA arrow, category tags, and the live-motion motifs (ticker diamond, equalizer bars, reading-progress glow). There's no second brand hue — the old two-color amber/teal split is gone, collapsed into one accent used consistently everywhere emphasis is needed.
+- Editorial index, not a card grid: one large featured "dispatch" up top, then a hairline-divided list, each row carrying an oversized outlined index numeral (`01`, `02`, …) that recolors on hover — a wire-service front page, not a blog archive.
+- Eyebrow labels are back, deliberately: "LATEST DISPATCH" above the lead story, "MORE FROM THE WIRE" above the list. They're part of the wire-desk voice, not a decoration to avoid.
+- Quiet, purposeful motion: a four/five-bar equalizer pulse (masthead + footer), a slow marquee ticker of short signal phrases, and a reading-progress bar that glows in the accent color. All motion respects `prefers-reduced-motion`.
+- A monospace label face for metadata (date, reading time, tag, nav, ticker) — unchanged in spirit from before, still never a body face.
+
+**Layout posture:** Header, ticker, and footer are full-bleed — no `max-width` container, just `clamp(24px,5vw,72px)` side padding — so they read as page-wide furniture, not a centered column. The home page's featured story and article list share a `max-width: 1120px` cap but no `margin: 0 auto`: on wide viewports the content hugs the left padding edge, like a newspaper front page starting at its left margin, rather than floating centered. The single-article reading view breaks that pattern deliberately — `max-width: 780px`, `margin: 0 auto` — a focused, book-like column in contrast to the front page's left-to-right sprawl.
 
 ## 2. Colors
 
-The palette is deliberately narrow: near-neutral architecture (pure white/black, one hairline gray) plus exactly two brand colors, each with one job. OKLCH values are canonical; hex in the frontmatter is the sRGB projection for tooling compliance.
+The palette is one near-neutral architecture (paper/near-black, one hairline gray, two text weights) plus a single accent, expressed at two intensities (`accent` / `accent-2`) rather than two separate brand hues.
 
-### Primary
-- **Honey Amber** (`#bc5000` light / `#ee8628` dark — `oklch(0.56 0.17 55)` / `oklch(0.72 0.16 57)`): the single warm signature color. Used for links, the primary CTA fill, hover underlines, and the lead story's headline rule. Verified 4.91:1 (light) and 7.97:1 (dark) against body background; white text on the light-mode fill hits 4.91:1, near-black text on the dark-mode fill hits 7.25:1.
+### Accent
+- **Signal Lime** (dark, `#bef264` — `oklch(0.88 0.18 126)`) / **Signal Green** (light, `#2f9e57` — `oklch(0.55 0.16 150)`): the one accent color. Used for links, hover states, the lead story's eyebrow + CTA, the ticker's diamond separators, the equalizer bars, the reading-progress fill, and — at full intensity — the featured story's category label.
+- **Dimmer variant** (`accent-2`, `#a3d95f` dark / `#26824a` light): the same hue at lower emphasis. Used for list-row category tags and link-hover states, so a hovered link or a secondary tag reads as "the same color family, one notch down" rather than a different meaning entirely.
 
-### Logo (fixed, theme-independent)
-- **Brand Navy** (`#12314f`): the supplied logomark's only color — a chip/circuit icon with a signal-style spark at its center. It does not participate in the primary/accent system and never changes with the color strategy. It renders as-is (navy) on light backgrounds; in dark mode the mark switches to white via `currentColor` so it stays legible against Near-Black, the one place in the system where a color is swapped purely for contrast rather than for meaning.
-
-### Secondary
-- **Deep Teal** (`#004868` light / `#008292` dark — `oklch(0.36 0.12 220)` / `oklch(0.54 0.13 205)`): the cool counterpoint to amber. Reserved for tags/category labels and secondary links — anything that needs to read as "metadata" rather than "primary action." Never appears in the same control as primary. Contrast against primary verified at 2.00:1 (light) / 1.75:1 (dark) — always visually distinguishable when adjacent.
+### Logo (theme-adaptive, no fixed brand color)
+- **Chip mark**: a rounded-rect chip with eight pin leads and a lime asterisk at its center. Unlike the old logo, it has no fixed brand hex — the chip body and pins are drawn in `--color-fg` (so they read as ink on paper / white on near-black) and the center asterisk is always drawn in `--color-accent`. The mark is generated directly from CSS custom properties (`src/components/LogoMark.tsx`), not a cropped import from outside artwork, so it never needs manual recoloring work when the palette shifts. Static rasterized favicons (which can't reference live CSS) freeze one fixed pair of colors instead — see `scripts/generate-favicons.py`.
 
 ### Neutral
-- **Paper White** (`#ffffff` — `oklch(1.000 0.000 0)`): body background, light mode. Pure white, zero chroma — deliberately not the warm-cream "AI default." Warmth is carried by primary and typography only.
-- **Ink** (`#15100d` — `oklch(0.18 0.01 55)`): body text, light mode. 18.83:1 against Paper White.
-- **Muted Ink** (`#5b5755` — `oklch(0.46 0.006 55)`): secondary text, captions, timestamps prose. 7.14:1 against Paper White.
-- **Hairline Gray** (`#f3f3f3` — `oklch(0.965 0.000 0)`): the only surface tint — section dividers, subtle card-free grouping. Zero brand hue, so it never drifts toward cream.
-- **Near-Black** (`#020202` — `oklch(0.09 0.000 0)`): body background, dark mode. True near-black, zero chroma.
-- **Paper Ink (dark)** (`#f1eeec` — `oklch(0.95 0.004 55)`): body text, dark mode. 17.87:1 against Near-Black.
-- **Muted Ink (dark)** (`#9b9795` — `oklch(0.68 0.006 55)`): secondary text, dark mode. 7.17:1 against Near-Black.
-- **Elevated Charcoal** (`#0f0d0c` — `oklch(0.16 0.004 55)`): the dark-mode surface tint, for the same sparing role as Hairline Gray.
+- **Paper** (`#f6f4ef` light / `oklch(0.972 0.005 95)`): body background, light mode. Deliberately warm — a soft, considered off-white, not a stark white. This is an intentional break from the old "no-cream" rule: the wire-dispatch identity wants a paper feel, not a clinical one.
+- **Surface** (`#fdfcfa` light / `#1c1e21` dark): the mono-callout / card background tint, barely distinguishable from `bg` — reserved for the rare block that needs to sit "on" the page rather than "in" it.
+- **Ink** (`fg`, `#1b1d21` light / `#f2f3f4` dark): primary text.
+- **Muted** (`#585d64` light / `#8b9096` dark): deks and secondary body text.
+- **Faint** (`#8b9096` light / `#4e5358` dark): metadata, labels, ticker copy — one step quieter than muted.
+- **Line** (`#d5d6d8` light / `#33363a` dark): hairline dividers and borders, the only structural device besides whitespace.
+- **Near-Black** (`#111214` dark, `oklch(0.155 0.006 250)`): body background, dark mode — the default reading surface.
 
 ### Named Rules
-**The One-Job Rule.** Primary (amber) means "action or emphasis." Accent (teal) means "metadata or category." A color never does both jobs on the same page — if teal starts marking links, retire amber from links entirely.
+**The One-Accent Rule.** There is exactly one accent color family (`accent` / `accent-2`). It never splits into a second hue for a different meaning — if a future addition needs a distinct "this is metadata, not action" color, that's a deliberate departure from this rule and belongs in a review, not a quiet addition.
 
-**The No-Cream Rule.** Body background is pure white or true near-black, full stop. If a background ever reads as cream, sand, or parchment, it has drifted and must be corrected back to zero chroma.
+**The Warm-Paper Rule.** Light mode's background is a warm, paper-toned off-white (`#f6f4ef`), not stark white. This replaces the old "no-cream" rule outright — the wire-dispatch identity wants the page to feel like newsprint, not a clinical white canvas.
 
 ## 3. Typography
 
-**Display Font:** Fraunces (with Georgia, serif fallback)
-**Body Font:** Public Sans (with -apple-system, sans-serif fallback)
-**Label/Mono Font:** JetBrains Mono (with ui-monospace, monospace fallback)
+**Display Font:** Newsreader (variable, optical-size axis enabled, italic supported)
+**Body Font:** IBM Plex Sans (400/500) — UI chrome, deks on the home page, nav
+**Label/Mono Font:** JetBrains Mono (400/500/700)
 
-**Character:** Fraunces is a warm, slightly soft transitional serif — it carries the "considered magazine" feeling in headlines without tipping into the overused Playfair-Display cliché. Public Sans is a humanist grotesk built for long reading sessions: even color, no gimmicks. JetBrains Mono appears only at small sizes, for metadata — a quiet nod to the practitioner half of the audience.
+**Character:** Newsreader is a warm, high-contrast transitional serif built for long optical-size range — it carries both the huge masthead/featured-headline treatment and the article body copy itself (a deliberate shift from the old system, where body copy ran in the sans face and serif was reserved for headlines only). IBM Plex Sans is the humanist grotesk for UI chrome: nav, the home-page dek, footer descriptions. JetBrains Mono is the label face — metadata, the ticker, nav links, eyebrow labels — never a body face.
 
-### Hierarchy
-- **Display** (460, `clamp(2.75rem, 1.75rem + 5vw, 5rem)`, 1.05): article titles and the homepage masthead lead. `text-wrap: balance`.
-- **Headline** (500, `clamp(1.75rem, 1.35rem + 2vw, 2.75rem)`, 1.15): section headers, secondary article-list titles.
-- **Title** (600, 1.25rem, 1.3): card-free sub-groupings, author names, pull-quote attribution.
-- **Body** (400, 1.125rem, 1.7): article prose. Capped at 68ch measure. `text-wrap: pretty`.
-- **Label** (500, 0.8125rem, 1.4, `0.02em` tracking): byline, date, reading time, category tag — always attached to a specific piece of metadata, never floating above a section as a kicker.
+### Hierarchy (selected roles — full fluid scale lives in `tokens.css` / Tailwind arbitrary values in components)
+- **Featured H1** (560, `clamp(48px, 7vw, 112px)`, 0.94 leading, `-0.028em` tracking): the homepage lead story.
+- **Article H1** (560, `clamp(40px, 5.4vw, 78px)`, 0.98 leading, `-0.024em` tracking): single-article view, and reused for the "All Articles" / About headings.
+- **List H2** (540, `clamp(28px, 3.4vw, 48px)`, 1.03 leading, `-0.017em` tracking): secondary article-list titles.
+- **Article body** (400, 21px, 1.72 leading): article prose — set in Newsreader, not the sans face.
+- **Article H2** (600, 31px, 1.15 leading, `-0.01em` tracking): in-body section headers.
+- **Blockquote** (Newsreader italic, 29px, 1.32 leading, `-0.012em` tracking, accent left rule): pull-quotes.
+- **Dek (home)**: IBM Plex Sans, `clamp(18px, 1.5vw, 23px)`, 1.5 leading, muted.
+- **Dek (article)**: Newsreader italic, `clamp(19px, 1.6vw, 24px)`, 1.5 leading, muted.
+- **Label**: JetBrains Mono, 13–14px, 0.02–0.16em tracking — byline, date, reading time, tag, nav, ticker, eyebrows.
+- **List index numeral**: Newsreader 500, `clamp(52px, 7vw, 104px)`, 0.8 leading, outlined (`-webkit-text-stroke: 1.4px currentColor` + transparent fill) so it recolors with the row on hover.
+- **Footer wordmark**: Newsreader 600, `clamp(52px, 11vw, 150px)`, 0.82 leading, `-0.03em` tracking.
 
 ### Named Rules
-**The Two-Voice Rule.** Only two families carry real reading weight: Fraunces for anything the reader scans, Public Sans for anything the reader reads continuously. JetBrains Mono is a label face only — it never sets a full sentence.
+**The Serif-Reads Rule.** Newsreader now carries both headlines and continuous article body reading — a deliberate merge of the old system's headline/body split. IBM Plex Sans is reserved for UI chrome and the home page's dek, not article prose. JetBrains Mono remains label-only; it never sets a full sentence.
 
-**The No-Kicker Rule.** Uppercase tracked mono labels attach to a byline, a date, or a tag. They never sit alone above a heading as a section eyebrow.
+**The Eyebrow-Is-Allowed Rule.** Uppercase tracked mono labels may sit above a section as a standalone eyebrow ("LATEST DISPATCH," "MORE FROM THE WIRE") — this reverses the old system's No-Kicker rule by design, because the wire-desk voice calls for it. An eyebrow still always sits immediately beside or above the thing it announces; it doesn't float free of any content.
 
 ## 4. Elevation
 
-Flat by design — there is no shadow vocabulary. Depth and grouping come from the Hairline Gray / Elevated Charcoal surface tint and from generous whitespace (the `spacing.lg` / `spacing.xl` steps), the way a printed page uses margin and rule lines instead of drop shadows. The one physical touch is the 1px hairline border (Hairline Gray at full opacity in light mode, a low-opacity Paper Ink in dark mode) used to separate list rows and the sticky header from content below it.
+Still flat by design — no `box-shadow` vocabulary for structure or grouping. The one exception is intentional and motion-tied: the reading-progress bar's accent fill carries a soft `box-shadow: 0 0 12px var(--color-accent)` glow, because it's meant to read as a live signal indicator, not a resting surface. Depth and grouping everywhere else still come from the `line` hairline and generous whitespace.
 
 ### Named Rules
-**The Flat-By-Default Rule.** No `box-shadow` anywhere in the system. If something needs to feel "raised," widen its margin or add a hairline rule — never a shadow.
+**The Flat-Structure Rule.** No `box-shadow` is used to imply elevation, grouping, or hierarchy. The reading-progress glow is the one narrow exception — a motion/signal effect, not a structural one — and shouldn't be read as license to add shadows elsewhere.
 
 ## 5. Components
 
 ### Buttons
-- **Shape:** barely-rounded corners (4px, `rounded.sm`) — enough to soften, not enough to feel like an app.
-- **Primary:** Honey Amber fill, Paper White text (light) / Ink text (dark), Label typography, `14px 28px` padding. Reserved for a single, deliberate per-page action — not currently used anywhere in the shipped site.
-- **Hover / Focus:** background shifts to Ink (light) / Paper Ink (dark) over 160ms ease-out-quart; focus-visible gets a 2px Honey Amber outline offset 2px.
-- **Ghost:** transparent background, Ink text, same padding/shape — used for secondary actions ("Read more," pagination).
+- **Primary:** accent fill, `bg` text, Label typography, `md` (8px) corner radius, `10px 22px` padding. Used sparingly — the shipped site mostly prefers mono text links with a gap-widening arrow (`READ DISPATCH →`, `More from AI Signal →`) over filled buttons.
+- **Subscribe button:** a circular accent-filled arrow (`→`) button, 32px, paired with the footer's bottom-border email field — the one filled control that ships today.
+
+### Links & CTAs (signature interaction)
+- **Style:** mono text in `accent`, with a small icon gap (`10px`) that widens (`16px`) on hover/focus over ~200ms — used for the featured CTA, the article footer link, and the "view all articles" link. This replaces card/button chrome as the primary call-to-action pattern.
 
 ### Tags
-- **Style:** no background fill, no border, no pill shape — just Deep Teal Label-face text. Sits inline with byline metadata, never as a standalone badge grid.
-- **State:** deliberately inert — no hover/underline state of its own, no "selected" state. Tag filtering doesn't exist yet; giving the tag a distinct hover treatment before that destination is real would make it look clickable-but-broken rather than restrained. Revisit this the day tag-filtered views ship, not before.
+- No background fill, no border, no pill shape — Label-face text in `accent-2` (list rows) or `accent` (the featured story). Still deliberately inert: no distinct hover/selected state, because tag-filtered views don't exist yet. Revisit the day they ship.
 
 ### Article Index Row (signature component)
-Replaces the card grid entirely. Each entry: Headline-weight title (Fraunces), a single-line Muted Ink dek in Body face, and a Label-face metadata line (date · reading time · tag in Deep Teal). Rows are separated by a 1px Hairline Gray rule, full-bleed within the content column — no border-left stripe, no box, no shadow. The lead/featured story at the top of the homepage breaks the row pattern once: full Display-size title plus a two-line dek, to establish hierarchy the way a newspaper front page does with its lead story.
+Each entry: an oversized outlined index numeral (Newsreader, `-webkit-text-stroke`, transparent fill, tied to `currentColor` so it recolors with the row), a Headline-weight title, a single-line Muted dek, and a Label-face metadata line (date · reading time · tag in `accent-2`). Rows are separated by a 1px `line` hairline; on hover the whole row shifts `translateX(10px)` and recolors toward `accent`, turning the outlined numeral solid-feeling without ever filling it. The lead/featured story breaks the pattern once at the top of the homepage: an eyebrow (equalizer bars + "LATEST DISPATCH"), a huge Display-size title, and a two-line dek — the newspaper front page's lead treatment.
+
+### Signal Ticker
+A full-width marquee strip, 1px `line` border top and bottom, looping short mono phrases separated by an accent "◆", `34s` linear scroll. Purely decorative brand furniture (not a live headline feed) — content is duplicated once for a seamless loop and hidden from assistive tech (`aria-hidden`), since a screen reader gains nothing from a repeating decorative strip.
+
+### Equalizer Bars
+Three sizes of the same motif — `eyebrow` (4 bars, next to "LATEST DISPATCH"), `footer` (5 bars, beside the masthead wordmark), `mini` (3 bars, in the footer's bottom bar) — each bar scaling `0.22 → 1 → 0.22` on a staggered delay. Always `accent`-colored; always disabled under `prefers-reduced-motion`.
+
+### Reading Progress
+A fixed 2px bar at the very top of the article view only, filled in `accent` with a glow, width driven by scroll position. The one place a `box-shadow` is intentional (see Elevation).
 
 ### Article Body Chart
-- **Style:** an SVG bar chart wrapped in a bordered figure — 1px Hairline Gray border, `sm` (4px) corner radius, generous inner padding, matching the deliberate treatment already given to code blocks and tables rather than sitting bare in the body copy. Bar fill is Honey Amber; the zero-baseline rule and axis are Hairline Gray; row labels are Ink, value labels are Muted Ink, both in Label face (Mono). A Label-face, Muted Ink caption sits below the figure, sourced from the image's alt text — the same typographic treatment as the article byline metadata line, not a separate caption style.
-- **Theme behavior:** the SVG's fills and font-family reference the same `--color-*`/`--font-jetbrains-mono` custom properties as the rest of the page, and the markup is inlined into the document (not loaded via `<img src>`) specifically so it repaints on the light/dark toggle instead of freezing at generation time. See `scripts/generate-chart.mjs` and `src/components/MdxImage.tsx`.
-- **Scope:** bar charts only, generated from data already cited in the article body (benchmarks, comparisons, percentages) — not decorative photography or hero imagery, which stay out of scope per the anti-references in `PRODUCT.md`.
+Unchanged from the prior system: an SVG bar chart, 1px `line` border, `sm` (4px) radius, generous padding — the same deliberate treatment given to blockquotes. Bar fill is `accent`; the zero-baseline rule and axis are `line`; labels are Label face. Inlined into the page markup (not `<img src>`'d) so it repaints on the theme toggle. See `scripts/generate-chart.mjs` and `src/components/MdxImage.tsx`.
 
 ### Inputs
-- **Style:** bottom-border only (1px Muted Ink), transparent background, no corner radius, no box. Not currently used anywhere in the shipped site; the primitive is defined for whatever text input need comes next (search, comments).
-- **Focus:** border shifts to 2px Honey Amber, no glow/shadow.
+- **Style:** the footer email field is a rounded (`9px`) `1px line` border container, transparent background, that turns `accent` on focus/hover — the only input currently shipped. It's presentational for now (see PRODUCT.md) since no newsletter provider is wired up yet.
 
 ### Logo
-- **Mark:** the supplied chip-and-spark icon (Brand Navy `#12314f`, white in dark mode via `currentColor`), paired inline with the Fraunces wordmark in the header and footer. Fixed brand asset — not part of the primary/accent system, never recolored to Honey Amber or Deep Teal.
+- **Mark:** the chip/pins/asterisk SVG described under Colors — fully token-driven, no fixed hex. Paired inline with the Newsreader wordmark in the header and the (much larger) footer masthead treatment.
 
 ### Navigation
-- **Style:** sticky header, Paper White/Near-Black background (matches body, not Hairline Gray), 1px Hairline Gray bottom border on scroll only. Logomark (Brand Navy / white in dark mode) plus wordmark set in Fraunces at Title size, as a single lockup. Nav links in Body face, Ink color, Honey Amber underline on hover (transform-based, no layout shift). Theme toggle sits at the far right as a simple sun/moon icon button, no background.
-- **Masthead tagline:** "— For people who build" set in Mono face, Body Small size, Muted Ink, immediately after the wordmark. The logo lockup and tagline sit in a `flex-wrap` group: inline on the same line whenever there's room (roughly ≥460px of available header width — in practice from the `sm`/`md` breakpoints up), and dropping to its own line below the lockup on narrower phones rather than disappearing or forcing horizontal scroll. This keeps the tagline visible at every width without crowding the nav/hamburger and theme toggle on the same row. Distinct from the longer descriptive line ("Notes on artificial intelligence, for practitioners and the curious alike") used in the footer and meta/OG description — the two are intentionally different lengths for different jobs, not an inconsistency to reconcile.
-- **Mobile:** nav links collapse into a full-height overlay panel (not a dropdown), Display-face link list, dismissible via the same toggle icon rotated to an ×.
+- **Style:** header is full-bleed (no max-width container, just `clamp(24px,5vw,72px)` side padding) with no border of its own — the Signal Ticker directly beneath it supplies the visual separation instead of a header hairline, so the two don't double up. Logomark + Newsreader wordmark + mono tagline ("— For people who build") sit left; mono nav links ("Articles" in `fg`/hover `accent`, "About" in `muted`/hover `fg`) plus a circular theme toggle sit right.
+- **Theme toggle:** a 38px circular `1px line`-bordered button showing a `◐` glyph that rotates 180° between states (border turns `accent` on hover).
+- **Mobile:** nav links collapse into a full-height overlay panel, Display-face link list, toggled by the same button that opens/closes a hamburger icon.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** keep body background at zero chroma — pure white (`#ffffff`) in light mode, true near-black (`#020202`) in dark mode.
-- **Do** use Honey Amber for exactly one job at a time: action or emphasis, never both in the same view.
-- **Do** build the article index as hairline-divided rows with one larger featured lead, not a grid of equal-weight cards.
-- **Do** cap body prose at 68ch and set body line-height to 1.7 for long-form reading.
-- **Do** give every animation a `prefers-reduced-motion` fallback (instant or crossfade).
+- **Do** use `accent`/`accent-2` for every job that needs emphasis — link, hover, CTA, tag, live-motion motif. One accent family, many intensities, never a second hue.
+- **Do** build the article index as an outlined-numeral, hairline-divided list with one larger featured lead, not a grid of equal-weight cards.
+- **Do** set article body copy in Newsreader (serif), not IBM Plex Sans — the body/headline split from the old system is gone.
+- **Do** give every animation (equalizer, ticker, entrance) a `prefers-reduced-motion` fallback.
+- **Do** let an eyebrow label ("LATEST DISPATCH," "MORE FROM THE WIRE") sit above the section it announces — that's part of the wire-desk voice now.
 
 ### Don't:
-- **Don't** use a cream, sand, or parchment body background — the "saturated AI default of 2026" this project explicitly rejects.
-- **Don't** apply `border-left`/`border-right` as a colored accent stripe on any row, card, or callout.
-- **Don't** use gradient text (`background-clip: text` + gradient) anywhere.
-- **Don't** build an icon-and-heading card grid for the article index — that is wiki/doc coldness and SaaS-template sameness both, and this project rejects both by name.
-- **Don't** place an uppercase tracked label above a section as a floating "eyebrow" — Label typography only ever attaches to real metadata (byline, date, tag).
-- **Don't** add `box-shadow` anywhere; elevation in this system is flat by rule.
+- **Don't** reintroduce a second brand hue for "metadata vs. action" — that split belonged to the old amber/teal system and is gone.
+- **Don't** apply `border-left`/`border-right` as a colored accent stripe on a row or card (the blockquote's accent rule and the mono-callout's accent-2 rule are the two narrow, named exceptions).
+- **Don't** use gradient text anywhere.
+- **Don't** add `box-shadow` for structure or grouping — the reading-progress glow is the one motion-tied exception, not a precedent.
+- **Don't** claim the footer's subscribe form is functional in copy or behavior beyond a visual placeholder until a real newsletter provider is wired up (see PRODUCT.md).

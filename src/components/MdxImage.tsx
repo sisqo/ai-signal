@@ -22,7 +22,7 @@ export function MdxImage({ src, alt }: { src?: string; alt?: string }) {
         <div
           role="img"
           aria-label={alt}
-          className="rounded-sm border border-surface p-6"
+          className="rounded-sm border border-line p-6"
           dangerouslySetInnerHTML={{ __html: svg }}
         />
         {alt && <figcaption className="mt-3 font-mono text-sm tracking-wide text-muted">{alt}</figcaption>}
@@ -33,7 +33,7 @@ export function MdxImage({ src, alt }: { src?: string; alt?: string }) {
   return (
     <figure className="not-prose my-10">
       {/* eslint-disable-next-line @next/next/no-img-element -- non-chart images aren't supported yet; plain img is the honest minimal fallback rather than building unused next/image sizing infra */}
-      <img src={src} alt={alt ?? ''} className="w-full rounded-sm border border-surface" loading="lazy" />
+      <img src={src} alt={alt ?? ''} className="w-full rounded-sm border border-line" loading="lazy" />
       {alt && <figcaption className="mt-3 font-mono text-sm tracking-wide text-muted">{alt}</figcaption>}
     </figure>
   )

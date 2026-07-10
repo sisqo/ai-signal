@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/next'
-import { fraunces, publicSans, jetbrainsMono } from '@/lib/fonts'
+import { newsreader, ibmPlexSans, jetbrainsMono } from '@/lib/fonts'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
+import { SignalTicker } from '@/components/SignalTicker'
 import { SITE_URL } from '@/lib/site'
 import { Providers } from './providers'
 import './globals.css'
@@ -29,18 +30,19 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#020202',
+  themeColor: '#111214',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fraunces.variable} ${publicSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${newsreader.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <Providers>
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
+            <SignalTicker />
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>

@@ -11,15 +11,7 @@ const links = [
 ]
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -29,28 +21,26 @@ export function SiteHeader() {
   }, [menuOpen])
 
   return (
-    <header
-      className={`sticky top-0 z-40 border-b bg-bg transition-colors duration-200 ease-out-quart ${
-        scrolled ? 'border-surface' : 'border-transparent'
-      }`}
-    >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
-          <Link href="/" className="flex items-center gap-2.5 text-[#12314f] dark:text-white">
+    <header className="relative z-20">
+      <div className="flex items-center justify-between px-[clamp(24px,5vw,72px)] py-[30px]">
+        <div className="flex flex-wrap items-center gap-x-3.5 gap-y-0.5">
+          <Link href="/" className="flex items-center gap-3.5">
             <LogoMark className="h-8 w-8" />
-            <span className="font-display text-xl font-semibold text-ink">AI Signal</span>
+            <span className="font-display text-[25px] font-semibold tracking-tight text-fg">AI Signal</span>
           </Link>
-          <span className="whitespace-nowrap font-mono text-sm tracking-wide text-muted">
+          <span className="whitespace-nowrap font-mono text-[13px] tracking-wide text-faint">
             — For people who build
           </span>
         </div>
 
-        <nav className="hidden items-center gap-8 sm:flex">
+        <nav className="hidden items-center gap-[clamp(20px,3vw,44px)] font-mono text-sm sm:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="border-b border-transparent pb-0.5 text-ink transition-colors duration-150 ease-out-quart hover:border-primary"
+              className={`transition-colors duration-200 ${
+                link.href === '/' ? 'text-fg hover:text-accent' : 'text-muted hover:text-fg'
+              }`}
             >
               {link.label}
             </Link>
@@ -68,17 +58,17 @@ export function SiteHeader() {
             className="relative grid h-9 w-9 place-items-center"
           >
             <span
-              className={`absolute h-[1.5px] w-5 bg-ink transition-transform duration-200 ease-out-quart ${
+              className={`absolute h-[1.5px] w-5 bg-fg transition-transform duration-200 ${
                 menuOpen ? 'rotate-45' : '-translate-y-1.5'
               }`}
             />
             <span
-              className={`absolute h-[1.5px] w-5 bg-ink transition-opacity duration-150 ease-out-quart ${
+              className={`absolute h-[1.5px] w-5 bg-fg transition-opacity duration-150 ${
                 menuOpen ? 'opacity-0' : 'opacity-100'
               }`}
             />
             <span
-              className={`absolute h-[1.5px] w-5 bg-ink transition-transform duration-200 ease-out-quart ${
+              className={`absolute h-[1.5px] w-5 bg-fg transition-transform duration-200 ${
                 menuOpen ? '-rotate-45' : 'translate-y-1.5'
               }`}
             />
@@ -87,7 +77,7 @@ export function SiteHeader() {
       </div>
 
       <div
-        className={`fixed inset-x-0 top-[73px] bottom-0 z-30 flex flex-col items-start gap-2 bg-bg px-6 pt-8 transition-opacity duration-200 ease-out-quart sm:hidden ${
+        className={`fixed inset-x-0 top-[73px] bottom-0 z-30 flex flex-col items-start gap-2 bg-bg px-[clamp(24px,5vw,72px)] pt-8 transition-opacity duration-200 sm:hidden ${
           menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
@@ -96,7 +86,7 @@ export function SiteHeader() {
             key={link.href}
             href={link.href}
             onClick={() => setMenuOpen(false)}
-            className="font-display text-4xl font-medium tracking-tight text-ink"
+            className="font-display text-4xl font-medium tracking-tight text-fg"
           >
             {link.label}
           </Link>

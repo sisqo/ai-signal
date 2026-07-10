@@ -7,8 +7,11 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 pb-24 pt-4">
-      <h1 className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
+    <div className="mx-auto max-w-copy px-[clamp(24px,5vw,72px)] pb-24 pt-[clamp(28px,4vw,60px)]">
+      <h1
+        className="font-display text-fg"
+        style={{ fontSize: 'clamp(40px,5.4vw,78px)', fontWeight: 560, lineHeight: 0.98, letterSpacing: '-0.024em' }}
+      >
         About AI Signal
       </h1>
       <div className="prose prose-lg mt-10 max-w-none dark:prose-invert">
