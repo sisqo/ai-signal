@@ -1,0 +1,22 @@
+name: Ping IndexNow with published pages
+
+on:
+  schedule:
+    # Every 4 hours — mirrors announce-bluesky.yml's reasoning: publish dates are date-only,
+    # so this just needs to run at least once after midnight Europe/Rome, not at an exact minute.
+    - cron: '0 */4 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm ci
+
+      - run: node scripts/ping-indexnow.mjs
