@@ -1,0 +1,15 @@
+<svg viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="200" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Fable 5</text>
+    <rect x="260" y="24" width="370.00000000000006" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">80.4%</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Opus 4.8</text>
+    <rect x="260" y="68" width="318.4577114427861" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="588.4577114427861" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">69.2%</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Grok 4.5</text>
+    <rect x="260" y="112" width="297.7487562189055" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="567.7487562189056" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">64.7%</text>
+    <text x="0" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Muse Spark 1.1</text>
+    <rect x="260" y="156" width="283.0223880597015" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="553.0223880597015" y="166" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">61.5%</text>
+</svg>

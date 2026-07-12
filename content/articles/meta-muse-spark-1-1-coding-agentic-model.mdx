@@ -1,0 +1,33 @@
+---
+title: "Meta Joins the Coding Model Fight With Muse Spark 1.1, Its First Paid Model Ever"
+slug: "meta-muse-spark-1-1-coding-agentic-model"
+dek: "After years of giving Llama away for free, Meta is charging $1.25 and $4.25 per million tokens for a model that tops the field on workplace tool use and trails it on raw coding accuracy."
+date: "2026-07-14"
+tag: "Tools"
+---
+
+On July 9, 2026, Meta [charged money for one of its own AI models for the first time](https://www.digitalapplied.com/blog/meta-muse-spark-1-1-agentic-model-api-2026). Muse Spark 1.1, the second release from Meta Superintelligence Labs, costs [$1.25 per million input tokens and $4.25 per million output tokens](https://www.digitalapplied.com/blog/meta-muse-spark-1-1-agentic-model-api-2026) — the small chunks of text a model reads and writes, and the unit every AI provider bills by — through a new public-preview Meta Model API, with $20 in free credits for new accounts.
+
+The pricing is notable mostly for what it breaks. Meta's Llama models have been free to download and run since 2023, a strategy built around commoditizing the layer OpenAI and Anthropic charge for. Muse Spark 1.1 keeps that open-weight strategy alive for Meta's general-purpose models, but for this one — built specifically for agentic work, the kind where a model plans a multi-step task and delegates pieces of it to other model instances rather than answering one question at a time — Meta decided the API access itself was worth billing for directly.
+
+## What it's built to do
+
+Muse Spark 1.1 ships with a [1-million-token context window with active compaction](https://www.digitalapplied.com/blog/meta-muse-spark-1-1-agentic-model-api-2026) — compaction being the technique of summarizing or discarding older parts of a long conversation so a model doesn't run out of working memory during a task that spans hundreds of steps. Meta built it around orchestration specifically: acting as a main agent that gathers context, makes a plan, and delegates execution to parallel subagents, or as one of those subagents itself, understanding its assigned tool and knowing when to escalate a decision back up. Mark Zuckerberg, announcing the release [in a post on X](https://www.storyboard18.com/amp/brand-makers/mark-zuckerberg-returns-to-x-after-three-years-to-launch-metas-muse-spark-1-1-ai-model-103762.htm), called it "a strong agentic and coding model at a very low price" and said it was "strongest at agentic performance, tool use, and computer use" — a framing the benchmarks below mostly back up.
+
+## Where it actually wins
+
+On [JobBench](https://officechai.com/ai/muse-spark-1-1-benchmarks/), a benchmark measuring professional tool use — the kind of orchestration where a model has to read a CRM, query an API, update a spreadsheet, and hand a sub-task to another agent without losing the thread — Muse Spark 1.1 scores 54.7, ahead of Claude Opus 4.8's 48.4 and GPT-5.5's 38.3 by a wide enough margin that it's the standout number in the entire release. Meta also reports leading scores on three other agent- and tool-use benchmarks — MCP Atlas, Humanity's Last Exam, and Finance Agent v2 — though without publishing the same head-to-head numbers for those.
+
+That combination — one main agent coordinating specialized subagents against a shared goal — is the same shape of problem [Augment Code's Intent](/articles/augment-code-intent-agent-orchestration) was built to manage from the tooling side rather than the model side: once several agents are running against one codebase or workflow, keeping track of who's doing what becomes its own job.
+
+## Where it falls behind
+
+Pure coding correctness is a different story. On [SWE-Bench Pro](https://scaleapi.github.io/SWE-bench_Pro-os/) — a benchmark that grades a model's fix against a real, previously unseen pull request rather than a task it might have already seen in training — Muse Spark 1.1 resolves 61.5% of problems, [independently confirmed on Scale's live public leaderboard](https://labs.scale.com/leaderboard/swe_bench_pro_public), where it currently ranks first among publicly tested entries. That number still lands behind [Grok 4.5's 64.7%](/articles/grok-4-5-coding-cost-benchmarks), which itself trails Claude Opus 4.8's 69.2% and [Fable 5's 80.4%](/articles/claude-fable-5-mythos-5-glasswing):
+
+![On SWE-Bench Pro, a benchmark that grades fixes against real unseen pull requests, Muse Spark 1.1 resolves 61.5% of problems — behind Grok 4.5's 64.7%, Opus 4.8's 69.2%, and Fable 5's 80.4%.](/articles/meta-muse-spark-1-1-coding-agentic-model/swe-bench-pro.svg)
+
+The pattern across both benchmarks points the same direction: Muse Spark 1.1 is a stronger workplace-automation model than a bug-fixing one, at least measured against the field it's launching into.
+
+## Where this actually fits
+
+Muse Spark 1.1 is available now in [public preview](https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/), US-only at launch with no EU access date announced yet. For teams building agent workflows that touch business tools — CRMs, spreadsheets, ticketing systems, internal APIs — rather than pushing commits directly, the JobBench margin is large enough to be worth a real evaluation, especially at a quarter of Fable 5's or GPT-5.6's per-token price. For work where the deliverable is a correct code change reviewed against a real pull request, the SWE-Bench Pro gap says to keep routing that work to whichever model already tops that specific leaderboard — cheap orchestration and cheap code correctness aren't the same purchase, even when they're the same price tag.
