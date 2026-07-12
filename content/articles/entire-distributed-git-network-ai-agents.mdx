@@ -1,0 +1,25 @@
+---
+title: "GitHub's Former CEO Bet That GitHub Itself Doesn't Scale to the Agent Era"
+slug: "entire-distributed-git-network-ai-agents"
+dek: "Entire's distributed Git network claims triple the clone throughput of Cursor's rival Origin platform — though both companies' numbers come from their own demos, not an independent bake-off."
+date: "2026-07-16"
+tag: "Tools"
+---
+
+Thomas Dohmke ran GitHub for four years before leaving Microsoft's subsidiary in August 2025. On July 8, 2026, his new startup [Entire opened a preview](https://siliconangle.com/2026/07/08/ex-github-chiefs-entire-opens-distributed-git-network-agent-era/) of a Git hosting network built to replace the very kind of platform he used to run — because, in his telling, that architecture wasn't built for what's straining it now.
+
+The strain is volume, not complexity. A human developer clones a repository a handful of times a day and pushes a commit every so often. A fleet of AI coding agents assigned to the same codebase does both continuously and in parallel — cloning fresh copies to work in isolation, pushing branches for review, polling for updates — at a request rate no Git host was sized for when "developer" meant "person at a keyboard."
+
+## The bet: centralized hosting is the bottleneck
+
+["Git was always meant to be decentralized,"](https://www.theregister.com/ai-and-ml/2026/07/08/former-github-ceo-launches-competitor-designed-for-the-age-of-vibe-coding/5268694) Dohmke has said, "but in practice, Git hosting platforms have largely routed developers into centralized systems. This was sustainable until agents came along." Entire's answer is to mirror GitHub repositories across geographic regions — the U.S., EU, and Australia at launch — so an agent clones from a nearby copy instead of querying one central server every time, the same logic behind a CDN (content delivery network) caching a website closer to each visitor instead of serving every request from one location.
+
+Entire has demoed [570,000 clone operations per hour from a single repository and roughly 2.1 million pushes per hour](https://siliconangle.com/2026/07/08/ex-github-chiefs-entire-opens-distributed-git-network-agent-era/) — figures that dwarf the numbers Cursor published for [Origin](https://www.eesel.ai/blog/what-is-cursor-origin), its own rival Git forge announced three weeks earlier, in June: roughly 296,000 clones and 81,000 pushes per hour. Neither company's numbers have been run through an independent, head-to-head benchmark — both are self-reported results from a controlled demo, and Entire's own preview is new enough that real-world load hasn't tested it the way years of production traffic have tested GitHub. What the comparison does establish is that Entire isn't a lone bet: two well-funded companies, working independently, concluded this year that Git hosting itself needs a different architecture once agents — not people — generate most of the traffic.
+
+## Beyond speed: a paper trail for agent decisions
+
+Entire's pitch isn't purely about throughput. [Entire Blame](https://www.geekwire.com/2026/former-github-ceos-startup-entire-unveils-its-answer-to-the-crush-of-ai-coding-agents/) surfaces the agent session, prompt, and reasoning behind a specific line of code — closer to an audit log than the commit-message-and-diff trail Git normally leaves. Entire Review sends a branch to multiple agents in parallel for what the company calls intent-aware review, checking whether a change matches what it was supposed to do rather than just whether it compiles. Underneath both, Entire stores agent transcripts and checkpoint metadata as Git data in dedicated branches alongside the code itself — with best-effort redaction of anything sensitive in those transcripts, a limitation the company itself acknowledges rather than papers over. It's the same instinct behind giving several running agents [a shared workspace instead of five separate blind spots](/articles/augment-code-intent-agent-orchestration): once agents generate most of a codebase's history, knowing which agent decided what becomes as important as the code itself.
+
+## Where this fits right now
+
+Entire is in preview, integrating with [Claude Code, Codex, Cursor, Factory AI, and GitHub Copilot](https://siliconangle.com/2026/07/08/ex-github-chiefs-entire-opens-distributed-git-network-agent-era/), and the company — five months old, backed by a [$60 million seed round at a $300 million valuation](https://siliconangle.com/2026/07/08/ex-github-chiefs-entire-opens-distributed-git-network-agent-era/) — says it plans to eventually open-source the network for self-hosting. None of that makes it a GitHub replacement for a team not already feeling agent-driven load: for a handful of agents working a normal-sized repo, GitHub's existing rate limits aren't close to binding. The signal worth tracking is different — when the company that used to run GitHub and the company building the most aggressive agent-native IDE independently bet that today's Git hosting won't hold, that's a preview of a constraint most teams haven't hit yet, not a should-you-switch decision for the ones that haven't.
