@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+  },
   alternates: {
     types: {
       'application/rss+xml': [{ url: '/rss.xml', title: 'AI Signal (RSS)' }],
