@@ -1,0 +1,27 @@
+---
+title: "GitHub Copilot Just Became Free to Install, If Not Free to Use"
+slug: "github-copilot-free-desktop-app-cost-controls"
+dek: "The same week GitHub opened its desktop app and a second AI agent to every plan tier, it also shipped new caps letting admins stop that wider access from quietly blowing through a paying team's budget."
+date: "2026-07-17"
+tag: "Tools"
+---
+
+On July 7, 2026, GitHub [removed the paywall](https://github.blog/changelog/2026-07-07-github-copilot-app-available-to-all/) on its Copilot desktop app — the standalone launcher for directing AI coding agents from outside any specific editor — extending it from paid subscribers to every plan, including Copilot Free and GitHub Education accounts, on macOS, Windows, and Linux. No credit card required. Developers without any Copilot plan at all can still use the app by bringing their own key (BYOK) to run sessions against a different model provider entirely.
+
+That's the accessible half of the week's news, and it matters for a reason beyond price: the app itself is built around running several agents in parallel — each in its own isolated git worktree (an independent working copy of a branch), tracked through a unified view of active sessions, pull requests, and background automations — rather than one assistant answering questions in a single chat window. Widening who can open it widens who's coordinating multiple agents at once, not just who's getting code suggestions.
+
+## What "free" actually includes
+
+Copilot Free's baseline hasn't changed: [2,000 code completions and 50 chat requests a month](https://www.usecarly.com/blog/github-copilot-limits/), no credit card, no expiration. Agent mode and the CLI are available on every tier now, including Free — but both draw from [GitHub AI Credits](https://docs.github.com/en/copilot/concepts/billing/individual-plans), the token-based usage unit that replaced GitHub's older Premium Request Units when the whole product line moved to usage-based billing on June 1, 2026. Copilot Pro's $10-a-month plan spells out its allotment plainly: 1,500 AI Credits monthly. Free's own credit allowance isn't published as a fixed number, only described as an "allowance" — which in practice means a free account can open the same desktop app and point it at the same agents a Pro subscriber uses, then hit a hard stop well before a paying account would.
+
+The same day, [Codex became available as a new agent provider in public preview inside JetBrains IDEs](https://github.blog/changelog/2026-07-07-codex-as-agent-provider-and-agentic-enhancements-in-jetbrains-ides/) — IntelliJ IDEA, PyCharm, and WebStorm — sitting alongside Claude, which had reached the same preview status two weeks earlier. Developers working in those IDEs can now run autonomous sessions against either agent without leaving for VS Code, including an Autopilot mode that auto-approves routine tool calls. It's the same tool-choice question [already facing anyone picking between Antigravity 2.0, Claude Code, and Codex](/articles/antigravity-2-vs-claude-code-vs-codex) — except now the choice sits inside a JetBrains dropdown instead of requiring a separate install.
+
+## The other half: guardrails for whoever's paying
+
+Widening access on one end pushed GitHub to tighten controls on the other. On July 2, [cost centers gained support for AI credit pools](https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/) — letting a Business or Enterprise administrator cap how much of an organization's shared monthly included credits any single team can draw down. GitHub calculates the cap automatically from the number of licenses assigned to that cost center, and admins choose what happens at the limit: block further included usage, or let it continue as billed overage if the enterprise allows it. A related feature, [per-user AI credit budgets](https://github.blog/changelog/2026-06-30-per-user-ai-credit-budgets-available-for-cost-centers/), shipped a week earlier, letting the same admins cap what an individual account inside a cost center can spend.
+
+Both features exist because usage-based billing turned "how many agents does the team run, and how hard" from a flat subscription line item into a number that moves every month. Broader tool access — more agents, more entry points, more people who can open them for free — makes that number harder to predict, not easier.
+
+## Where this actually leaves a team
+
+For an individual developer, the free desktop app and BYOK option are worth trying with no real downside — the 2,000-completion, 50-chat baseline was already free, and agent access just got added to it at no new cost, capped by credits rather than a paywall. For anyone administering a Business or Enterprise account, the more consequential change is the one that shipped a few days earlier and got less attention: turn on AI credit pools and per-user budgets before, not after, a newly-free-to-access desktop app and a second in-IDE agent provider start pulling from the same shared credit pool every paying seat draws from.
