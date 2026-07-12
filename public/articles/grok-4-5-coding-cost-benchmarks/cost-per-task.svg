@@ -1,0 +1,12 @@
+<svg viewBox="0 0 680 156" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="156" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Fable 5 (in Claude Code)</text>
+    <rect x="260" y="24" width="370" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">11.8 / task</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">GPT-5.5 (in Codex)</text>
+    <rect x="260" y="68" width="158.97457627118644" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="428.97457627118644" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">5.07 / task</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">Grok 4.5 (in Grok Build)</text>
+    <rect x="260" y="112" width="78.07627118644068" height="20" rx="2" fill="var(--color-primary)" />
+    <text x="348.0762711864407" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">2.49 / task</text>
+</svg>
