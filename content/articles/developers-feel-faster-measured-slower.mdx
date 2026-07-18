@@ -1,0 +1,41 @@
+---
+title: "Developers Feel 20% Faster With AI. Measured, They're 19% Slower."
+slug: "developers-feel-faster-measured-slower"
+dek: "A controlled study clocked experienced developers 19% slower with AI while they swore it had sped them up — and three more datasets show the gap isn't just a feeling."
+date: "2026-07-19"
+tag: "Tools"
+---
+
+Sixteen experienced developers took on 246 real coding tasks under controlled measurement in early 2025. With AI tools switched on, they finished those tasks 19% slower than the ones they did without. The unsettling part isn't the slowdown. It's that the same developers, asked afterward, estimated that AI had sped them up by 20%.
+
+That result comes from [METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), a nonprofit AI-evaluation lab (short for Model Evaluation & Threat Research), and it names a problem every team adopting AI tools is quietly walking into: the *feeling* of coding faster with an assistant is real, and it is not the same thing as coding faster. A widening pile of data — on code quality, delivery stability, and developer trust — suggests the gap between the two is where a lot of 2026's AI productivity story actually lives.
+
+## The study that measured instead of asked
+
+METR didn't run a survey. It ran a randomized controlled trial — the setup where the same people do similar work with and without the thing being tested, so the difference can be pinned on it. The 16 participants were seasoned contributors to large, mature open-source projects (averaging more than 22,000 GitHub stars and a million-plus lines of code) — their own repositories, not unfamiliar ones. The 246 tasks were ordinary bug fixes, features, and refactors that averaged about two hours each. The tooling was current: mostly Cursor Pro running Claude 3.5 and 3.7 Sonnet, frontier models when the study ran.
+
+The three numbers that matter form a straight line away from reality:
+
+| Developers' estimate | Effect on task time |
+| --- | --- |
+| Predicted before the study | 24% faster |
+| Believed afterward | 20% faster |
+| Actually measured | 19% slower |
+
+The forecast was wrong, and — the harder finding — experience didn't correct it. After living through the slowdown, developers still felt sped up. METR is careful about how far this generalizes: it's a small sample of experts working in codebases they already know intimately, which is precisely the situation where an AI's suggestions compete against knowledge the developer already holds in their head. On unfamiliar code or greenfield work, the balance may tip the other way. But as a measurement of the perception gap itself, it's the cleanest one available.
+
+## Why it's more than one study
+
+If the slowdown were just friction that vanishes with practice, the artifacts it leaves in a codebase would be temporary too. They aren't. [GitClear](https://www.gitclear.com/ai_assistant_code_quality_2025_research), a firm that analyzes version-control history, looked at 211 million changed lines of code from 2020 through 2024 and found the fingerprints of fast generation everywhere. Copy-pasted (cloned) code rose from 8.3% to 12.3% of changes. Refactoring — reworking existing code to be cleaner rather than adding more, which GitClear tracks as "moved" lines — fell from 25% of changed lines in 2021 to under 10% in 2024. For the first time in the dataset's history, developers pasted more code than they moved. The plain reading: AI makes adding code almost free and consolidating it comparatively expensive, so duplication accretes.
+
+Google's [DORA](https://dora.dev/research/2024/dora-report/) research — an annual, large-scale study of software-delivery performance — found the downstream cost. In its 2024 report, every 25% increase in AI adoption was associated with a 7.2% drop in delivery stability (how often deployments succeed without needing an urgent fix afterward) and a slight dip in throughput. The proposed mechanism is mundane: AI makes it easy to write more code at once, bigger changesets are riskier, and risk shows up as instability.
+
+## The trust numbers caught up
+
+Developers noticed. Stack Overflow's [2025 survey](https://survey.stackoverflow.co/2025/ai) of tens of thousands of developers found 84% using or planning to use AI tools — and trust falling as usage climbed. Only around a third say they trust the accuracy of AI output; 46% actively distrust it, more than the share that trusts it, and just 3% "highly trust" it. The most experienced developers are the most skeptical. The top complaint, from 45% of respondents, was "AI solutions that are almost right, but not quite" — and 66% said they're now spending more time fixing almost-right AI code.
+
+That last figure is the perception gap seen from the inside. Generating a plausible answer feels instant; finding the one wrong line in it is the slow part, and correction time is exactly the kind of effort people forget to count. It's the same shift an [earlier piece traced when reviewing AI code started eating more hours than writing it](/articles/ai-coding-review-time-exceeds-writing-time), and it's why developers have been getting [more selective about what they actually hand off](/articles/what-developers-delegate-to-ai-2026).
+
+## What to do with this if you ship code
+
+Don't trust the feeling — measure it. If you can't point to a change in cycle time (how long a unit of work takes from first commit to merge) before and after AI adoption, you're managing on vibes, and the vibes are documented to be off by nearly 40 points. Budget for the correction-and-review half of the loop, not just generation — that's where the time actually goes. Treat rising duplication and short-term churn (code rewritten or deleted within days of being committed) as a leading indicator that your team is generating faster than it's consolidating. And read the METR population as a map: the developers it slowed down were experts on code they knew cold, which is where an assistant helps least. The speedup is realest on unfamiliar languages, boilerplate, and scaffolding — match the tool to the task, and keep a human reading closely everywhere a wrong line is expensive.
