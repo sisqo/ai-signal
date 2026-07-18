@@ -1,0 +1,43 @@
+---
+title: "Kimi K3 Tops the Coding Charts — and Open-Sources the Weights Next Week"
+slug: "kimi-k3-open-weight-coding-model"
+dek: "Moonshot's 2.8-trillion-parameter model is the largest ever released with open weights, and it's beating Fable 5 on an independent coding leaderboard — but it dropped the cheap-Chinese-model playbook, and the weights it's named for aren't downloadable yet."
+date: "2026-07-23"
+tag: "Tools"
+---
+
+On July 16, Moonshot AI released Kimi K3, a 2.8-trillion-parameter model that is [the largest ever put out with open weights](https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems) — the downloadable files that let anyone run a model on their own hardware instead of renting it through an API. Within a day it sat at the top of an independent coding leaderboard, ahead of Claude Fable 5 and OpenAI's GPT-5.6 Sol. Two things about that sentence are shakier than they sound: the leaderboard covers only front-end code, and those "open weights" can't be downloaded yet.
+
+Strip away the superlatives and Kimi K3 is the clearest sign yet that the gap between China's open models and America's closed frontier has shrunk to a rounding error on some tasks. But it's also a break from the script those Chinese models have followed for two years. K3 isn't cheap, and — as of this writing — it isn't actually open. Both of those deserve more of a developer's attention than the leaderboard rank does.
+
+## What it is
+
+K3 is a mixture-of-experts model: of its 2.8 trillion parameters, spread across 896 "experts," only 16 fire on any given token (the unit of text a model reads and writes). That's the trick that makes a model this enormous affordable to serve — most of it sits idle for any given word. It uses a new attention design Moonshot calls Kimi Delta Attention, carries a 1-million-token context window (how much text it can consider at once), and understands images natively. For now it's reachable through Moonshot's website and API.
+
+## The leaderboard, and how much to trust it
+
+K3 debuted at number one on the [Frontend Code Arena](https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3) with a score of 1,679, a 17-place jump from its predecessor and ahead of both Fable 5 and Sol, winning six of the arena's seven front-end categories (it trails Fable 5 only in gaming). This is a real independent signal, not a vendor slide: the arena ranks models by human preference votes on head-to-head outputs — a stronger footing than [some earlier Chinese coding-model claims](/articles/cheap-coding-models-decision-framework), where only one benchmark score had been checked by anyone but the maker.
+
+It holds up beyond that one venue, too. The third-party evaluator Artificial Analysis scores K3 among the [top three across six coding benchmarks](https://www.nxcode.io/resources/news/kimi-k3-benchmarks-coding-agent-evaluation-guide-2026), leading on two and trailing Sol on a terminal-tasks test by half a point. So it isn't a single-leaderboard fluke. But "best at front-end preference tests" is not "best coding model," and it shouldn't be read as one — preference voting rewards output that *looks* right, front-end work is where that bias is strongest, and public leaderboards can be optimized for. The developer Simon Willison, testing it hands-on, called K3 a [clear step up from prior Kimi versions](https://simonwillison.net/2026/Jul/16/kimi-k3/) but flagged a practical catch: it ships with a single reasoning setting, "max," so it thinks hard — and expensively — about everything. Which brings up the price.
+
+## The twist: it isn't the cheap option
+
+For two years the story of Chinese open models was frontier-adjacent quality at a fraction of the price. K3 walks away from it.
+
+| Model | Input ($/M tokens) | Output ($/M tokens) |
+| --- | --- | --- |
+| Kimi K2.6 (its predecessor) | $0.95 | $4 |
+| Kimi K3 | $3 | $15 |
+| Claude Sonnet (for reference) | $3 | $15 |
+
+Moonshot [priced its flagship](https://openrouter.ai/moonshotai/kimi-k3) at exact parity with a mid-tier US frontier model, roughly triple what the last Kimi cost. And because the only reasoning mode is the token-hungry "max," the real cost per task runs above the sticker rate — one of Willison's simple tests burned about 16,600 output tokens, some 25 cents, on a single prompt. If the reason to look at a Chinese model was that it undercut Sonnet and Sol, K3 is not that model.
+
+## The other twist: "open" is still a promise
+
+Moonshot says it will publish the full weights on Hugging Face — the standard hub for sharing models — [by July 27, under a "Modified MIT" license](https://codersera.com/blog/kimi-k3-complete-guide-2026/). Permissive, but the "modified" is doing work; anyone planning to build on it should read the actual terms rather than assume plain MIT. And as of this writing, the repository is still empty.
+
+That gap matters because open weights are the entire point of a story like this. Self-hosting for privacy, fine-tuning on your own data, running it air-gapped, and — not least — independently verifying those benchmark claims by running the thing yourself: none of that is possible until the files land. Until July 27 delivers, the largest open-weight model ever released is, in practice, just another paid API.
+
+## What it means for you
+
+If you build front-end- or UI-heavy features, K3 is worth a genuine bake-off — its strength there is real and independently observed, not marketing. Don't switch for the price, though: at $3/$15 plus a mandatory "max" reasoning mode, it isn't undercutting [Sol](/articles/gpt-5-6-government-preview) or [Fable 5](/articles/claude-fable-5-mythos-5-glasswing). And if self-hosting or fine-tuning is the whole reason you care, wait for July 27, confirm the weights are actually up, and read the license before you plan around them — openness you can't download is a roadmap item, not a feature. The lasting signal is directional: an open-weight model trading the top spot with the closed frontier, and pricing itself like the closed frontier, is the same convergence showing up when [Meta started charging for Muse Spark](/articles/meta-muse-spark-1-1-coding-agentic-model). The tidy split between cheap-and-open and expensive-and-closed is dissolving.
