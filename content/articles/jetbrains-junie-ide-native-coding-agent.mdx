@@ -1,0 +1,33 @@
+---
+title: "JetBrains' Junie Left Beta as the #1 Coding Agent — Inside the IDE, Not the Terminal"
+slug: "jetbrains-junie-ide-native-coding-agent"
+dek: "The IDE-native agent hit general availability topping an independent benchmark at a quarter the cost of its nearest rival — by doing something terminal agents structurally can't: driving the real debugger."
+date: "2026-07-22"
+tag: "Tools"
+---
+
+When JetBrains' coding agent, Junie, hits a failing test, it doesn't sprinkle print statements around and run it again. It opens the debugger, sets a breakpoint, and inspects the running program's state the way a developer would. That one capability is the clearest expression of a bet JetBrains just made official: the AI agent belongs inside the tools developers already use, not in a separate terminal window.
+
+On June 17, [Junie left beta](https://blog.jetbrains.com/junie/2026/06/junie-coding-agent-out-of-beta/) and became generally available across every JetBrains IDE — the family of programming environments (IntelliJ IDEA, PyCharm, WebStorm, GoLand, and the rest) that a large share of professional developers already work in all day. An IDE, short for integrated development environment, is the editor-plus-tooling app where code gets written, run, and debugged. The timing matters because the agentic-coding conversation has been dominated by terminal-first tools; Junie is the counter-argument, and it arrived with numbers behind it.
+
+## The benchmark, with the usual caveats
+
+Junie placed first on the most recent run of [SWE-Rebench](https://vibecoding.app/blog/junie-review), an independent benchmark that pulls fresh, recently-filed GitHub issues each cycle specifically so an agent can't have been trained on the answers — a defense against the benchmark-gaming that makes older, static tests unreliable. Junie resolved 61.6% of the tasks, with a 72.7% pass@5 (solved within five attempts), and did it at $1.14 per problem — roughly four times cheaper than the next-best agent at $4.91.
+
+The house caveat applies, and JetBrains says it out loud: because SWE-Rebench rotates in new tasks every cycle, rankings move from run to run, so a first-place finish this month isn't a standing crown. But topping the field *and* costing a quarter of the runner-up in the same run is a harder result to wave away than a single cherry-picked score. What's being measured is the "model-harness" — the scaffolding Junie wraps around a frontier model — and on this run it landed competitive with the raw frontier models themselves.
+
+## What "belongs in the IDE" actually buys you
+
+The debugger integration is the headline because a terminal agent structurally can't match it. Junie drives your IDE's actual debugger — launching or joining a run, setting breakpoints, reading runtime state — instead of the log-statement guesswork an agent confined to a shell falls back on. For bug-hunting specifically, inspecting a live program beats reasoning about it from the outside.
+
+The other GA additions target the thing teams actually distrust about agents — that they charge off and build the wrong thing. Plan Mode makes Junie produce a structured plan before it writes any code, with sections for product requirements, technical design, delivery stages, and testing. Crucially the plan is a real, editable file that lives in `.junie/plans`, so you can commit it and let it become living documentation rather than a throwaway chat message; you enter it with `Shift+Tab` and approve before implementation. Project-aware code review walks you through each change and explains the design decision behind it. And async runs let a long task start on your laptop and be checked from your phone. Junie isn't IDE-locked, either: one engine drives the IDE chat, a dedicated tool window, and a command-line version (over a shared protocol JetBrains calls ACP) that also runs in CI/CD — the same "one agent, many front-ends" consolidation showing up elsewhere, like Devin Desktop's [agent switchboard](/articles/windsurf-devin-desktop-cascade-migration).
+
+## The catch: credits
+
+Junie ships on JetBrains' existing AI plans — AI Pro at $100/year (10 monthly credits) and AI Ultimate at $300/year (35 monthly credits) — using Claude by default, with the option to bring your own Anthropic, OpenAI, or Google key, or point it at a local model.
+
+The number that doesn't show up in the benchmark cost is how fast agentic work drains those credits. A heavy debugging session can burn 1–3 credits per task, and users on JetBrains' own forums report exhausting a month's worth of Ultimate credits in a single day on a large project. That's the honest counterweight to "$1.14 per problem": benchmark tasks are small and bounded, and a real debugging session on a real codebase is neither. The per-problem figure is a floor, not a forecast.
+
+## Where it fits
+
+If you already work in a JetBrains IDE, Junie is now the path of least resistance, and the real-debugger integration is a genuine edge for the specific job of tracking down bugs. If you live in the terminal or another editor, this isn't a reason to switch IDEs — [Claude Code](/articles/antigravity-2-vs-claude-code-vs-codex) and Codex still own that surface, and Junie's own CLI is the newer, less-proven half of the product. Whichever you use, turn Plan Mode on and actually read the plan: the approve-before-code gate is where the IDE-native model earns its keep, catching a wrong direction before it becomes 300 lines of the wrong code. And keep an eye on the credit meter on debugging-heavy days — if you run agents hard, a bring-your-own-key setup may cost less than the included allotment.
