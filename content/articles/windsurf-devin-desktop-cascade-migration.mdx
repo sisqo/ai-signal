@@ -1,0 +1,48 @@
+---
+title: "Cascade Is Dead: What Windsurf Users Have to Do Now"
+slug: "windsurf-devin-desktop-cascade-migration"
+dek: "Windsurf quietly became Devin Desktop, and on July 1 the on-machine agent it ran for two years went dark — a zero-effort switch if you code by hand, a broken build for anyone whose CI still calls Cascade by name."
+date: "2026-07-20"
+tag: "Tools"
+---
+
+On July 1, 2026, Cascade stopped working — no deprecation warning, no grace period, no soft landing. For most of the people who used it, that sentence will mean nothing, because the agent had already been swapped out under a new name a month earlier. For anyone whose automated pipeline still calls `cascade` by name, it meant a passing build on June 30 turned into a `command not found` on July 1.
+
+Cascade was the on-machine coding agent built into Windsurf, the AI editor. On June 2, its owner — [Cognition](https://cognition.ai), the startup behind the autonomous Devin agent, which absorbed Windsurf in 2025 — pushed an over-the-air update that [renamed Windsurf to Devin Desktop](https://www.digitalapplied.com/blog/windsurf-becomes-devin-desktop-ide-migration-2026) and replaced Cascade with a rewritten agent called Devin Local. If you write code in the editor by hand, the switch was engineered to be invisible: plans, settings, keybindings, extensions, and MCP connections all carried over on their own. The disruption is aimed squarely at one group — teams that wired Cascade into scripts and continuous-integration jobs (CI, the automated build-and-test runs that fire on every commit).
+
+## What changed, and what didn't
+
+For interactive use, the migration is genuinely zero-effort — which is exactly the trap. Because opening the editor still works perfectly, it's easy to assume the whole switch was seamless and never check the automation until it fails. It fails hard: any programmatic call to Cascade now errors out with nothing to catch beforehand. As the developers who [documented the breakage](https://byteiota.com/cascade-eol-july-1-2026-devin-local-migration/) put it, a green build on June 30 can be a broken build on July 1. Interactive editing is untouched; CI pipelines, Makefiles, shell scripts, and automated review workflows that name Cascade are not.
+
+## Devin Local: a Rust rewrite with parallel subagents
+
+Cascade was written in Python and ran as a single sequential agent — one task at a time — for about two years. Devin Local is a complete rewrite in Rust, and it changes the shape of the thing, not just its speed. Cognition claims up to 30% better token efficiency (its own example shows a refactoring task dropping from roughly 24,000 tokens to 18,000 — tokens being the billable units of text a model reads and writes). No independent benchmark has confirmed that figure yet, so treat it as a vendor claim, not a line you can put in a budget.
+
+The substantive new capability is subagents: Devin Local can spawn parallel sub-sessions that split separable work — say, a database schema change and the test updates that go with it — and report back to a main agent, mirroring the multi-agent design Cognition already ships in Devin Cloud. There are two modes: foreground subagents pause for your approval, and background subagents run in parallel but are restricted to pre-approved tools. Cascade could do none of this.
+
+## The migration, in commands
+
+The first job is finding your exposure. One grep tells you whether this affects you at all:
+
+```bash
+# Find every place your repo still names Cascade
+grep -ri "cascade" .github/ .circleci/ Makefile scripts/
+```
+
+Anything that turns up gets repointed. Interactive and local calls move to `devin acp`; for headless CI runs, Cognition points teams at the open-source `acpx` runner:
+
+```bash
+acpx --agent './bin/dev-acp --profile ci' 'describe your task'
+```
+
+Project rules stored in `.windsurfrules` migrate automatically, or you can move them to `.devin/rules/` by hand if you'd rather do it explicitly.
+
+## The bigger move: the IDE as an agent switchboard
+
+The rename is the least interesting part. Devin Desktop's default surface is no longer an editor with an agent attached — it's an "Agent Command Center," a Kanban board for dispatching and tracking local and cloud agents, with the traditional editor one click away. The same agent now runs across four surfaces: Devin Desktop, Devin Cloud, a Devin CLI, and Devin Review.
+
+The load-bearing detail is that Devin Desktop ships supporting the [open Agent Client Protocol](https://aicoderscope.com/blog/windsurf-devin-desktop-rebrand-acp-2026/) (ACP, an Apache-licensed standard for wiring any agent into any editor). That means rival agents — Codex, Claude's agent, Gemini CLI, OpenCode, JetBrains' Junie — run as first-class citizens inside it. It's the same "the workspace, not the model, is the product" bet [Augment Code made with Intent](/articles/augment-code-intent-agent-orchestration), and it quietly hedges Cognition against being chained to its own coding model.
+
+## What to do before your next deploy
+
+The deadline has already passed, so run the grep today rather than at the next incident. Don't trust "it still opens fine" — interactive success is precisely what hides a CI failure. If you'd rather not follow Cognition's roadmap at all, a forced migration is a natural exit point: Cascade users are also [moving to Cursor or Claude Code](https://andrew.ooo/answers/cascade-eol-july-1-2026-migrate-devin-local-cursor-claude-code/), and because Devin Desktop speaks ACP, you can even keep it as the shell while running [Claude Code](/articles/antigravity-2-vs-claude-code-vs-codex) or Codex inside it. And treat the 30% token-efficiency claim as a hypothesis until it shows up on your own bill.
