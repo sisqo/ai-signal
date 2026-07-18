@@ -1,0 +1,38 @@
+---
+title: "The Month AI Coding Agents Became the Supply Chain Attack"
+slug: "ai-coding-agents-supply-chain-attack"
+dek: "Three separate 2026 findings — the GuardFall shell-injection class, a poisoned Claude Code GitHub Action, and hallucinated packages installed on autopilot — point at the same thing: the agent with a shell is the new attack surface."
+date: "2026-07-21"
+tag: "Tools"
+---
+
+On June 30, an [Adversa AI](https://adversa.ai/blog/opensource-ai-coding-agents-shell-injection-vulnerability/) researcher showed that 10 of the 11 most popular open-source AI coding agents — tools with roughly 548,000 GitHub stars between them — could be tricked into running destructive commands using shell tricks that have been in security textbooks for decades. Only one of the eleven was built to stop it.
+
+That finding, nicknamed GuardFall, is one of three ways 2026 has quietly nailed down the same uncomfortable fact: an AI coding agent is not just a thing that writes code. It's a program with a shell (the command-line interpreter that runs real programs on your machine), a network connection, and — more and more — permission to act without pausing to ask. That makes it two things at once to an attacker: a target worth breaking into, and a delivery truck for getting malicious code onto machines and into other people's projects. The convenience that makes an agent useful *is* the attack surface.
+
+## The agent as a target that will run anything: GuardFall
+
+GuardFall isn't a bug in one tool. It's a design pattern shared across the field: the agent inspects the raw text of a command against a blocklist, decides it looks safe, and hands it to Bash — which then rewrites that text through expansion, substitution, and quote handling into something the filter never saw. Decades-old evasion techniques (quoted token splitting, `$IFS` expansion, command substitution, encoded pipelines) sail straight through. Because the failure is architectural, adding more blocklist patterns doesn't fix it; the whole "agent to shell, gated by string matching" convention fails structurally.
+
+The affected list reads like a directory of popular agents — Aider, Cline, Goose, OpenHands, SWE-agent, opencode, and NousResearch's Hermes among them. Hermes is worth flagging: an [earlier framework weighed it against OpenClaw](/articles/openclaw-vs-hermes-decision-framework) partly on its CVE count (Common Vulnerabilities and Exposures, the industry's numbered catalog of known flaws). GuardFall is the reminder that the tracked CVE count was never the whole risk. The one agent that held up, Continue, did so by validating what actually gets executed rather than trusting the string.
+
+## The agent's CI plumbing as a supply-chain on-ramp
+
+The second vector is the automation wired around agents. Researcher RyotaK of [GMO Flatt Security](https://flatt.tech/research/posts/poisoning-claude-code-one-github-issue-to-break-the-supply-chain/) found a flaw in the official Claude Code GitHub Action — a script that runs automatically inside a repository when something happens, like a new issue or pull request. Its permission check trusted any actor whose name ended in `[bot]`, regardless of that account's real permissions. That let an attacker feed untrusted input — the text of a malicious GitHub issue — into a workflow that by default held read and write access to code, issues, pull requests, and workflow files.
+
+The supply-chain part is what makes it serious rather than merely bad: the Claude Code Action's own repository used the vulnerable workflow, so compromising it could propagate downstream to [every project that depends on the action](https://thehackernews.com/2026/06/claude-code-github-action-flaw-let-one.html), Anthropic's included. Anthropic patched it in version 1.0.94, and the researcher rated it 7.8 on CVSS's 0–10 severity scale — "high." And this is not hypothetical: back in February, a prompt-injected issue title (instructions hidden in data the agent reads, so it treats them as commands) against Cline's triage workflow let attackers steal an `npm` publishing token and push an unauthorized `cline@2.3.0` to everyone who updated.
+
+## The agent as an unwitting courier: slopsquatting
+
+The third vector needs no vulnerability at all — just the model's own confidence. Language models reliably invent package names that don't exist, and they invent the *same* fake names repeatedly: when researchers re-ran identical prompts ten times, [43% of hallucinated package names showed up on every single run](https://www.techtimes.com/articles/319457/20260701/ai-coding-agents-skip-package-verification-attackers-are-exploiting-it.htm). An attacker just runs a popular model a few dozen times, notes the names that keep recurring, and registers them first. This is "slopsquatting," and it works because a coding agent with install rights takes a hallucinated dependency straight from generation to execution with no human in between.
+
+It's already happening. In January, a researcher registered the npm name `react-codeshift` — a package that never existed, which a model had conjured by [conflating two real tools](https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages), `jscodeshift` and `react-codemod`. Before he could defensively claim it, the fake name had already spread to 237 GitHub repositories through AI-generated agent skill files, and autonomous agents began attempting to download it immediately.
+
+## The common root, and what to actually do
+
+One thread runs through all three: excessive agency — an agent operating with more filesystem, network, and account permission than its task needs — is the most-cited root cause behind 2026's agent incidents. It's the same failure mode that let [Amazon's coding agent rebuild a production environment](/articles/amazon-kiro-deleted-production-blame) uninvited. If you run agents on real code, four moves cut most of this exposure:
+
+- **Shrink the blast radius.** Give agents and their CI workflows least-privilege, narrowly scoped tokens — never the default "read and write everything." A poisoned issue can only do what the workflow's permissions allow.
+- **Never let an agent install packages unsupervised.** Enforce lockfile pinning and package-hash verification in CI, and gate new dependencies behind an allowlist or a human. That closes the slopsquatting door outright.
+- **Assume command filters can be bypassed.** GuardFall says string-matching blocklists are not a control. Prefer agents that sandbox the shell or validate at execution, and keep auto-mode out of repositories you don't fully trust.
+- **Treat repository content as untrusted input.** Issues, PR descriptions, and file contents are where prompt injection lives. Any agent that reads them is reading potential instructions from a stranger.
