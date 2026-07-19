@@ -1,0 +1,48 @@
+---
+title: "Fable 5 Rejoins Subscriptions July 20 — Just Not the Plan Most People Pay For"
+slug: "claude-fable-5-max-team-premium-subscription-return"
+dek: "Anthropic finally set a date to fold its best model back into Max and Team Premium at no extra charge. Pro subscribers get left out with a one-time $100 credit, and even the included plans see the cap land at half of a limit that shrinks a third the same day."
+date: "2026-07-19"
+tag: "Tools"
+---
+
+The date Anthropic wouldn't commit to now exists. Beginning July 20, 2026, [Claude Fable 5](/articles/claude-fable-5-mythos-5-glasswing) — the company's most capable and most expensive model — goes back to being an included part of two paid plans, Max and Team Premium, with no per-token charge stacked on top. "Beginning July 20, Claude Fable 5 will be included in all Max and Team Premium plans, at 50% of limits," [the company posted](https://twitter.com/claudeai/status/2078302415804379218). That closes the question left hanging when Fable 5 [came off subscriptions on July 7](/articles/claude-fable-5-leaves-subscriptions-usage-credits): Anthropic promised then to restore it "as soon as capacity allows," with no date attached. The date is here — and so is the fine print.
+
+For anyone who doesn't track token meters, the plain version: Anthropic's flagship AI spent two weeks as a metered add-on — you paid by the word, on top of a flat monthly fee — and starting July 20 it's bundled back into the subscription for people on the higher-priced Max and Team plans. But two details decide whether that's a win or a step backward, and for the cheapest paid plan it's the latter.
+
+## Included, but at half of a smaller number
+
+Two things happen on July 20, not one. First, Fable 5 usage on Max and Team Premium is capped at 50% of each plan's allowance — the model can only draw down half of your weekly usage before the plan pushes you back to cheaper models. That's the same 50% ceiling as the original six-day free window in early July.
+
+Second, the underlying limits themselves drop by roughly a third on the same day, according to [The Decoder](https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/) — the end of a temporary capacity bonus, applied plan-wide rather than just to Fable. So the two changes compound: half of a limit that is now about two-thirds its old size works out to roughly a third of the ceiling a Max subscriber had a week earlier. And because the cut is plan-wide, it trims headroom for every model on the plan, not only Fable — Opus 4.8 runs are working against a lower ceiling too.
+
+Usage limits here are measured in tokens — the chunks of text, each roughly a short word or piece of one, that a model reads (input) and writes (output). Fable 5 bills at [$10 per million input tokens and $50 per million output tokens](/articles/claude-fable-5-mythos-5-glasswing), double Opus 4.8's $5 and $25. That price gap is the whole reason capacity is scarce: every Fable 5 session costs Anthropic more to serve, so the company is rationing it rather than eating unlimited demand at a flat subscription rate.
+
+## Pro is the plan that loses
+
+The plan left out is the one the most people are on. Claude Pro — the $20-a-month individual tier — and Team Standard seats do **not** get Fable 5 included on July 20. They keep access only through usage credits: Anthropic's name for prepaid, metered per-token billing layered onto a subscription, the same way the API has always charged. To soften it, Anthropic is handing affected subscribers a one-time $100 credit, per The Decoder, Simon Willison, and [Dawn](https://www.dawn.com/news/2016483).
+
+That $100 is a countdown, not a plan. At Fable 5's $50-per-million rate for output, it buys roughly two million output tokens — enough for a burst of heavy agentic coding, not a habit. The Decoder's blunt read: "That $100 probably won't last long."
+
+For a Pro subscriber this is a reversal of a reversal. Fable 5 was included at the [June 9 launch](/articles/claude-fable-5-mythos-5-glasswing) and again during the July 1–7 window, both times up to the same 50% cap. The July 20 restoration hands that included status to Max and Team Premium and quietly leaves Pro behind — a downgrade from where a Pro user stood at the start of the month, dressed up as the model "returning to subscriptions."
+
+| Plan | Fable 5 from July 20 | How it's billed |
+|---|---|---|
+| Free | Not included | No access |
+| Pro ($20/mo) | Not included | Usage credits only, plus a one-time $100 credit |
+| Max | Included, up to 50% of weekly limit | Flat subscription; weekly limit itself drops ~a third |
+| Team — Standard seats | Not included | Usage credits only, plus a one-time $100 credit |
+| Team — Premium seats | Included, up to 50% of weekly limit | Flat subscription; weekly limit itself drops ~a third |
+| API / consumption billing | Always metered | $10 per million in, $50 per million out |
+
+## Why Anthropic drew the line here
+
+Anthropic's own framing stays what it was on July 7: this is capacity, not pricing. The company acknowledged on X that Fable demand "has been hard to manage and frustrating for users" and said it is "continuing to invest in more capacity," per The Decoder's account of the announcement — a single-source quote worth reading as the company's spin rather than an audited fact.
+
+The outside read is less charitable. Both [Simon Willison](https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/) and The Decoder tie the decision to keep Fable in subscriptions *at all* — instead of pushing everyone to metered API pricing, which was the trajectory after July 7 — to competitive pressure: OpenAI's [GPT-5.6 Sol](/articles/gpt-5-6-government-preview) at the top of the coding benchmarks, and aggressively cheap Chinese models underneath. On that read, the July 20 move is less a capacity milestone than the least Anthropic could do to keep flat-rate subscribers from defecting, while still steering the heaviest users toward paying by the token.
+
+## What to check before July 20
+
+If you're on Max or Team Premium, Fable 5 is included again with no credit setup — but treat the 50% cap as a budget, not a background detail. Opus 4.8 stays un-metered on the plan (its ceiling drops with the plan-wide cut, but you're not paying per token for it) at half of Fable 5's rate, so keep it as the default and spend the Fable half-allowance on the long-horizon agentic runs where [its 11-point lead on SWE-Bench Pro](/articles/claude-fable-5-mythos-5-glasswing) — Anthropic's own benchmark that scores a model's fixes against real, already-resolved GitHub issues — actually compounds across many steps.
+
+If you're on Pro or Team Standard, decide now whether Fable 5 is worth stepping up to Max, or whether Opus 4.8 — included, capable, half the price — covers what you do. The $100 credit will carry a few heavy sessions and then quietly run out; if you turn credits on, watch the meter rather than discovering the bill later. And Team admins should note the split is by seat type, not org: only Premium seats (the $125-a-month tier that already bundles Claude Code) get included Fable 5 on July 20 — Standard seats need usage credits enabled, or they get nothing past the one-time $100.
