@@ -37,8 +37,8 @@ export function generateBarChart({ items, unit = '', maxValue }) {
       const barY = centerY - barHeight / 2
       const barWidth = Math.max(item.value * scale, 2)
       return `
-    <text x="0" y="${centerY}" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-ink)">${escapeXml(item.label)}</text>
-    <rect x="${labelWidth}" y="${barY}" width="${barWidth}" height="${barHeight}" rx="2" fill="var(--color-primary)" />
+    <text x="0" y="${centerY}" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-fg)">${escapeXml(item.label)}</text>
+    <rect x="${labelWidth}" y="${barY}" width="${barWidth}" height="${barHeight}" rx="2" fill="var(--color-accent)" />
     <text x="${labelWidth + barWidth + 10}" y="${centerY}" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">${escapeXml(item.value)}${escapeXml(unit)}</text>`
     })
     .join('')

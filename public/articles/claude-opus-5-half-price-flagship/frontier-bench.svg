@@ -1,0 +1,12 @@
+<svg viewBox="0 0 680 156" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <line x1="260" y1="0" x2="260" y2="156" stroke="var(--color-surface)" stroke-width="1" />
+    <text x="0" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-fg)">Claude Opus 5</text>
+    <rect x="260" y="24" width="369.99999999999994" height="20" rx="2" fill="var(--color-accent)" />
+    <text x="640" y="34" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">43.3%</text>
+    <text x="0" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-fg)">Claude Fable 5</text>
+    <rect x="260" y="68" width="287.96766743648965" height="20" rx="2" fill="var(--color-accent)" />
+    <text x="557.9676674364896" y="78" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">33.7%</text>
+    <text x="0" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-fg)">Claude Opus 4.8</text>
+    <rect x="260" y="112" width="159.7921478060046" height="20" rx="2" fill="var(--color-accent)" />
+    <text x="429.7921478060046" y="122" dy="0.35em" font-family="var(--font-jetbrains-mono, monospace)" font-size="13" fill="var(--color-muted)">18.7%</text>
+</svg>
