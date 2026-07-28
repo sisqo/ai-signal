@@ -1,0 +1,61 @@
+---
+title: "MCP Is Deleting the Handshake Every Server Opens With"
+slug: "mcp-stateless-spec-2026-07-28"
+dek: "The spec dated July 28 drops protocol-level sessions entirely and starts a twelve-month countdown on Roots, Sampling, and Logging — the largest migration server authors have faced since the standard launched."
+date: "2026-07-28"
+tag: "Tools"
+---
+
+The Model Context Protocol specification dated today removes the two-message handshake that every MCP server has opened with since the standard's first release in November 2024. MCP is the open standard for connecting AI assistants to outside tools and data — the reason Claude can read your Jira board or Cursor can query your database — and Anthropic [handed it to the Linux Foundation](https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/) on December 9, 2025, with more than 10,000 active public servers already running and adoption across ChatGPT, Cursor, Gemini, Microsoft Copilot, and VS Code. This is the first revision that breaks them.
+
+What's being deleted is the *session*: the protocol's built-in memory that a particular client and a particular server are partway through a conversation. Under the new spec every request stands on its own, carrying its own identity and capabilities. A developer running a single MCP server locally will notice almost nothing. A team running one behind a load balancer — the traffic cop that spreads incoming requests across several copies of a server — gets the single most awkward part of deploying MCP in production removed, at the cost of breaking the code they wrote to work around it.
+
+## What the session was actually doing
+
+Every MCP connection used to start the same way: the client sent `initialize`, the server replied with its capabilities, the client sent `initialized`, and the server issued an `Mcp-Session-Id` header that had to accompany every subsequent request — all of it carried over JSON-RPC, the minimal message format MCP uses to wrap remote function calls. That header pinned the client to one specific server process. Scaling horizontally — running many copies of a server — then required either sticky routing (forcing every request from one client back to the same copy) or a shared session store that all copies could read. The protocol's own [roadmap](https://modelcontextprotocol.io/development/roadmap) had already conceded the point: "running it at scale has revealed gaps around horizontal scaling, stateless operation, and middleware patterns," with a next-generation transport meant to "behave correctly behind load balancers and proxies."
+
+The [release candidate announcement](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/), published May 21, describes the payoff directly: "any MCP request can land on any server instance, and the sticky routing and shared session stores that horizontal deployments needed before are no longer required at the protocol layer."
+
+The handshake's job gets redistributed. Protocol version, client info, and client capabilities now ride in a `_meta` object on every single request (SEP-2575 and SEP-2567 — an SEP, or Specification Enhancement Proposal, is MCP's equivalent of an RFC). Two new headers, `Mcp-Method` and `Mcp-Name`, let gateways route a request without parsing its JSON body (SEP-2243). An optional `server/discover` call replaces the handshake for clients that want to ask what a server supports before calling it.
+
+State itself doesn't vanish — it just stops hiding in transport metadata and becomes something the model can see. The pattern the spec pushes toward is explicit handles: a tool call returns an identifier like `basket_id`, and later calls take it as an argument. As one server author [put it](https://lukeocodes.dev/mcp-goes-stateless), "the changes are good, the migration is real work, and the explicit-handle pattern they're pushing you towards is one you should probably have been using anyway."
+
+## The breaking-change list
+
+| What changes | Who it hits |
+| --- | --- |
+| `initialize`/`initialized` handshake removed | Every server; hand-rolled transports hardest |
+| `Mcp-Session-Id` header removed | Anything storing per-session state |
+| `Mcp-Method` and `Mcp-Name` headers now required on Streamable HTTP POSTs | Servers and gateways |
+| `tasks/list` removed entirely | Clients enumerating long-running work |
+| Missing-resource error moves from `-32002` to `-32602` (SEP-2164) | Clients matching literal error codes |
+| Tool schemas must be valid JSON Schema 2020-12 (SEP-2106) | Servers with loose or hand-written schemas |
+| HTTP+SSE transport formally deprecated | Anyone still on the pre-Streamable transport |
+
+`tasks/list` is the clearest illustration of why this is a rewrite rather than a tidy-up: without sessions, the server has no safe way to answer the question "whose tasks?" The method didn't get replaced, it got deleted, because the concept it depended on is gone.
+
+Server authors carry most of the cost here. Client and host integrators can negotiate both the old and new versions during the transition and control their own compatibility window; servers have to remove handshakes, externalize per-session state, support header-based routing, validate every tool schema, and harden their authorization flows. Anyone on an official SDK gets most of that for free: [betas for Python, TypeScript, Go, and C#](https://blog.modelcontextprotocol.io/posts/sdk-betas-2026-07-28/) have been out since June 29, with the maintainers' caveat to pin an exact version because public APIs may still shift before stable. Anyone who hand-rolled a transport layer is looking at real work.
+
+## Three features start a twelve-month clock
+
+Roots, Sampling, and Logging are now marked Deprecated under a new feature-lifecycle policy (SEP-2577). They keep working — deprecation guarantees at least twelve months before a feature is even eligible for removal, or ninety days under an expedited exception — but each ships with a migration path away from the protocol:
+
+- **Roots** (server-initiated questions about which directories it may touch) → pass paths as tool parameters, resource URIs, or plain server configuration.
+- **Sampling** (a server asking the client's model to generate something for it) → call an LLM provider's API directly.
+- **Logging** → write to stderr or emit OpenTelemetry, the vendor-neutral standard for traces and metrics.
+
+That's a deliberate narrowing of what the protocol claims to do, and it lands close to the tradeoff in [our API vs. MCP framework](/articles/api-vs-mcp-decision-framework): every additional layer routed through MCP costs tokens and indirection for capability a deterministic system may not need. Three of the features that made MCP feel like an application platform rather than a tool-calling wire format are now on their way out.
+
+## Extensions become the release valve
+
+Rather than absorbing every new idea into the core, the spec adds a formal Extensions framework (SEP-2133): reverse-DNS identifiers, negotiation through capability maps, independent versioning, and separate repositories. Two extensions ship as official on day one.
+
+**MCP Apps** (SEP-1865) graduates from experimental and lets a server ship interactive HTML that the host renders in a sandboxed iframe, with UI actions flowing back over the same JSON-RPC connection. **Tasks** (SEP-2663) moves out of the experimental core and gets rebuilt around the stateless model: a tool call answers with a task handle, and the client drives it with `tasks/get`, `tasks/update`, and `tasks/cancel`.
+
+Six more SEPs pull authorization toward mainstream practice in OAuth 2.1 and OpenID Connect — the standards that handle "log in with your existing account" for most of the web — including mandatory validation of the `iss` parameter per RFC 9207 to block mix-up attacks, where a malicious authorization server tricks a client into sending a login code to the wrong place.
+
+## What to do this week
+
+Check whether you actually ship a server or just consume one — most people building with MCP are clients, and clients can sit on `2025-11-25` while the ecosystem moves. If you do ship a server, the order that matters is: find every place you stored something keyed by session ID and give it an explicit handle instead; run your tool schemas through a JSON Schema 2020-12 validator; grep for `-32002`; and confirm your SDK's release milestone before writing migration code by hand.
+
+One caveat on timing. The specification carries today's date and the release candidate has been locked since May 21, but at the time of writing the published spec had not flipped over: `modelcontextprotocol.io/specification/latest` still redirected to `2025-11-25`, which still lists "Stateful connections" among the protocol's key details, and `/specification/2026-07-28` returned a 404. Nothing breaks the moment a date passes anyway — a client speaking `2026-07-28` falls back to the old handshake when it reaches an older server, and the ten-week window since the RC existed precisely so SDK maintainers could validate against real workloads first. Treat the date as the day the clock starts, not the day your server stops working.
