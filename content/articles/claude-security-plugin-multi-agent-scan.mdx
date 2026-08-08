@@ -1,0 +1,81 @@
+---
+title: "Claude Code Now Hunts Its Own Security Bugs. It Refuses to Fix Them for You."
+slug: "claude-security-plugin-multi-agent-scan"
+dek: "Anthropic's new security plugin scans your whole project, then makes three agents vote on every bug it found. Not one patch gets applied without you."
+date: "2026-08-10"
+tag: "Tools"
+---
+
+Anthropic released the [Claude Security plugin](https://github.com/anthropics/claude-plugins-official) for Claude Code on July 22. It scans your whole project for security bugs. It writes the fixes. Then it stops and waits for you to apply them by hand.
+
+That last part is a design choice, not a missing feature. The tool never applies its own patches. A patch is a file that describes a change to your code. You read it, then you run `git apply` yourself.
+
+The reason is the interesting part. Anthropic built this tool as if it does not trust its own output. Three separate agents have to agree before a bug even appears in your report.
+
+## How to install it
+
+You add it from inside a Claude Code session:
+
+```
+/plugin install claude-security@claude-plugins-official
+/reload-plugins
+```
+
+You need a paid Claude Code plan, Claude Code version 2.1.154 or newer, Git, and Python 3.9.6 or newer. The scan runs on your machine and spends tokens from your plan. A token is a small piece of text. It is about three quarters of a word. AI usage gets counted in tokens. Anthropic warns that a deep scan may use a lot of them.
+
+## Six phases, not one prompt
+
+The scan is not a single question to a model. It runs in six steps.
+
+First, **inventory**: the tool splits your project into parts. Second, **threat model**: for each part it lists the places where data enters from outside. Third, **research**: separate agents study each part. Fourth, **sweep**: it fills the gaps nothing covered yet. Fifth, **panel**: three verifiers judge every finding. Sixth, **adversarial**: an optional extra pass that re-checks the weak cases at higher effort.
+
+The research step looks at four fixed kinds of bug:
+
+| Category | What it means in plain terms |
+|---|---|
+| Injection and input | Someone sends bad data and your program runs it as a command |
+| Auth and access | A user reaches something they should not be allowed to reach |
+| Memory and unsafe | The program reads or writes memory it does not own |
+| Crypto and secrets | Weak encryption, or a password or key left in the code |
+
+The memory check is skipped for languages that manage memory for you, like Python, Go, and JavaScript. That saves time on a project where the whole category cannot happen.
+
+## Three agents have to agree
+
+This is the part worth copying, whatever tool you use.
+
+A finding does not reach your report because one model said so. Three independent verifiers vote on it. Each one looks through a different lens. One asks whether an attacker can actually reach the code. One asks what the damage would be. One asks whether some other defense already blocks it.
+
+Two of the three have to agree. If all three agree, the report marks the finding "high" confidence. If only two agree, the confidence is capped at "medium."
+
+One more detail matters more than it looks. The vote count is calculated in Python code, not written by the model. The model votes. The code counts. The model cannot change the count.
+
+Anthropic is answering a real problem here. AI security scanners are famous for confident nonsense. The volume of findings is the failure, not the fix. Every wrong finding costs a developer real time. And [reviewing AI output already eats more hours per week than writing code does](/articles/ai-coding-review-time-exceeds-writing-time). A scanner that reports too many uncertain findings makes that worse.
+
+## The patches are checked too
+
+When you pick a finding, the plugin drafts a patch in a separate throwaway copy of your project. It never touches your files. Then it checks that patch against three questions. Does it fix the actual bug? Does it add a new bug? Does it change behavior that should stay the same?
+
+Only then do you get the file. One patch per pull request, applied by you.
+
+That workflow is slower than "let the agent fix it." It is also the safer choice. An agent with write access to your project is an attack surface. The industry [spent this year learning that the hard way](/articles/ai-coding-agents-supply-chain-attack).
+
+## What it will not do
+
+Anthropic is unusually direct about the limits. The documentation says scans are nondeterministic. Run the same scan twice and you may get different results. It also says the plugin does not replace static analysis, dependency scanning, or human code review. Static analysis is a traditional tool that checks code without running it. Dependency scanning checks the outside libraries you pull in.
+
+Anthropic calls the plugin one layer of defense, not a complete solution. Anthropic publishes no false-positive rate. So you cannot yet know how often it is wrong.
+
+There is also no sandbox built in. A sandbox is a locked box that stops code from touching the rest of your machine. If you scan a codebase you do not trust, you have to add that yourself.
+
+This is the second security plugin this year. The free security-guidance plugin arrived on May 27 and works differently. It watches Claude while it writes, checking file edits and commits as they happen. The new one is a deliberate deep scan of code that already exists, including code no AI wrote.
+
+## What to do about it
+
+**Run it once on your oldest service.** Not the project you started last month. Pick the one nobody has read end to end since 2023. That is where you will find the crypto-and-secrets bugs.
+
+**Read the confidence label before the finding.** A "medium" means one of three verifiers disagreed. Treat it as a question, not a bug report.
+
+**Budget the tokens.** A deep scan on a large project is not cheap. Run it on a Friday, not an hour before a release.
+
+**Keep your existing scanners.** This one is built to sit alongside them, and Anthropic says so in writing. A tool that admits what it cannot do is easier to trust with what it can.
