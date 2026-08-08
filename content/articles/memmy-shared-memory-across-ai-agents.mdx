@@ -1,0 +1,69 @@
+---
+title: "You Explain Your Project to Four AI Agents a Day. Memmy Makes You Do It Once."
+slug: "memmy-shared-memory-across-ai-agents"
+dek: "Memmy is a local memory hub for Claude Code, Codex, OpenClaw and Hermes. It launched July 30 with 612 GitHub stars, and that number is the reason to be careful."
+date: "2026-08-11"
+tag: "Tools"
+---
+
+Most developers now run more than one AI coding agent. Claude Code in the terminal. Codex for a second opinion. Maybe OpenClaw or Hermes for local jobs. Each one starts every session knowing nothing about your project.
+
+So you explain it again. Use Tauri here, not Electron. Never touch the migrations folder. The staging keys live in a vault, not in the repo. You typed all of that yesterday, into a different tool.
+
+[Memmy](https://github.com/MemTensor/memmy-agent) is an attempt to end that. It is one memory store that every agent reads from. It launched on Product Hunt on [July 30](https://www.producthunt.com/products/memmy) and finished second that day.
+
+## What it actually does
+
+Memmy runs on your machine as a small service. It keeps a single store of what it has learned about you and your work. Your preferences, your decisions, your project rules.
+
+Your agents then read that store instead of asking you. Memmy lists support for Claude Code, Codex, Cursor, OpenClaw, Hermes Agent, and OpenCode.
+
+It connects in two ways. It can run as an MCP server, and it also offers an API that looks like OpenAI's. MCP is the standard that lets an AI tool call outside services in one agreed format. An earlier piece here covered [when to use MCP instead of a plain API](/articles/api-vs-mcp-decision-framework). Because Memmy speaks both, most agents can use it with no custom code.
+
+You can run it three ways. There is a desktop app. There is a `memmy` command line tool. And there is a second command, `memmy-memory`, that other agents call directly.
+
+## Where your memory lives
+
+This is the part that makes it worth trying. Memmy is local first.
+
+The memory sits in a folder on your own computer, at `~/.memmy/workspace`. The store itself is a SQLite file. SQLite is a database that lives in one ordinary file, with no server to run. Yours sits at `~/.memmy/memory-service/memory.sqlite`.
+
+Nothing has to leave your machine for the memory to work. The project is MIT licensed, which means you can read every line and change it. It is built by a group called MemTensor.
+
+You do still need a model. Memmy ships free trial credits. It also supports bring-your-own-key. So you can point it at a model service you already pay for.
+
+One small design detail deserves credit. When the memory service fails, it reports the error. It does not return a made-up memory instead. That sounds obvious. Most memory layers do not work that way. And a false "you told me to use Postgres" is worse than no memory at all.
+
+## The number you should look at first
+
+Memmy has 612 stars on GitHub. It has 46 commits on its main branch, 63 forks, and a handful of open issues and pull requests.
+
+That is a very young project. Compare that with the agents it supports. [OpenClaw passed 382,000 stars](/articles/openclaw-vs-hermes-decision-framework) before most people had heard of it. Stars are a popularity count, not a quality score. But 46 commits tells you how much code has actually been written and revised.
+
+So treat Memmy as an idea worth testing, not a tool to build a team workflow on this month. The idea is clearly right. Cross-agent memory is a real gap and somebody will fill it well. Whether this particular project is the one is not knowable yet.
+
+## One memory means one target
+
+There is a second reason for care, and it has nothing to do with maturity.
+
+A shared memory store is a single place holding everything your agents know about your work. Project structure. Internal decisions. Whatever you pasted into a chat six weeks ago and forgot.
+
+That concentration is the whole value. It is also the whole risk. An attacker who reaches that one file learns a lot. More than any single agent session would give them. The industry [learned this about coding agents all year](/articles/ai-coding-agents-supply-chain-attack). The convenient thing and the dangerous thing are the same thing.
+
+Local storage helps here. Your memory is not sitting in someone else's cloud. But a file on your laptop is still a file. Laptops get stolen. Laptops also get copied to backups you forgot about.
+
+## What memory can and cannot fix
+
+Shared memory does not solve the harder problem underneath it. Models still get worse at using what they know as the context grows. Our earlier piece on [what developers get wrong about AI memory](/articles/context-memory-myths-ai-coding-agents) covered the research. Recall drops sharply, well before a model's advertised limit.
+
+Memmy lets your context move between tools. It does not make a model better at reading a large context. Those are different problems, and only one of them has a tool for it.
+
+## What to do about it
+
+**Try it on one project, not all of them.** Pick something small and not secret. See whether the memory it builds is actually useful, or just a pile of old chat.
+
+**Read what it stored.** The store is a plain SQLite file on your disk. Open it. If you cannot tell why a memory was kept, that memory will not help an agent either.
+
+**Do not put secrets near it.** Keys, tokens, and passwords should never enter a chat. A tool that remembers chats forever raises the cost of that mistake.
+
+**Watch the commit count, not the star count.** Come back in three months. If the project has grown from 46 commits to several hundred and closed its issues, it is real. If it has not, the gap is still open and somebody else will fill it.
