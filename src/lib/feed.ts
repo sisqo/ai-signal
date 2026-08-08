@@ -3,7 +3,7 @@ import { getPublishedArticles } from './content'
 import { SITE_URL } from './site'
 
 const SITE_TITLE = 'AI Signal'
-const SITE_DESCRIPTION = 'Notes on artificial intelligence, for practitioners and the curious alike.'
+const SITE_DESCRIPTION = 'Artificial intelligence, explained in plain English.'
 const AUTHOR = { name: 'SisQo', link: 'https://sisqo.dev' }
 const MAX_ITEMS = 20
 

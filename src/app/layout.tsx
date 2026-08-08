@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     default: 'AI Signal — Notes on artificial intelligence',
     template: '%s — AI Signal',
   },
-  description: 'An editorial-quality blog about artificial intelligence, for practitioners and the curious alike.',
+  description: 'An editorial-quality blog about artificial intelligence, written in plain English for readers everywhere.',
   openGraph: {
     title: 'AI Signal',
-    description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
+    description: 'Artificial intelligence, explained in plain English.',
     type: 'website',
   },
   twitter: {

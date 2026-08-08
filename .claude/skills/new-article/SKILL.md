@@ -44,7 +44,7 @@ Numbered list, five items, each one line: a working title and a half-sentence on
 
 ## Step 3: Write
 
-Voice, structure, length, titling, citation, and tagging rules all live in root `CLAUDE.md`'s **Editorial Guidelines** section — read it before writing and follow it exactly. Don't restate or re-derive those rules here; this skill only adds the mechanical bits below.
+Voice, structure, length, titling, citation, and tagging rules all live in root `CLAUDE.md`'s **Editorial Guidelines** section — read it before writing and follow it exactly. Don't restate or re-derive those rules here; this skill only adds the mechanical bits below. The English level in particular is far simpler than a default first draft will be — write toward it from the start, and Step 3b catches whatever still slipped through.
 
 MDX gotchas (see root `CLAUDE.md` for more):
 - Do **not** start the body with a `#` H1 repeating the title — the page template renders the title from frontmatter separately. Start with the lead paragraph or a `##` subsection.
@@ -58,13 +58,27 @@ MDX gotchas (see root `CLAUDE.md` for more):
 
 This only works for bar charts of data already cited in the article (see `DESIGN.md`'s "Article Body Chart" component). Don't reach for it for decorative or stock photography — that's explicitly out of scope (see `PRODUCT.md`'s anti-references).
 
+## Step 3b: Simplify pass
+
+Before touching frontmatter, re-read the whole draft once against this list and fix what fails. The rules themselves are in root `CLAUDE.md`'s Editorial Guidelines — this is only the checklist for catching where a first draft drifts off them, and a first draft always does. Rewriting sentences here is normal, not a sign the draft was bad.
+
+- **Sentence length.** Find the three longest sentences in the piece. Any over 20 words gets split. Then check the overall rhythm: if most sentences run past ~12 words, the draft is still in the old dense register — rewrite it, don't just trim.
+- **Rare words.** Scan for any word a reader with school-level English wouldn't know, and swap it for a common one.
+- **Idioms and metaphors.** Hunt for figurative language and phrasal verbs. Replace each with a plain verb.
+- **Glosses.** List every acronym, benchmark, product term, and unit that appears. Confirm each one is explained in short plain sentences at its first mention — not compressed into a parenthetical.
+- **Passive voice.** Find every "was/were + past participle" and flip it to active, unless the actor genuinely doesn't matter.
+- **Title and dek.** Read them cold. Would a reader with weak English know what happened and why it matters, without opening the piece?
+- **Stakes.** Does the reader learn the consequence within the first three sentences?
+- **No hollow hooks in the body.** No withheld payoff, no rhetorical questions aimed at the reader, no adjective claiming more than the sources support. (The payoff-promise closer is allowed in the title or dek only.)
+- **Facts intact.** Simplifying rewrites a lot of sentences, and that is exactly where a fact gets bent. Re-check every number, date, name, and link against the research one final time.
+
 ## Step 4: Frontmatter
 
 ```yaml
 ---
 title: "..."
 slug: "kebab-case-slug"
-dek: "One sentence teaser, no filler."
+dek: "One or two short sentences. Plain words. State the stake."
 date: "YYYY-MM-DD"   # today, per current system context — or the --publish date if one was given
 tag: "..."
 ---

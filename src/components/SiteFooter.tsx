@@ -13,7 +13,7 @@ export function SiteFooter() {
             <span className="font-display text-xl font-semibold text-fg">AI Signal</span>
           </Link>
           <p className="mt-4 font-display text-lg leading-snug text-muted">
-            Notes on artificial intelligence, for practitioners and the curious alike.
+            Artificial intelligence, explained in plain English.
           </p>
           <p className="mt-8 font-mono text-xs tracking-[0.14em] text-faint">SUBSCRIBE TO THE SIGNAL</p>
           <SubscribeForm />

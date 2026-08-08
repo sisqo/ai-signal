@@ -16,17 +16,23 @@ export default function AboutPage() {
       </h1>
       <div className="prose prose-lg mt-10 max-w-none dark:prose-invert">
         <p>
-          AI Signal is a running account of what&rsquo;s actually happening in artificial intelligence — new
-          models, the tools built on top of them, and the industry moves that explain why any of it matters —
-          written for people who build with this technology and people who are simply trying to keep up with it.
+          AI Signal is a running account of what is happening in artificial intelligence. New models, the tools
+          built on top of them, and the moves that explain why any of it matters. It is written for people who
+          build with this technology, and for people who are just trying to keep up.
         </p>
         <p>
-          The starting assumption is that both audiences deserve the same thing: pieces that get to the point, use
-          real names and numbers instead of vague hand-waving, and stop once they&rsquo;ve made their case. No
-          manufactured urgency, no unearned hype, no restating a press release with different adjectives.
+          Every piece is written in simple English. Most readers here do not speak English as a first language,
+          so the sentences stay short and every technical term gets explained. The stakes come first, in plain
+          words. Then come the numbers.
         </p>
         <p>
-          AI Signal is written and edited by SisQo. New pieces publish regularly — when there&rsquo;s
+          Direct framing is the house style. Invented drama is not. Every date, price, and name is checked
+          against at least two sources before it appears, and every claim that can be linked is linked. No
+          manufactured urgency, no headline the piece cannot back up, no press release restated with different
+          adjectives.
+        </p>
+        <p>
+          AI Signal is written and edited by SisQo. New pieces publish regularly. They go out when there is
           something worth writing about, not on a fixed schedule for its own sake.
         </p>
         <p>

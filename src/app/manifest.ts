@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'AI Signal',
     short_name: 'AI Signal',
-    description: 'Notes on artificial intelligence, for practitioners and the curious alike.',
+    description: 'Artificial intelligence, explained in plain English.',
     start_url: '/',
     display: 'standalone',
     background_color: '#111214',
