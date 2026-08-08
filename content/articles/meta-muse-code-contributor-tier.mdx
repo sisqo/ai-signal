@@ -1,0 +1,71 @@
+---
+title: "Meta Charges $0.20 Where Anthropic Charges $25. The Price Is Your Code."
+slug: "meta-muse-code-contributor-tier"
+dek: "Meta's new terminal coding agent shipped on August 5. Its cheap tier costs 125 times less than Claude Opus 5, and Meta trains on what you send it."
+date: "2026-08-08"
+tag: "Tools"
+---
+
+Meta released a coding agent called Muse Code on [August 5](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2). It runs in your terminal. The agent itself is not the story. The price is.
+
+Meta sells the model behind it in two tiers. The normal tier costs [$1.25 for a million input tokens and $4.25 for a million output tokens](https://openrouter.ai/meta/muse-spark-1.2). A token is a small piece of text. It is about three quarters of a word. AI companies bill you by the token, so this is the number that decides your monthly bill.
+
+The second tier costs [$0.10 and $0.20](https://aicybr.com/blog/meta-muse-code-muse-spark-1-2-complete-guide). Anthropic charges $5 and $25 for [Claude Opus 5](/articles/claude-opus-5-half-price-flagship). On output tokens, Meta's cheap tier is 125 times cheaper.
+
+That tier is called the contributor tier. To get the price, you let Meta use your data to train its models. Your prompts, your code, your errors. That is the whole trade.
+
+## What Muse Code is
+
+Muse Code is a terminal agent. It runs in a command line window. It does not live inside your editor. You give it a task. It plans the work, writes the code, and checks the result.
+
+It works on macOS and Linux. Windows is planned but not here yet. It is a public beta, so parts of it will change.
+
+The design copies ideas that are now standard in this category. Muse Code splits one job across several agents at once. Each agent works in its own Git worktree. A worktree is a separate working copy of your project. Two agents cannot overwrite each other's files. Mark Zuckerberg described the tool as work that ["fans out to separate sub-agents working in parallel in isolated worktrees"](https://techcrunch.com/2026/08/05/meta-launches-muse-code-an-ai-agent-for-large-code-bases/).
+
+It also keeps an event log. It writes every model call, tool run, and edit to a file on your machine. If the agent crashes, it restarts from that log instead of starting over.
+
+Three built-in commands drive the work. `/plan` writes a plan and waits for your approval. `/grill` attacks that plan and finds the weak parts. `/goal` runs until the job is finished.
+
+None of that is new. [Claude Code](/articles/claude-code-built-in-commands-ranked) and Codex both do parallel agents and approval gates already. Meta is not winning on features.
+
+## The two prices
+
+| Tier | Input per 1M tokens | Output per 1M tokens | Meta trains on your data |
+|---|---|---|---|
+| Muse Spark 1.2 standard | $1.25 | $4.25 | No |
+| Muse Spark 1.2 contributor | $0.10 | $0.20 | Yes |
+| Claude Opus 5 | $5.00 | $25.00 | No |
+
+The standard tier is not a price cut. Meta charged exactly $1.25 and $4.25 [when Muse Spark 1.1 launched in July](/articles/meta-muse-spark-1-1-coding-agentic-model). The contributor tier is the new part, and it is the reason to pay attention.
+
+Cached input drops even further. On the standard tier a cached million costs $0.15. On the contributor tier it costs $0.002, according to published breakdowns of Meta's rate card. A cache stores text the model has already read. You pay less to send that text again. This matters because a coding agent re-sends the same project files on every turn.
+
+Alexandr Wang is Meta's AI chief. His pitch to TechCrunch: the tool "can be an incredibly good option, especially from a cost perspective."
+
+He is right about the cost. The question is what Meta gets back. A coding agent reads your whole repository. That means every file in your project. It sees code you have not shipped. It sees credentials if anyone left one in a config file. On the contributor tier, all of that becomes training material.
+
+## The headline benchmark is Meta's own number
+
+Meta says Muse Spark 1.2 scores 82.9% on [Terminal-Bench 2.1](https://www.tbench.ai/). Terminal-Bench is a test made of real command-line jobs. The model gets a task and a terminal. It has to finish the job on its own. A higher score means more jobs finished.
+
+That 82.9% comes from Meta's own test setup. On the same setup, Meta puts Claude Opus 5 at 86.7%. So Meta's own chart shows Meta losing. Neither score sits on the public leaderboard yet.
+
+There is a reason to wait for that leaderboard. Meta claimed 80.0% for Muse Spark 1.1. Independent testers measured 76.2%, [a gap of 3.8 points](https://kingy.ai/blog/muse-code-muse-spark-1-2-benchmarks-verified/). Apply the same gap to 1.2 and the real number lands near 79%.
+
+Independent results already look different. Vals is a company that tests models under one shared setup. It ranked Muse Spark 1.2 14th out of 50 models on Terminal-Bench 2.1. On the Vals Index, which counts cost as well as skill, the same model ranked 5th. Its cost per test was $0.69, the lowest in the top five.
+
+Read those two rankings together. Muse Spark 1.2 is not the strongest coding model. It is the cheapest one that is still good.
+
+That is a real position. Most teams do not need the strongest model for every task. They need a good model they can run all day. Meta is selling exactly that, and selling it at a price no competitor has matched.
+
+## What to do about it
+
+**If your code is already public, take the contributor tier.** Open-source work has nothing to protect. At $0.10 and $0.20 you can run agents in a loop and barely notice the bill.
+
+**If you work on private code, read your own contract first.** Many companies have a written rule about where source code may go. The contributor tier sends it to Meta for training. One developer should not decide that alone.
+
+**Do not switch tools because of the 82.9% number.** It is Meta's own measurement, from a company that overstated the same benchmark last month. Independent numbers will arrive soon.
+
+**Run one real task and compare the bill.** Pick a job you have already given Claude Code or Codex. Give the same job to Muse Code. Compare the result and the cost side by side. Your own repository is a better test than any leaderboard.
+
+The price is the argument here, and it is a strong one. On the cheap tier, money is not the only thing you pay.
