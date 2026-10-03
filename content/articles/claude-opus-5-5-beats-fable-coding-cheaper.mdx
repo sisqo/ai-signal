@@ -1,0 +1,83 @@
+---
+title: "Claude Opus 5.5 Beats Anthropic's Top Model at Coding. It Costs 60% Less."
+slug: "claude-opus-5-5-beats-fable-coding-cheaper"
+dek: "Opus 5.5 costs $4 per million input tokens. Fable 5.1 costs $10. On Anthropic's own coding tests, the cheaper model wins. One change may break your code: you can no longer turn thinking off."
+date: "2026-10-06"
+tag: "Tools"
+---
+
+On September 22, Anthropic released [Claude Opus 5.5](https://www.anthropic.com/news/claude-opus-5-5). It costs $4 per million input tokens and $20 per million output tokens. That is 20% less than Opus 5. It is also 60% less than Claude Fable 5.1, the model Anthropic sells as its most capable. And on most of Anthropic's own coding tests, Opus 5.5 scores higher than Fable 5.1.
+
+The same day, Claude Code made Opus 5.5 its default Opus model. So if you pick Opus in Claude Code, you already use it.
+
+## What it costs
+
+AI models charge by the token. A token is a small piece of text, about three quarters of an English word. Input tokens are what you send. Output tokens are what the model writes back.
+
+| Model | Input, per million tokens | Output, per million tokens |
+|---|---|---|
+| Claude Opus 5.5 | $4 | $20 |
+| Claude Opus 5 | $5 | $25 |
+| Claude Fable 5.1 | $10 | $50 |
+
+Cached input fell even more. Cached input is text you send again and again, like project files or long instructions. Anthropic stores it, so the next request costs less. On Opus 5.5, cached input costs $0.20 per million tokens. On Opus 5, it cost $0.50. That is 60% less.
+
+Anthropic also says Opus 5.5 uses fewer tokens per task. Together with the lower price, Anthropic says typical work costs 40% less to run than on Opus 5. That is Anthropic's own number. Your own bill is the better test.
+
+There is also a fast mode. It runs about 2.5 times faster. It costs $8 per million input tokens and $40 per million output tokens.
+
+## The coding numbers
+
+Anthropic published scores on several coding tests. Here are three of them:
+
+| Test | Opus 5.5 | Fable 5.1 | Opus 5 |
+|---|---|---|---|
+| Terminal-Bench 4.0 | 66.4% | 55.8% | 52.3% |
+| FrontierCode v1.1 | 54.4% | 50.3% | 48.0% |
+| CursorBench 4.0 | 57.8% | 51.8% | 46.6% |
+
+Terminal-Bench checks how well a model works in a command line. The model has to run commands, read the results, and fix its own mistakes. FrontierCode is a set of long, hard coding tasks. CursorBench is a coding test made by Cursor, the company behind the AI code editor.
+
+Opus 5.5 leads Fable 5.1 on all three. On Terminal-Bench, the lead is more than 10 points.
+
+Two warnings come with these numbers. First, Anthropic ran most tests at the default effort setting. Effort is a setting that controls how long the model thinks before it answers. A higher effort can change the results. Second, these are Anthropic's own tests. An outside group, Artificial Analysis, reportedly measured Opus 5.5 at 59.6% on Terminal-Bench, [according to Kingy AI](https://kingy.ai/blog/claude-opus-5-5-specs-benchmarks-pricing-comparison/). That is lower than Anthropic's 66.4%, but still above Fable 5.1's number.
+
+Opus 5.5 is also not the best model on every coding test. Google's Gemini 4 Argon scored higher on DeepSWE, another coding test. But you cannot use Argon yet, as we explained in [our article on Gemini 4 Argon](/articles/gemini-4-argon-coding-limited-release).
+
+## Faster, and it finds more bugs
+
+Anthropic says Opus 5.5 writes its output more than 30% faster than Opus 5. In one test, it checked a codebase of 200,000 lines in under three hours. Opus 5 needed more than 20 hours for the same job, Anthropic says.
+
+Deloitte, the consulting company, tested Opus 5.5 on code with known bugs. At high effort, Opus 5.5 found 72% of them. Opus 5 found 56%.
+
+Customers quoted by Anthropic tell a similar story. GitHub's chief product officer said that in VS Code, Opus 5.5 "solved more terminal tasks than Opus 5 in less than half the steps." Fewer steps means fewer tokens, and fewer tokens means a smaller bill.
+
+## The change that can break your code
+
+There is one change you need to know about before you switch. On Opus 5.5, you cannot turn thinking off.
+
+Thinking means the model reasons step by step before it writes the answer. Thinking uses tokens too. On older Claude models, you could turn thinking off to save tokens and time. On Opus 5, thinking was already on by default, as we wrote in [our article on Opus 5](/articles/claude-opus-5-half-price-flagship). On Opus 5.5, it is always on.
+
+This matters if your code sets a low limit on output tokens. The `max_tokens` setting caps the thinking and the answer together. So a request with a tight limit can stop in the middle of the answer. You can still control how much the model thinks. Use the effort setting, from `low` to `max`. You just cannot turn thinking off.
+
+## Safety, briefly
+
+Anthropic says Opus 5.5 did better on its behavior checks than any model it has tested. In its tests, Opus 5.5 tried to break out of its limits about 85% less often than Opus 5. Those limits are the rules about what an agent may touch.
+
+Opus 5.5 also has the same safety filter as Fable 5.1. Some requests about cyberattacks or dangerous biology go to an older model, Opus 4.8, instead. Anthropic says it will soon open its Cyber Verification Program to more security teams. That program gives checked security teams fewer limits.
+
+## A cheaper option arrived a week later
+
+On September 28, Anthropic also released [Claude Sonnet 5.5](https://code.claude.com/docs/en/changelog). It costs $2 per million input tokens and $10 per million output tokens. That is half the price of Opus 5.5. Claude Code now uses it as the default Sonnet model. For simple, routine coding work, test Sonnet 5.5 before you pay for Opus.
+
+## What to do now
+
+**Move from Opus 5 to Opus 5.5.** It costs less, and it beat Opus 5 on every coding test in the table above. The model name in the API is `claude-opus-5-5`.
+
+**Check your token limits first.** Look for every place your code sets `max_tokens`. Make sure the limit leaves room for thinking. Otherwise answers may stop in the middle.
+
+**Do not pay for Fable 5.1 for coding by default.** On these coding tests, Opus 5.5 scored higher at 40% of the price. Keep Fable 5.1 only for tasks where you tested it and it clearly does better.
+
+**Use effort to control cost.** Start at the default level. Raise it only for hard tasks. Lower it for simple ones.
+
+**Measure your own bill for one week.** Anthropic says costs fall 40%. Compare one week on Opus 5 with one week on Opus 5.5, on the same kind of work.
