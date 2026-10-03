@@ -1,0 +1,78 @@
+---
+title: "OpenAI Will Now Run Your Coding Agent for You. The Fast Version Costs Six Times More."
+slug: "openai-devday-2026-codex-cloud-agents-api"
+dek: "At DevDay, OpenAI moved Codex into its own cloud and opened its agent system to other apps. A new Ultrafast mode writes 300 tokens a second, at six times the price."
+date: "2026-10-05"
+tag: "Tools"
+---
+
+On September 29, OpenAI held DevDay 2026 in San Francisco. It made more than 20 announcements. Three of them change how you use Codex, OpenAI's coding agent. Codex can now keep working in OpenAI's cloud after you close your laptop. Other apps can now use the same agent system through an API. And a new speed mode makes Codex up to eight times faster, at six times the price.
+
+None of this makes the model smarter. It changes where your agent runs, who pays for the machine, and how long you wait.
+
+## Codex Cloud: the agent keeps working without you
+
+Until now, Codex mostly ran on your own computer. If you closed the laptop, the work stopped.
+
+[Codex Cloud](https://the-decoder.com/openai-expands-codex-and-its-api-at-devday-with-security-scans-a-decisions-api-and-ultrafast/) moves that work to OpenAI's servers. You set up an environment once. An environment is a ready-made workspace. It holds your code repository and the libraries your project needs. It also holds your tools and the rules for the agent.
+
+Then you start a task and leave. The task keeps running in the cloud. You can check it later from your phone or a browser. Your team can also share the same environment, so everyone's agent starts with the same setup.
+
+Codex Cloud is open on the Plus, Pro, Business, Enterprise, Edu, and Healthcare plans, according to [benchlm](https://benchlm.ai/blog/posts/openai-devday-2026). It supports the same tools as local Codex, including plugins and computer use. Computer use means the agent can click and type in normal software, the way a person does.
+
+There is a cost you do not see on the price list. Your code now runs on OpenAI's machines. For many teams this is fine. For a team with strict rules about where code may live, check those rules before you turn it on.
+
+## The Agents API: OpenAI's agent system, inside your app
+
+The second change is for people who build their own tools. It is called the [Agents API](https://www.infoq.com/news/2026/10/openai-devday-2026/).
+
+An agent is more than a model. Around the model there is a program that runs the loop. It sends the task, calls tools, reads the results, and decides the next step. When the conversation gets too long, it shortens the old parts so the model can keep going. People call this program the harness.
+
+Building a good harness is hard work. Until now, every company that wanted an agent had to build its own. The Agents API gives you the harness that Codex uses, as a service. You give it your tools and your task. OpenAI runs the loop, keeps the session alive, and recovers when something fails.
+
+The Agents API now supports computer use too. So an app built on it can work with software that has no API, only a screen. It also supports several agents working together on one task. The Agents API is in public beta. A beta is an early version that may still change.
+
+The trade is simple. You write less code. But your agent's loop now runs on OpenAI's terms, and moving to another model provider later gets harder.
+
+## Ultrafast: 300 tokens a second
+
+Speed is the third change. AI models write text in tokens. A token is a small piece of text, about three quarters of an English word. A coding agent can write thousands of lines for one task. So you often wait a long time.
+
+The new Ultrafast tier writes up to 300 tokens per second. OpenAI says that is up to eight times faster in Codex, and up to six times faster in the API.
+
+The price is six times the normal rate. For GPT-6 Astra, OpenAI's top model, that means:
+
+| GPT-6 Astra | Input, per million tokens | Output, per million tokens |
+|---|---|---|
+| Normal speed | $10 | $50 |
+| Ultrafast | $60 | $300 |
+
+Input tokens are what you send to the model. Output tokens are what it writes back.
+
+Inside ChatGPT and Codex, Ultrafast needs an Enterprise plan or the new Pro 500 plan. Pro 500 costs $500 a month. Ultrafast for GPT-6.1 Sol, OpenAI's cheaper new model, is planned for later.
+
+## The cheaper model next to it
+
+GPT-6.1 Sol also arrived at DevDay. OpenAI built it for coding, computer use, and office work. It costs $2 per million input tokens and $10 per million output tokens. That is one fifth of Astra's normal price. OpenAI calls it close to Astra in quality.
+
+So the choice inside Codex now has three steps. Sol for most work. Astra when the task is hard. Astra Ultrafast when the task is hard and you cannot wait.
+
+## Code review and security scans
+
+Two more Codex features came out the same day. A new review screen in the ChatGPT desktop app shows a pull request's changes, checks, and comments in one place. A pull request is a set of code changes waiting for approval. Codex can also review it first in the cloud, while you do other work. GitHub support is ready now. GitLab support is in preview.
+
+Codex Security Cloud scans your GitHub repositories on a schedule. It checks each new commit, removes duplicate findings, and prepares fixes. You still review every fix before it goes in. Anthropic made the same choice in August, as we wrote in [our article on Claude Code's security plugin](/articles/claude-security-plugin-multi-agent-scan).
+
+Both features aim at the same problem. Developers now spend more time reviewing AI code than writing code, as [one survey we covered in July](/articles/ai-coding-review-time-exceeds-writing-time) found. OpenAI wants Codex to do part of that review too.
+
+## What to do now
+
+**Try Codex Cloud on long tasks first.** Test runs, large refactors, and dependency upgrades are good candidates. These are tasks you would leave running anyway.
+
+**Check where your code is allowed to live.** Codex Cloud runs your repository on OpenAI's servers. Ask your security team before you connect a private company repository.
+
+**Use Sol by default, not Astra.** At one fifth of the price, Sol should be your starting point. Move up to Astra only when Sol fails on a task.
+
+**Do not buy Ultrafast for speed alone.** Six times the price is a lot to pay for waiting less. It makes sense when a person sits and waits for every answer. It makes less sense for a task that runs in the cloud while you sleep.
+
+**Build on the Agents API only if you plan to stay with OpenAI.** It can save you a lot of work. But your agent then depends on OpenAI's harness. If you leave later, you have to build your own harness after all.
