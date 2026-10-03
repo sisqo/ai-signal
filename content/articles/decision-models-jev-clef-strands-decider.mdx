@@ -1,0 +1,79 @@
+---
+title: "A New Kind of AI Model Only Answers Yes or No. Five Companies Released One in Two Weeks."
+slug: "decision-models-jev-clef-strands-decider"
+dek: "Decision models pick from a fixed list of answers instead of writing text. Jev costs $0.042 per million input tokens. Cloudflare, Amazon and Perplexity now give similar models away for free."
+date: "2026-10-07"
+tag: "Tools"
+---
+
+In mid-September, a startup called TypeSafe released [Jev](https://www.marktechpost.com/2026/09/19/typesafe-ai-releases-jev/). Jev does not write text. It only picks an answer from a list you give it. It costs $0.042 per million input tokens, and the output is free. Two weeks later, OpenAI, Cloudflare, Amazon and Perplexity all had their own version.
+
+If your AI agent makes many small choices, this changes your bill. Many of those choices may no longer need a large model at all.
+
+## What a decision model is
+
+A normal AI model, like Claude or GPT, writes text. You ask a question, and it writes an answer word by word. That takes time, and you pay for every word.
+
+A decision model works differently. You give it a question and a fixed set of answers. It does not write anything. It returns the answer it picks, plus a number that shows how sure it is.
+
+These models handle three kinds of questions:
+
+- **Yes or no.** "Is this email spam?"
+- **Pick one.** "Is this support ticket about billing, login, or a bug?"
+- **Score.** "How urgent is this message, from 1 to 5?"
+
+AI agents ask questions like these all the time. Should I call this tool? Is this command safe to run? Which team should get this ticket? Until now, many agents sent every one of these small questions to a large, expensive model.
+
+## Why this is fast and cheap
+
+Writing text is the slow part of a model's work. A decision model skips it. TypeSafe says Jev answers in 70 to 500 milliseconds. A millisecond is one thousandth of a second.
+
+TypeSafe also tested Jev against a normal model on narrow decision tasks. It says Jev was up to 193.6 times faster and 444.6 times cheaper. TypeSafe ran those tests itself. Treat them as the company's claim, not a fact.
+
+There is an outside report too. Guillermo Rauch runs Vercel, a company that hosts websites and apps. He said Jev was up to 18 times faster than OpenAI's GPT Luna on one task, and more accurate. The task was checking whether a command was safe to run.
+
+Price is the other half. Jev costs $0.042 per million input tokens. A token is a small piece of text, about three quarters of an English word. For comparison, Claude Fable 5.1 costs $10 per million input tokens. That is about 238 times more.
+
+## Five versions in two weeks
+
+Here is what came out after Jev:
+
+| Model | Company | Size | Open weights? |
+|---|---|---|---|
+| Jev | TypeSafe | Not public | No, hosted only |
+| Decisions API | OpenAI | Built on GPT-6 Luna | No |
+| Clef and Clef-flash | Cloudflare | 27B and 9B | Yes, Apache 2.0 |
+| Strands Decider 2B | Amazon | 2B | Yes |
+| pplx-decider-v1-27b | Perplexity | 27B | Yes, Apache 2.0 |
+
+"Open weights" means you can download the model and run it on your own computer. Apache 2.0 is a license that lets you use the model for free, also in commercial products. "27B" means 27 billion parameters. Parameters are the numbers inside a model that it learned during training. More parameters usually means a stronger but slower model.
+
+**OpenAI** showed its [Decisions API](https://thenewstack.io/openai-decision-api-luna/) at DevDay on September 29. It runs on a special version of GPT-6 Luna. OpenAI says it answers in about 150 milliseconds, against 1.6 seconds for a normal Luna call. It is in limited preview, and OpenAI has not published a price. We covered OpenAI's other DevDay news in [our article on Codex Cloud](/articles/openai-devday-2026-codex-cloud-agents-api).
+
+**Cloudflare** released [Clef and Clef-flash](https://blog.cloudflare.com/clef-decision-models/) on October 1. Both are built on Qwen, a family of open models from Alibaba. Clef-flash answers in 38.8 milliseconds at the median. The median is the middle value: half of the answers are faster, half are slower. Clef can also read images.
+
+**Amazon** released [Strands Decider 2B](https://siliconangle.com/2026/10/01/aws-debuts-strands-decider-2b-a-first-lightweight-decision-model-for-accelerate-agentic-workflows/) the same day. It is small enough to run on one gaming graphics card. On an Nvidia RTX 3090, it answers in about 115 milliseconds at the median. Amazon also shared the training data and training scripts.
+
+**Perplexity** released [pplx-decider-v1-27b](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b), also on October 1. On 11 tests, it scored 85.71%. Jev scored 84.51% on the same tests. Perplexity's own API for it costs [$0.04 per million input tokens](https://x.com/perplexitydevs/status/2105725598882832414).
+
+## The catch
+
+Every company here tested its own model. Each one says it beats Jev, at least on some tests. Those tests do not all measure the same thing.
+
+Cloudflare's own numbers show the limits. Its table shows Clef-flash scoring only 66.77 on one test, CLINC150. Jev scored 89.27 there. CLINC150 checks if a model can sort messages into 150 topics. It also checks if the model notices when a message fits none of them. So the small, fast version can fail badly on some jobs.
+
+Jev's founder, Diogo Almeida, gave a warning to [TechCrunch](https://techcrunch.com/2026/10/01/amazon-releases-its-own-jev-clone-as-decision-models-flood-the-web/). "I get that people think it's a gold rush," he said. "But they might be underestimating the difficulty of making the models actually smart."
+
+A decision model also cannot explain itself in words. It gives you an answer and a number. If you need a reason, you still need a normal model.
+
+## What to do now
+
+**Find the small decisions in your agent.** Look through your agent's logs. Count how often it asks a large model a yes-or-no or pick-one question. Those calls are the ones a decision model can replace.
+
+**Test on your own data, not the vendors' tests.** Take 200 real past decisions where you know the right answer. Run them through two decision models and through your current model. Compare the results.
+
+**Use the confidence number.** Each answer comes with a number that shows how sure the model is. When the number is low, send the question to your large model instead. This keeps most of the savings and catches the hard cases.
+
+**Start with an open model if your data is private.** Clef, Strands Decider and Perplexity's model can all run on your own machines. Your data then never leaves your servers.
+
+**Do not use a decision model where you need a reason.** For security reviews or anything a person must check later, a bare "yes, 0.91" is not enough.
