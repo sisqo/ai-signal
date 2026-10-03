@@ -1,0 +1,79 @@
+---
+title: "Google's New Model Wins a Big Coding Test. You Cannot Use It Yet."
+slug: "gemini-4-argon-coding-limited-release"
+dek: "Gemini 4 Argon beat Claude Opus 5.5 and GPT-6 Astra on DeepSWE. It will cost half as much as Opus 5.5 at first. But today, only security teams can use it."
+date: "2026-10-04"
+tag: "Tools"
+---
+
+On September 30, Google announced [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/). It scored 77.9% on a hard coding test. That is higher than Claude Opus 5.5 and GPT-6 Astra. But you cannot use it today, and Google has not said when you can.
+
+Right now, Argon goes only to a small group of security teams. Everyone else has to wait. So if you plan to switch your coding agent this month, there is nothing to switch to yet.
+
+## The coding numbers
+
+The test that matters most here is called DeepSWE. DeepSWE is a coding test made by a company called [Datacurve](https://www.benchlm.ai/benchmarks/deepSwe). It has 113 tasks in 91 real open-source projects. Each task asks the model to add a feature or fix a bug. Then tests written by people check if the code works.
+
+Datacurve's engineers wrote every task from scratch. They did not copy them from old GitHub changes. This matters because a model may have seen old GitHub changes during training. A fresh task is harder to cheat on.
+
+On version 1.1 of DeepSWE, the scores were close:
+
+| Model | DeepSWE v1.1 |
+|---|---|
+| Gemini 4 Argon | 77.9% |
+| Claude Opus 5.5 | 74.2% |
+| GPT-6 Astra | 74.1% |
+
+Argon leads by 3.7 points. That is a real lead, but it is not a large one.
+
+## Where Argon loses
+
+DeepSWE is not the only coding test. Google also published other scores, and Argon does not win them all. [VentureBeat](https://venturebeat.com/technology/google-unveils-gemini-4-argon-retaking-benchmark-lead-over-openai-and-anthropic-but-in-limited-release) counted the results. Argon leads or ties on 13 of the 18 tests Google shared.
+
+Two of the tests it loses are about coding. The first is Terminal-Bench 4.0. Terminal-Bench checks how well a model works in a command line. It has to run commands, read the output, and fix its own mistakes. Argon scored 57.4%. Claude Opus 5.5 scored 66.4%. That is a 9-point gap, and it goes the other way.
+
+The second is FrontierSWE v2, another test of long software tasks. Argon scored 55.0%. GPT-6 Astra scored 65.5%, according to [MarkTechPost](https://www.marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense/).
+
+So the honest summary is this. Argon is the best model on one important coding test. It is not the best model at all coding work. If your agent spends most of its time in a terminal, Opus 5.5 still scored higher there.
+
+## Who can use it today
+
+Google is giving Argon first to its [Fairwind Program](https://blog.google/innovation-and-ai/technology/safety-security/fairwind-program/). Fairwind started in early September. It is a group of trusted security teams. Members include government agencies, critical infrastructure operators, and large software projects. They use Google's AI to find and fix security bugs before attackers find them.
+
+This is the same choice Anthropic made in June. Anthropic gave its strongest model to security partners first. We covered that in [our article on Claude Fable 5 and Mythos 5](/articles/claude-fable-5-mythos-5-glasswing). The reason is simple. A model that is very good at finding security bugs could also help an attacker. So the companies let defenders use it first.
+
+Google also says Argon is part of the U.S. government's voluntary testing process. In that process, the government can test a model before it is released.
+
+After that, Google says it will open Argon "as soon as possible." Paid API customers come first. Subscribers to Google AI Ultra, Google's top paid plan, also come first. Google gave no date.
+
+## What it will cost
+
+Google published the price before the model is open to most people. There are two prices. The first is a starting price. The second is the normal price that comes later.
+
+Prices for AI models are counted in tokens. A token is a small piece of text, about three quarters of an English word. Input tokens are what you send to the model. Output tokens are what the model writes back.
+
+| | Input, per million tokens | Output, per million tokens |
+|---|---|---|
+| Argon, starting price | $2 | $10 |
+| Argon, normal price later | $4 | $20 |
+| Claude Opus 5.5 | $4 | $20 |
+
+At the starting price, Argon costs half as much as [Claude Opus 5.5](https://www.anthropic.com/news/claude-opus-5-5). At the normal price, the two cost exactly the same. Google has not said how long the starting price will last.
+
+Cached input gets a 95% discount at both prices. Cached input is text you send again and again, like a long set of instructions. The model stores it, so the second time costs much less. Coding agents send the same project files many times, so this discount matters for them.
+
+## One million tokens out
+
+Argon has one more feature that matters for coding. It can write up to 1 million tokens in one answer. Earlier Gemini models stopped at 64,000. That is about 15 times more.
+
+A long answer matters when an agent rewrites many files in one go. Google says it used Argon to help move up to 800,000 lines of code to Rust. Rust is a programming language known for safe memory use. That is Google's own claim about its own work. Nobody outside Google has checked it.
+
+## What to do now
+
+**Do not change your setup yet.** You cannot buy Argon today. Plan with the tools you can actually use this week.
+
+**Write down your own test now.** Pick five real tasks from your own project that your current agent finds hard. Save them. When Argon opens, run the same five tasks on it. Your own code tells you more than any public score.
+
+**Look at where your agent spends its time.** If it works mostly in a terminal, Opus 5.5 scored 9 points higher on Terminal-Bench. If it writes large features inside a codebase, Argon's DeepSWE lead matters more.
+
+**Plan for the normal price, not the starting price.** A budget built on $2 per million input tokens will double when the starting price ends. At $4 and $20, Argon competes with Opus 5.5 on quality alone, not on price. Compare them at that price.
